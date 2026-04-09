@@ -1,0 +1,5 @@
+{
+  "name": "Grand Estate",
+  "description": "Website properti single-page modern minimalis",
+  "requestFramePermissions": ["geolocation"]
+}
