@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import { Calculator, Building2, Percent, Calendar } from 'lucide-react';
 
 const banks = [
-  { name: 'BTN', rate: 5.00, type: 'Subsidi' },
+  { name: 'BTN', rate: 6.99, type: 'Komersil (Fix 2 Thn)' },
   { name: 'BRI', rate: 6.50, type: 'Komersil' },
   { name: 'BNI', rate: 6.75, type: 'Komersil' },
   { name: 'Mandiri', rate: 6.50, type: 'Komersil' },
@@ -14,12 +14,11 @@ const banks = [
 ];
 
 export default function Kpr() {
-  const [harga, setHarga] = useState(500000000);
-  const [dpPercent, setDpPercent] = useState(10);
+  const [harga, setHarga] = useState(380000000);
+  const [dpAmount, setDpAmount] = useState(5500000);
   const [tenor, setTenor] = useState(15);
-  const [bunga, setBunga] = useState(6.5);
+  const [bunga, setBunga] = useState(6.99);
 
-  const dpAmount = harga * (dpPercent / 100);
   const pokokKredit = harga - dpAmount;
   const bungaPerBulan = bunga / 100 / 12;
   const totalBulan = tenor * 12;
@@ -79,18 +78,18 @@ export default function Kpr() {
                 <div>
                   <label className="flex justify-between text-sm font-medium mb-2">
                     <span>Uang Muka (DP)</span>
-                    <span className="text-brand-gold">{dpPercent}%</span>
+                    <span className="text-brand-gold">{formatRupiah(dpAmount)}</span>
                   </label>
                   <input 
                     type="range" 
                     min="0" 
-                    max="50" 
-                    step="5"
-                    value={dpPercent} 
-                    onChange={(e) => setDpPercent(Number(e.target.value))}
+                    max={harga * 0.5} 
+                    step="500000"
+                    value={dpAmount} 
+                    onChange={(e) => setDpAmount(Number(e.target.value))}
                     className="w-full accent-brand-gold h-2 bg-brand-charcoal/10 dark:bg-brand-ivory/10 rounded-lg appearance-none cursor-pointer"
                   />
-                  <p className="text-xs text-brand-charcoal/50 dark:text-brand-ivory/50 mt-2">{formatRupiah(dpAmount)}</p>
+                  <p className="text-xs text-brand-charcoal/50 dark:text-brand-ivory/50 mt-2">{((dpAmount / harga) * 100).toFixed(1)}% dari harga</p>
                 </div>
 
                 <div>

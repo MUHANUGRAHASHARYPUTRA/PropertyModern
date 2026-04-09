@@ -1,8 +1,33 @@
 'use client';
 
+import { useState } from 'react';
 import { Send, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export default function Kontak() {
+  const [formData, setFormData] = useState({
+    nama: '',
+    whatsapp: '',
+    email: '',
+    minat: '',
+    pesan: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { nama, whatsapp, email, minat, pesan } = formData;
+    
+    if (!nama || !whatsapp || !pesan) {
+      alert("Mohon lengkapi Nama, WhatsApp, dan Pesan.");
+      return;
+    }
+
+    const text = `Halo Grand Estate, saya ${nama}.\n\nEmail: ${email}\nMinat: ${minat}\n\nPesan:\n${pesan}`;
+    const encodedText = encodeURIComponent(text);
+    const waUrl = `https://wa.me/6281234567890?text=${encodedText}`;
+    
+    window.open(waUrl, '_blank');
+  };
+
   return (
     <section id="kontak" className="py-24 bg-brand-offwhite dark:bg-brand-dark-surface">
       <div className="container mx-auto px-6 md:px-12">
@@ -80,26 +105,50 @@ export default function Kontak() {
           {/* Contact Form */}
           <div className="bg-white dark:bg-brand-dark p-8 rounded-2xl shadow-lg border border-brand-charcoal/5 dark:border-brand-ivory/5">
             <h3 className="text-2xl font-serif mb-6">Kirim Pesan</h3>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Nama Lengkap</label>
-                  <input type="text" className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors" placeholder="Cth: Budi Santoso" />
+                  <input 
+                    type="text" 
+                    required
+                    value={formData.nama}
+                    onChange={(e) => setFormData({...formData, nama: e.target.value})}
+                    className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors" 
+                    placeholder="Cth: Budi Santoso" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Nomor WhatsApp</label>
-                  <input type="tel" className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors" placeholder="Cth: 0812..." />
+                  <input 
+                    type="tel" 
+                    required
+                    value={formData.whatsapp}
+                    onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
+                    className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors" 
+                    placeholder="Cth: 0812..." 
+                  />
                 </div>
               </div>
               
               <div>
                 <label className="block text-sm font-medium mb-2">Email</label>
-                <input type="email" className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors" placeholder="Cth: budi@email.com" />
+                <input 
+                  type="email" 
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors" 
+                  placeholder="Cth: budi@email.com" 
+                />
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-2">Minat Properti</label>
-                <select className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors appearance-none">
+                <select 
+                  value={formData.minat}
+                  onChange={(e) => setFormData({...formData, minat: e.target.value})}
+                  className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors appearance-none"
+                >
                   <option value="">Pilih Tipe Properti</option>
                   <option value="subsidi">Properti Subsidi</option>
                   <option value="komersil">Properti Komersil</option>
@@ -109,7 +158,14 @@ export default function Kontak() {
 
               <div>
                 <label className="block text-sm font-medium mb-2">Pesan</label>
-                <textarea rows={4} className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors resize-none" placeholder="Tulis pesan atau pertanyaan Anda di sini..."></textarea>
+                <textarea 
+                  rows={4} 
+                  required
+                  value={formData.pesan}
+                  onChange={(e) => setFormData({...formData, pesan: e.target.value})}
+                  className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors resize-none" 
+                  placeholder="Tulis pesan atau pertanyaan Anda di sini..."
+                ></textarea>
               </div>
 
               <button className="w-full py-4 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal font-medium rounded-xl hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-white transition-colors flex items-center justify-center gap-2 mt-4">

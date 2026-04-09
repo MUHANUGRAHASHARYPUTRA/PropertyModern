@@ -16,6 +16,12 @@ interface CompareStore {
   selectedProperties: Property[];
   toggleProperty: (property: Property) => void;
   clearCompare: () => void;
+  isCompareModalOpen: boolean;
+  setCompareModalOpen: (isOpen: boolean) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  searchType: string;
+  setSearchType: (type: string) => void;
 }
 
 export const useCompareStore = create<CompareStore>((set) => ({
@@ -33,4 +39,10 @@ export const useCompareStore = create<CompareStore>((set) => ({
     }
   }),
   clearCompare: () => set({ selectedProperties: [] }),
+  isCompareModalOpen: false,
+  setCompareModalOpen: (isOpen) => set({ isCompareModalOpen: isOpen }),
+  searchQuery: '',
+  setSearchQuery: (query) => set({ searchQuery: query }),
+  searchType: '',
+  setSearchType: (type) => set({ searchType: type }),
 }));

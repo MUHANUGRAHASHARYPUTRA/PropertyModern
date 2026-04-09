@@ -6,8 +6,11 @@ import { motion } from 'motion/react';
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+    
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -30,8 +33,8 @@ export default function CustomCursor() {
     };
   }, []);
 
-  // Only show on desktop
-  if (typeof window !== 'undefined' && window.innerWidth < 768) return null;
+  // Only show on desktop and after mount
+  if (!isMounted || window.innerWidth < 768) return null;
 
   return (
     <>

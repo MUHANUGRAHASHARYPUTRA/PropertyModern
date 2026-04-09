@@ -14,6 +14,7 @@ import Footer from '@/components/Footer';
 import FloatingContact from '@/components/FloatingContact';
 import CustomCursor from '@/components/CustomCursor';
 import PageLoader from '@/components/PageLoader';
+import CompareModal from '@/components/CompareModal';
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
       
       <Footer />
       <FloatingContact />
+      <CompareModal />
     </main>
   );
 }

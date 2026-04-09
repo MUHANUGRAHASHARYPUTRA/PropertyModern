@@ -169,6 +169,7 @@ export default function Komersil() {
                   Hapus Semua
                 </button>
                 <button 
+                  onClick={() => useCompareStore.getState().setCompareModalOpen(true)}
                   className="flex-1 md:flex-none px-6 py-2 bg-brand-gold text-white font-medium hover:bg-brand-gold/90 transition-colors disabled:opacity-50"
                   disabled={selectedProperties.length < 2}
                 >

@@ -98,14 +98,78 @@ const mapStyles = [
   }
 ];
 
-const center = { lat: -5.147665, lng: 119.432732 }; // Example coordinates (Makassar)
+const center = { lat: -5.208151, lng: 119.472288 }; // Approximate coordinates for the provided link
+const mapLink = "https://maps.app.goo.gl/RTvTQ4skZyijpptdA?g_st=ic";
 
 export default function MapSection() {
   const mapRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "200px" });
   const [mapError, setMapError] = useState(false);
+  const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
+  const [distance, setDistance] = useState('');
+  const [duration, setDuration] = useState('');
   const [activeLayer, setActiveLayer] = useState<string | null>(null);
+
+  const calculateRoute = async () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      try {
+        const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
+        if (!apiKey) {
+          alert("Google Maps API key is missing.");
+          return;
+        }
+
+        const loader = new Loader({
+          apiKey,
+          version: "weekly",
+        });
+
+        const routesLibrary = await (loader as any).importLibrary("routes");
+        const DirectionsService = routesLibrary.DirectionsService;
+        const DirectionsRenderer = routesLibrary.DirectionsRenderer;
+        
+        const directionsService = new DirectionsService();
+        
+        const origin = { lat: position.coords.latitude, lng: position.coords.longitude };
+        
+        const results = await directionsService.route({
+          origin: origin,
+          destination: center,
+          travelMode: (window as any).google.maps.TravelMode.DRIVING,
+        });
+
+        setDirectionsResponse(results);
+        if (results.routes[0].legs[0]) {
+          setDistance(results.routes[0].legs[0].distance?.text || '');
+          setDuration(results.routes[0].legs[0].duration?.text || '');
+        }
+
+        // We need to render the route on the map
+        if ((window as any).googleMapInstance) {
+          if (!(window as any).directionsRenderer) {
+            (window as any).directionsRenderer = new DirectionsRenderer({
+              map: (window as any).googleMapInstance,
+              suppressMarkers: false,
+            });
+          }
+          const renderer = (window as any).directionsRenderer;
+          renderer.setDirections(results);
+        }
+
+      } catch (error) {
+        console.error("Error calculating route:", error);
+        alert("Gagal menghitung rute. Pastikan Anda memberikan izin lokasi.");
+      }
+    }, () => {
+      alert("Gagal mendapatkan lokasi Anda. Pastikan izin lokasi diberikan.");
+    });
+  };
 
   useEffect(() => {
     if (!isInView || !mapRef.current) return;
@@ -128,7 +192,7 @@ export default function MapSection() {
         const { Map } = await (loader as any).importLibrary("maps");
         const { Marker } = await (loader as any).importLibrary("marker");
 
-        const map = new Map(mapRef.current!, {
+        const mapInstance = new Map(mapRef.current!, {
           center,
           zoom: 14,
           styles: mapStyles,
@@ -143,11 +207,13 @@ export default function MapSection() {
           },
           gestureHandling: "cooperative",
         });
+        
+        (window as any).googleMapInstance = mapInstance;
 
         // Add main marker
         new Marker({
           position: center,
-          map,
+          map: mapInstance,
           title: "Grand Estate",
           icon: {
             path: google.maps.SymbolPath.CIRCLE,
@@ -187,7 +253,10 @@ export default function MapSection() {
               Terletak di pusat perkembangan kota dengan akses mudah ke berbagai fasilitas umum dan infrastruktur transportasi.
             </p>
           </div>
-          <button className="flex items-center gap-2 px-6 py-3 bg-brand-gold text-white hover:bg-brand-gold/90 transition-colors font-medium">
+          <button 
+            onClick={calculateRoute}
+            className="flex items-center gap-2 px-6 py-3 bg-brand-gold text-white hover:bg-brand-gold/90 transition-colors font-medium rounded-full"
+          >
             <Navigation className="w-4 h-4" />
             Hitung Rute ke Lokasi
           </button>
