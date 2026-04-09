@@ -30,6 +30,14 @@ export default function Kpr() {
     return `Rp ${Math.round(angka).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
   };
 
+  const handleAjukanKPR = () => {
+    const text = `Halo Grand Estate, saya ingin mengajukan KPR dengan rincian simulasi berikut:\n\n- Harga Properti: ${formatRupiah(harga)}\n- Uang Muka (DP): ${formatRupiah(dpAmount)}\n- Pokok Kredit: ${formatRupiah(pokokKredit)}\n- Tenor: ${tenor} Tahun\n- Suku Bunga: ${bunga}% per tahun\n- Estimasi Cicilan: ${formatRupiah(cicilan)} per bulan\n\nMohon informasi lebih lanjut mengenai persyaratannya. Terima kasih.`;
+    const encodedText = encodeURIComponent(text);
+    const waUrl = `https://wa.me/62895403047867?text=${encodedText}`;
+    
+    window.open(waUrl, '_blank');
+  };
+
   return (
     <section id="kpr" className="py-24 bg-brand-ivory dark:bg-brand-dark">
       <div className="container mx-auto px-6 md:px-12">
@@ -152,7 +160,10 @@ export default function Kpr() {
                 </div>
               </div>
 
-              <button className="w-full py-4 bg-brand-gold text-white font-medium hover:bg-brand-gold/90 transition-colors">
+              <button 
+                onClick={handleAjukanKPR}
+                className="w-full py-4 bg-brand-gold text-white font-medium hover:bg-brand-gold/90 transition-colors"
+              >
                 Ajukan KPR Online
               </button>
             </div>

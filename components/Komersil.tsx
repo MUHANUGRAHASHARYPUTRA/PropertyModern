@@ -17,7 +17,9 @@ const komersilData = [
     kamarTidur: 3,
     kamarMandi: 2,
     badge: 'EXCLUSIVE',
-    image: 'https://picsum.photos/seed/villa1/800/600'
+    image: 'https://picsum.photos/seed/villa1/800/600',
+    deskripsi: 'Hunian eksklusif dengan desain tropis modern, dilengkapi dengan smart home system dan sirkulasi udara optimal.',
+    fasilitas: ['Smart Home', 'Carport 2 Mobil', 'Taman Belakang', 'CCTV 24 Jam']
   },
   {
     id: 'k2',
@@ -29,7 +31,9 @@ const komersilData = [
     kamarTidur: 3,
     kamarMandi: 2,
     badge: 'BEST SELLER',
-    image: 'https://picsum.photos/seed/villa2/800/600'
+    image: 'https://picsum.photos/seed/villa2/800/600',
+    deskripsi: 'Rumah 2 lantai di jalan utama kawasan, akses langsung ke fasilitas komersial dan clubhouse.',
+    fasilitas: ['One Gate System', 'Balkon Luas', 'High Ceiling', 'Clubhouse Access']
   },
   {
     id: 'k3',
@@ -41,7 +45,9 @@ const komersilData = [
     kamarTidur: 4,
     kamarMandi: 3,
     badge: 'SOLD OUT',
-    image: 'https://picsum.photos/seed/villa3/800/600'
+    image: 'https://picsum.photos/seed/villa3/800/600',
+    deskripsi: 'Mahakarya arsitektur dengan ruang keluarga yang luas, kolam renang pribadi opsional, dan material premium.',
+    fasilitas: ['Private Pool (Opt)', 'Kamar Pembantu', 'Garasi 2 Mobil', 'Premium Material']
   }
 ];
 
@@ -100,7 +106,20 @@ export default function Komersil() {
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className="mb-4">
+                  <p className="text-sm text-brand-charcoal/70 dark:text-brand-ivory/70 line-clamp-2 mb-3">
+                    {item.deskripsi}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {item.fasilitas.map((fasilitas, i) => (
+                      <span key={i} className="text-[10px] uppercase tracking-wider bg-brand-charcoal/5 dark:bg-brand-ivory/5 px-2 py-1 rounded-sm text-brand-charcoal/60 dark:text-brand-ivory/60">
+                        {fasilitas}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center pt-4 border-t border-brand-charcoal/10 dark:border-brand-ivory/10">
                   <div className="flex gap-6 text-sm text-brand-charcoal/70 dark:text-brand-ivory/70">
                     <div className="flex items-center gap-2">
                       <Maximize className="w-4 h-4" />

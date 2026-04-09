@@ -23,7 +23,7 @@ export default function Kontak() {
 
     const text = `Halo Grand Estate, saya ${nama}.\n\nEmail: ${email}\nMinat: ${minat}\n\nPesan:\n${pesan}`;
     const encodedText = encodeURIComponent(text);
-    const waUrl = `https://wa.me/6281234567890?text=${encodedText}`;
+    const waUrl = `https://wa.me/62895403047867?text=${encodedText}`;
     
     window.open(waUrl, '_blank');
   };
@@ -68,7 +68,7 @@ export default function Kontak() {
                   <div>
                     <h4 className="font-medium mb-1">Telepon & WhatsApp</h4>
                     <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-sm">
-                      +62 812 3456 7890<br />
+                      +62 895 4030 47867<br />
                       (0411) 123456
                     </p>
                   </div>

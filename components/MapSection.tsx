@@ -268,18 +268,29 @@ export default function MapSection() {
           
           {/* Map Container */}
           {mapError ? (
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-brand-charcoal/50 dark:text-brand-ivory/50 p-6 text-center">
-              <MapIcon className="w-16 h-16 mb-4 opacity-50" />
-              <p className="font-medium mb-2">Peta interaktif tidak dapat dimuat</p>
-              <p className="text-sm">Silakan periksa koneksi internet Anda atau konfigurasi API Key.</p>
-              <a 
-                href={`https://maps.google.com/maps?q=${center.lat},${center.lng}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 px-6 py-2 bg-brand-charcoal text-brand-ivory dark:bg-brand-ivory dark:text-brand-charcoal rounded-full text-sm font-medium"
-              >
-                Buka di Google Maps
-              </a>
+            <div className="absolute inset-0 w-full h-full">
+              <iframe 
+                src={`https://maps.google.com/maps?q=${center.lat},${center.lng}&z=15&output=embed`}
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Maps Location"
+              ></iframe>
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/90 dark:bg-brand-dark/90 backdrop-blur-md px-6 py-3 rounded-full shadow-lg border border-brand-charcoal/10 flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-amber-500" />
+                <span className="text-sm font-medium">Mode Peta Sederhana</span>
+                <a 
+                  href={mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 text-sm text-brand-gold hover:underline font-medium"
+                >
+                  Buka di Aplikasi
+                </a>
+              </div>
             </div>
           ) : (
             <div ref={mapRef} className="w-full h-full" />

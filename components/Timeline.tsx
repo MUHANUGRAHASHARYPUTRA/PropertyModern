@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { CheckCircle2, Clock, Calendar } from 'lucide-react';
 
@@ -11,6 +12,20 @@ const timeline = [
 ];
 
 export default function Timeline() {
+  const [email, setEmail] = useState('');
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    const text = `Halo Grand Estate, saya ingin berlangganan notifikasi update progres pembangunan. Email saya: ${email}`;
+    const encodedText = encodeURIComponent(text);
+    const waUrl = `https://wa.me/62895403047867?text=${encodedText}`;
+    
+    window.open(waUrl, '_blank');
+    setEmail(''); // Reset form
+  };
+
   return (
     <section className="py-24 bg-brand-ivory dark:bg-brand-dark overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
@@ -65,15 +80,19 @@ export default function Timeline() {
 
         <div className="mt-16 text-center">
           <form 
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Terima kasih telah berlangganan! Anda akan menerima update progres pembangunan via email.");
-            }}
+            onSubmit={handleSubscribe}
             className="inline-flex flex-col md:flex-row items-center gap-4 bg-white dark:bg-brand-dark-surface p-2 pr-2 md:pr-2 pl-6 rounded-3xl md:rounded-full shadow-md border border-brand-charcoal/5 dark:border-brand-ivory/5"
           >
             <span className="text-sm font-medium text-brand-charcoal/70 dark:text-brand-ivory/70 py-2 md:py-0">Dapatkan notifikasi update via email</span>
             <div className="flex w-full md:w-auto bg-brand-offwhite dark:bg-brand-dark rounded-full p-1">
-              <input type="email" required placeholder="Email Anda" className="bg-transparent border-none outline-none px-4 py-2 w-full md:w-48 text-sm" />
+              <input 
+                type="email" 
+                required 
+                placeholder="Email Anda" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-transparent border-none outline-none px-4 py-2 w-full md:w-48 text-sm" 
+              />
               <button type="submit" className="bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal px-6 py-2 rounded-full text-sm font-medium hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-white transition-colors">
                 Subscribe
               </button>

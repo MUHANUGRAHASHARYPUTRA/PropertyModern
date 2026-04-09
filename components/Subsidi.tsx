@@ -14,7 +14,7 @@ const subsidiData = [
     luasBangunan: 30,
     kamarTidur: 2,
     kamarMandi: 1,
-    status: 'Ready Stock',
+    status: 'SOLD OUT',
     image: 'https://picsum.photos/seed/house1/600/400'
   },
   {
@@ -25,7 +25,7 @@ const subsidiData = [
     luasBangunan: 30,
     kamarTidur: 2,
     kamarMandi: 1,
-    status: 'Inden',
+    status: 'SOLD OUT',
     image: 'https://picsum.photos/seed/house2/600/400'
   },
   {
@@ -36,7 +36,7 @@ const subsidiData = [
     luasBangunan: 30,
     kamarTidur: 2,
     kamarMandi: 1,
-    status: 'Ready Stock',
+    status: 'SOLD OUT',
     image: 'https://picsum.photos/seed/house3/600/400'
   }
 ];
@@ -86,7 +86,7 @@ export default function Subsidi() {
                 <div className="absolute top-4 left-4 bg-[#1D9E75] text-white text-xs font-bold px-4 py-1.5 tracking-wider uppercase">
                   Bersubsidi
                 </div>
-                <div className="absolute top-4 right-4 bg-brand-charcoal/80 backdrop-blur-sm text-white text-xs px-4 py-1.5 tracking-wider uppercase">
+                <div className={`absolute top-4 right-4 backdrop-blur-sm text-white text-xs px-4 py-1.5 tracking-wider uppercase ${item.status === 'SOLD OUT' ? 'bg-red-600/90' : 'bg-brand-charcoal/80'}`}>
                   {item.status}
                 </div>
               </div>
