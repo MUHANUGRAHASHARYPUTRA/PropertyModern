@@ -270,7 +270,7 @@ export default function MapSection() {
           {mapError ? (
             <div className="absolute inset-0 w-full h-full">
               <iframe 
-                src={`https://maps.google.com/maps?q=${center.lat},${center.lng}&z=15&output=embed`}
+                src={`https://maps.google.com/maps?q=Bukit+Panaikang+Residence&z=15&output=embed`}
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 

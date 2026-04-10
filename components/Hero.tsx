@@ -1,12 +1,35 @@
 'use client';
 
+import { useRef, useState, useEffect } from 'react';
 import { motion, Variants } from 'motion/react';
 import { Search, MapPin, ChevronDown, Home } from 'lucide-react';
-import Image from 'next/image';
 import { useCompareStore } from '@/lib/store';
 
 export default function Hero() {
   const { searchQuery, setSearchQuery, searchType, setSearchType } = useCompareStore();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  useEffect(() => {
+    const handleInteraction = () => {
+      if (!hasInteracted) {
+        setHasInteracted(true);
+        if (videoRef.current) {
+          videoRef.current.muted = false;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleInteraction, { passive: true });
+    window.addEventListener('click', handleInteraction, { passive: true });
+    window.addEventListener('touchstart', handleInteraction, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleInteraction);
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+    };
+  }, [hasInteracted]);
 
   const handleSearch = () => {
     const targetId = searchType === 'subsidi' ? '#subsidi' : searchType === 'komersil' ? '#komersil' : '#subsidi';
@@ -40,20 +63,21 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Background Image with subtle parallax */}
+      {/* Background Video with subtle parallax */}
       <motion.div 
         className="absolute inset-0 z-0"
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
       >
-        <Image 
-          src="https://picsum.photos/seed/architecture/1920/1080" 
-          alt="Grand Estate Background" 
-          fill
-          priority
-          className="object-cover"
-          referrerPolicy="no-referrer"
+        <video
+          ref={videoRef}
+          src="https://assets.mixkit.co/videos/preview/mixkit-modern-architectural-building-with-a-glass-facade-4178-large.mp4"
+          autoPlay
+          loop
+          muted={!hasInteracted}
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover blur-[2px]"
         />
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-brand-charcoal/40 to-transparent dark:from-brand-dark dark:via-brand-dark/60" />

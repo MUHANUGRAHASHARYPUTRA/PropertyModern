@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, X, Maximize, Bed, Bath } from 'lucide-react';
+import { Check, X, Maximize, Bed, Bath, MoveHorizontal } from 'lucide-react';
 import Image from 'next/image';
 
 const subsidiData = [
@@ -27,17 +27,6 @@ const subsidiData = [
     kamarMandi: 1,
     status: 'SOLD OUT',
     image: 'https://picsum.photos/seed/house2/600/400'
-  },
-  {
-    id: 's3',
-    name: 'Cluster Harmoni',
-    price: 'Rp 162.000.000',
-    luasTanah: 60,
-    luasBangunan: 30,
-    kamarTidur: 2,
-    kamarMandi: 1,
-    status: 'SOLD OUT',
-    image: 'https://picsum.photos/seed/house3/600/400'
   }
 ];
 
@@ -56,25 +45,32 @@ export default function Subsidi() {
               Wujudkan rumah impian dengan program KPR FLPP. Cicilan ringan, syarat mudah, dan kualitas bangunan terjamin.
             </p>
           </div>
-          <button 
-            onClick={() => setIsModalOpen(true)}
-            className="px-8 py-4 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-colors rounded-none font-medium whitespace-nowrap tracking-wide"
-          >
-            Cek Syarat KPR Subsidi
-          </button>
+          <div className="flex flex-col items-start md:items-end gap-4">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="px-8 py-4 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-colors rounded-none font-medium whitespace-nowrap tracking-wide"
+            >
+              Cek Syarat KPR Subsidi
+            </button>
+            <div className="flex items-center gap-2 text-brand-gold text-sm font-medium animate-pulse bg-brand-gold/10 px-4 py-2 rounded-full shrink-0">
+              <MoveHorizontal className="w-4 h-4" />
+              <span>Geser ke samping</span>
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {subsidiData.map((item, index) => (
-            <motion.div 
-              key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-brand-ivory dark:bg-brand-dark rounded-xl overflow-hidden shadow-lg group cursor-pointer"
-            >
+        {/* Horizontal Scroll Area */}
+        <div className="w-full overflow-x-auto snap-x snap-mandatory no-scrollbar pb-12">
+          <div className="flex gap-8 w-max px-6 md:px-12">
+            {subsidiData.map((item, index) => (
+              <motion.div 
+                key={item.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="w-[85vw] md:w-[480px] shrink-0 snap-center bg-brand-ivory dark:bg-brand-dark rounded-xl overflow-hidden shadow-lg group cursor-pointer"
+              >
               <div className="relative h-72 overflow-hidden">
                 <Image 
                   src={item.image} 
@@ -112,6 +108,7 @@ export default function Subsidi() {
               </div>
             </motion.div>
           ))}
+          </div>
         </div>
       </div>
 

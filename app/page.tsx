@@ -8,6 +8,7 @@ import Statistik from '@/components/Statistik';
 import Timeline from '@/components/Timeline';
 import MapSection from '@/components/MapSection';
 import Testimonial from '@/components/Testimonial';
+import VideoTestimonial from '@/components/VideoTestimonial';
 import Faq from '@/components/Faq';
 import Kontak from '@/components/Kontak';
 import Footer from '@/components/Footer';
@@ -32,6 +33,7 @@ export default function Home() {
       <Statistik />
       <MapSection />
       <Testimonial />
+      <VideoTestimonial />
       <Faq />
       <Kontak />
       
