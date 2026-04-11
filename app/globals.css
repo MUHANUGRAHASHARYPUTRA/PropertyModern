@@ -13,10 +13,19 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     letter-spacing: 0.04em;
-    text-transform: none; /* Diubah agar huruf kapital muncul sesuai ketikan Anda */
+    text-transform: none;
+  }
+
+  /* Memberikan space di atas agar tidak tertutup navbar saat scroll */
+  section[id] {
+    scroll-margin-top: 100px;
   }
 }
 
@@ -25,13 +34,13 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-brand-ivory);
+  background: #FDFBF7; /* Brand Ivory */
 }
 .dark ::-webkit-scrollbar-track {
-  background: var(--color-brand-dark);
+  background: #0A0A0A; /* Brand Dark */
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-brand-gold);
+  background: #B89B5E; /* Brand Gold */
   border-radius: 4px;
 }
 
@@ -43,6 +52,3 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
-/* Bagian logo N bisa dihapus jika Anda tidak terganggu di localhost, 
-   karena di produksi otomatis hilang sendiri. */

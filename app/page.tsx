@@ -24,18 +24,42 @@ export default function Home() {
       <CustomCursor />
       <Navbar />
       
-      <Hero />
-      <Subsidi />
-      <Komersil />
-      <Galeri />
+      {/* Bungkus setiap bagian dengan ID yang sesuai dengan navLinks di Navbar */}
+      <section id="home">
+        <Hero />
+      </section>
+
+      <section id="subsidi">
+        <Subsidi />
+      </section>
+
+      <section id="komersil">
+        <Komersil />
+      </section>
+
+      <section id="galeri">
+        <Galeri />
+      </section>
+
       <Timeline />
-      <Kpr />
+
+      <section id="kpr">
+        <Kpr />
+      </section>
+
       <Statistik />
-      <MapSection />
+
+      <section id="lokasi">
+        <MapSection />
+      </section>
+
       <Testimonial />
       <VideoTestimonial />
       <Faq />
-      <Kontak />
+
+      <section id="kontak">
+        <Kontak />
+      </section>
       
       <Footer />
       <FloatingContact />
