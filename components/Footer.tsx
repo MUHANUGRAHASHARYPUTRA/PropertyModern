@@ -81,7 +81,7 @@ export default function Footer() {
 
             {/* Social Media Icons */}
             <div className="flex gap-4">
-              <a href="https://www.instagram.com/alizah.property" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-brand-ivory/10 flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:scale-110 transition-all group" title="Instagram">
+              <a href="https://www.instagram.com/alizah_property" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-brand-ivory/10 flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:scale-110 transition-all group" title="Instagram">
                 <Instagram className="w-5 h-5 text-brand-ivory group-hover:text-white" />
               </a>
               <a href="https://www.facebook.com/share/17LqMkgJ8t/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-brand-ivory/10 flex items-center justify-center hover:bg-[#1877F2] hover:scale-110 transition-all group" title="Facebook">
