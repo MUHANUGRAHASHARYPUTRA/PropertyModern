@@ -7,27 +7,27 @@ import Image from 'next/image';
 const testimonials = [
   {
     id: 1,
-    name: 'Budi & Sarah',
-    unit: 'Cluster Harmoni (Subsidi)',
+    name: 'angga',
+    unit: 'Subsidi',
     text: 'Proses KPR sangat dibantu oleh tim marketing. Lingkungannya asri dan tetangga ramah. Sangat cocok untuk keluarga muda seperti kami.',
     rating: 5,
-    image: 'https://picsum.photos/seed/user1/100/100'
+    image: '/images/angga.png'
   },
   {
     id: 2,
-    name: 'Andi Pratama',
-    unit: 'The Signature Villa (Komersil)',
+    name: 'Ali',
+    unit: 'Komersil',
     text: 'Kualitas bangunan premium dan desainnya sangat modern. Nilai investasi naik cukup signifikan dalam setahun terakhir. Sangat puas!',
     rating: 5,
-    image: 'https://picsum.photos/seed/user2/100/100'
+    image: '/images/ali.jpg'
   },
   {
     id: 3,
-    name: 'Keluarga Wijaya',
-    unit: 'Grand Boulevard',
-    text: 'Fasilitas lengkap, dekat dengan sekolah anak dan pusat perbelanjaan. Keamanan 24 jam membuat kami merasa tenang.',
+    name: 'Keluarga Abubakar',
+    unit: 'Subsidi & Komersil',
+    text: 'Fasilitas lengkap, bebas banjir,dekat dengan sekolah anak dan pusat perbelanjaan.',
     rating: 4,
-    image: 'https://picsum.photos/seed/user3/100/100'
+    image: '/images/abubakar.jpg'
   }
 ];
 
@@ -40,7 +40,7 @@ export default function Testimonial() {
             cerita <span className="text-brand-gold italic">mereka</span>
           </h2>
           <p className="text-brand-ivory/70">
-            Kebahagiaan penghuni adalah prioritas utama kami. Simak pengalaman mereka yang telah menjadi bagian dari keluarga Grand Estate.
+            Kebahagiaan penghuni adalah prioritas utama kami. Simak pengalaman mereka yang telah menjadi bagian dari keluarga Alizah Property.
           </p>
         </div>
 

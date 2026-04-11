@@ -12,7 +12,7 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   useEffect(() => setMounted(true), []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -60,7 +60,7 @@ export default function Navbar() {
         <a href="#" onClick={(e) => scrollToSection(e, '#home')} className="flex items-center gap-2 group">
           <Home className="w-6 h-6 text-brand-gold group-hover:scale-110 transition-transform" />
           <span className="font-serif text-2xl font-medium tracking-wide text-brand-charcoal dark:text-brand-ivory">
-            grand estate
+            Alizah Property
           </span>
         </a>
 

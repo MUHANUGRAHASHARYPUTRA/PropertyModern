@@ -1,35 +1,28 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import { motion, Variants } from 'motion/react';
-import { Search, MapPin, ChevronDown, Home } from 'lucide-react';
+import { motion, Variants, AnimatePresence } from 'motion/react';
+import { Search, MapPin, ChevronDown, Home, Volume2, VolumeX } from 'lucide-react';
 import { useCompareStore } from '@/lib/store';
 
 export default function Hero() {
   const { searchQuery, setSearchQuery, searchType, setSearchType } = useCompareStore();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
-  useEffect(() => {
-    const handleInteraction = () => {
-      if (!hasInteracted) {
-        setHasInteracted(true);
-        if (videoRef.current) {
-          videoRef.current.muted = false;
-        }
+  // Menangani toggle suara secara manual
+  const toggleAudio = () => {
+    if (videoRef.current) {
+      const newMutedState = !videoRef.current.muted;
+      videoRef.current.muted = newMutedState;
+      setIsMuted(newMutedState);
+      
+      // Memastikan video tetap berjalan saat tombol ditekan
+      if (videoRef.current.paused) {
+        videoRef.current.play();
       }
-    };
-
-    window.addEventListener('scroll', handleInteraction, { passive: true });
-    window.addEventListener('click', handleInteraction, { passive: true });
-    window.addEventListener('touchstart', handleInteraction, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleInteraction);
-      window.removeEventListener('click', handleInteraction);
-      window.removeEventListener('touchstart', handleInteraction);
-    };
-  }, [hasInteracted]);
+    }
+  };
 
   const handleSearch = () => {
     const targetId = searchType === 'subsidi' ? '#subsidi' : searchType === 'komersil' ? '#komersil' : '#subsidi';
@@ -45,14 +38,12 @@ export default function Hero() {
       });
     }
   };
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.5,
-      }
+      transition: { staggerChildren: 0.15, delayChildren: 0.5 }
     }
   };
 
@@ -63,7 +54,7 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Background Video with subtle parallax */}
+      {/* Background Video */}
       <motion.div 
         className="absolute inset-0 z-0"
         initial={{ scale: 1.1 }}
@@ -72,25 +63,55 @@ export default function Hero() {
       >
         <video
           ref={videoRef}
-          src="https://assets.mixkit.co/videos/preview/mixkit-modern-architectural-building-with-a-glass-facade-4178-large.mp4"
+          src="/videos/hero.mp4"
           autoPlay
           loop
-          muted={!hasInteracted}
+          muted={isMuted}
           playsInline
-          className="absolute inset-0 w-full h-full object-cover blur-[2px]"
+          className="absolute inset-0 w-full h-full object-cover blur-[2px]" 
         />
-        {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-brand-charcoal/40 to-transparent dark:from-brand-dark dark:via-brand-dark/60" />
       </motion.div>
 
+      {/* Tombol Kontrol Suara Manual (Pojok Kanan Bawah) */}
+      <div className="absolute bottom-8 left-8 z-30">
+        <button
+          onClick={toggleAudio}
+          className="p-2 rounded-full bg-brand-ivory/10 backdrop-blur-md border border-brand-ivory/20 text-brand-ivory hover:bg-brand-gold hover:border-brand-gold transition-all duration-300 group"
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
+        >
+          <AnimatePresence mode="wait">
+            {isMuted ? (
+              <motion.div
+                key="muted"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+              >
+                <VolumeX className="w-6 h-6" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="unmuted"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+              >
+                <Volume2 className="w-6 h-6" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </button>
+      </div>
+
       <div className="container relative z-10 mx-auto px-6 md:px-12 flex flex-col items-center text-center mt-20">
-        
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="max-w-4xl flex flex-col items-center"
         >
+          {/* Badge Unit */}
           <motion.div variants={itemVariants} className="mb-6">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-gold/20 backdrop-blur-md border border-brand-gold/30 text-brand-ivory text-sm font-medium">
               <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse" />
@@ -98,13 +119,16 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-serif text-brand-ivory mb-6 leading-[1.1] tracking-tight">
-            hunian impian, <br className="hidden md:block" />
-            <span className="text-brand-gold italic font-light">harga nyata.</span>
-          </motion.h1>
+          <motion.h1 
+  variants={itemVariants} 
+  className="text-5xl md:text-7xl lg:text-8xl font-serif text-brand-ivory mb-6 leading-[1.1] tracking-tight normal-case"
+>
+  Bukit Panaikang <br className="hidden md:block" />
+  <span className="text-brand-gold italic font-light">Residence.</span>
+</motion.h1>
 
           <motion.p variants={itemVariants} className="text-lg md:text-xl text-brand-ivory/80 mb-12 max-w-2xl font-sans font-light tracking-wide">
-            Temukan kenyamanan hidup di kawasan prestisius dengan fasilitas lengkap dan akses mudah ke pusat kota.
+            Temukan kenyamanan hidup di kawasan Moncongloe bebas banjir dan akses mudah ke pusat kota Makassar.
           </motion.p>
 
           {/* Search Bar */}
@@ -143,7 +167,6 @@ export default function Hero() {
             </button>
           </motion.div>
         </motion.div>
-
       </div>
     </section>
   );

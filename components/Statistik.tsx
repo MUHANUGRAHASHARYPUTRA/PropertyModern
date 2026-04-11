@@ -5,10 +5,10 @@ import { motion, useInView } from 'motion/react';
 import { ShieldCheck, Award, Users, Home } from 'lucide-react';
 
 const stats = [
-  { id: 1, label: 'Unit Terjual', value: 850, suffix: '+', icon: Home },
-  { id: 2, label: 'Tahun Berdiri', value: 15, suffix: '', icon: Award },
+  { id: 1, label: 'Unit Terjual', value: 75, suffix: '+', icon: Home },
+  { id: 2, label: 'Tahun Berdiri', value: 7, suffix: '', icon: Award },
   { id: 3, label: 'Kepuasan Pelanggan', value: 98, suffix: '%', icon: Users },
-  { id: 4, label: 'Mitra Bank', value: 12, suffix: '+', icon: ShieldCheck },
+  { id: 4, label: 'Mitra Bank', value: 10, suffix: '+', icon: ShieldCheck },
 ];
 
 function Counter({ from, to, duration = 2, inView }: { from: number, to: number, duration?: number, inView: boolean }) {

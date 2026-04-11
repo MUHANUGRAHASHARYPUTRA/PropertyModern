@@ -5,12 +5,10 @@ import { motion } from 'motion/react';
 import { Calculator, Building2, Percent, Calendar } from 'lucide-react';
 
 const banks = [
-  { name: 'BTN', rate: 6.99, type: 'Komersil (Fix 2 Thn)' },
+  { name: 'BTN', rate: 6.99, type: 'Komersil' },
+  { name: 'BTN Syariah', rate: 6.99, type: 'Komersil' },
   { name: 'BRI', rate: 6.50, type: 'Komersil' },
-  { name: 'BNI', rate: 6.75, type: 'Komersil' },
   { name: 'Mandiri', rate: 6.50, type: 'Komersil' },
-  { name: 'BSI', rate: 5.00, type: 'Syariah' },
-  { name: 'Bank Kalsel', rate: 7.00, type: 'Komersil' },
 ];
 
 export default function Kpr() {
@@ -31,7 +29,7 @@ export default function Kpr() {
   };
 
   const handleAjukanKPR = () => {
-    const text = `Halo Grand Estate, saya ingin mengajukan KPR dengan rincian simulasi berikut:\n\n- Harga Properti: ${formatRupiah(harga)}\n- Uang Muka (DP): ${formatRupiah(dpAmount)}\n- Pokok Kredit: ${formatRupiah(pokokKredit)}\n- Tenor: ${tenor} Tahun\n- Suku Bunga: ${bunga}% per tahun\n- Estimasi Cicilan: ${formatRupiah(cicilan)} per bulan\n\nMohon informasi lebih lanjut mengenai persyaratannya. Terima kasih.`;
+    const text = `Halo Alizah Property, saya ingin mengajukan KPR dengan rincian simulasi berikut:\n\n- Harga Properti: ${formatRupiah(harga)}\n- Uang Muka (DP): ${formatRupiah(dpAmount)}\n- Pokok Kredit: ${formatRupiah(pokokKredit)}\n- Tenor: ${tenor} Tahun\n- Suku Bunga: ${bunga}% per tahun\n- Estimasi Cicilan: ${formatRupiah(cicilan)} per bulan\n\nMohon informasi lebih lanjut mengenai persyaratannya. Terima kasih.`;
     const encodedText = encodeURIComponent(text);
     const waUrl = `https://wa.me/62895403047867?text=${encodedText}`;
     
@@ -46,7 +44,7 @@ export default function Kpr() {
             simulasi <span className="text-brand-gold italic">kpr</span>
           </h2>
           <p className="text-brand-charcoal/70 dark:text-brand-ivory/70">
-            Hitung estimasi cicilan bulanan Anda. Kami bekerja sama dengan bank terkemuka untuk memberikan suku bunga terbaik.
+            Hitung estimasi cicilan bulanan Anda (cicilan biasanya berubah sesuai ketentuan bank yang berlaku). Kami bekerja sama dengan bank terkemuka untuk memberikan suku bunga terbaik.
           </p>
         </div>
 

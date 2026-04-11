@@ -214,7 +214,7 @@ export default function MapSection() {
         new Marker({
           position: center,
           map: mapInstance,
-          title: "Grand Estate",
+          title: "Bukit Panaikang Residence",
           icon: {
             path: google.maps.SymbolPath.CIRCLE,
             scale: 10,
@@ -235,10 +235,10 @@ export default function MapSection() {
   }, [isInView]);
 
   const facilities = [
-    { id: 'school', label: 'Sekolah / Univ', icon: '🏫' },
-    { id: 'hospital', label: 'Rumah Sakit', icon: '🏥' },
-    { id: 'mall', label: 'Pusat Perbelanjaan', icon: '🛍️' },
-    { id: 'market', label: 'Minimarket', icon: '🛒' },
+    { id: 'mosque', label: 'Masjid', icon: '🕌' },
+    { id: 'hospital', label: 'Puskesmas', icon: '🏥' },
+    { id: 'gas station', label: 'SPBU Pertamina', icon: '⛽️' },
+    { id: 'market', label: 'Alfamart', icon: '🛒' },
   ];
 
   return (
@@ -253,13 +253,15 @@ export default function MapSection() {
               Terletak di pusat perkembangan kota dengan akses mudah ke berbagai fasilitas umum dan infrastruktur transportasi.
             </p>
           </div>
-          <button 
-            onClick={calculateRoute}
-            className="flex items-center gap-2 px-6 py-3 bg-brand-gold text-white hover:bg-brand-gold/90 transition-colors font-medium rounded-full"
-          >
-            <Navigation className="w-4 h-4" />
-            Hitung Rute ke Lokasi
-          </button>
+          <a 
+  href="https://maps.app.goo.gl/RTvTQ4skZyijpptdA?g_st=ic" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="flex items-center gap-2 px-6 py-3 bg-brand-gold text-white hover:bg-brand-gold/90 transition-colors font-medium rounded-full inline-flex"
+>
+  <Navigation className="w-4 h-4" />
+  Hitung Rute ke Lokasi
+</a>
         </div>
       </div>
 
@@ -334,10 +336,10 @@ export default function MapSection() {
               </thead>
               <tbody className="text-sm md:text-base">
                 {[
-                  { name: 'Bandara Internasional', dist: '15 km', time: '25 mnt', icon: '✈️' },
-                  { name: 'Pusat Kota / CBD', dist: '8 km', time: '15 mnt', icon: '🏢' },
-                  { name: 'Rumah Sakit Pusat', dist: '3 km', time: '8 mnt', icon: '🏥' },
-                  { name: 'Pintu Tol Terdekat', dist: '2 km', time: '5 mnt', icon: '🛣️' },
+                  { name: 'Bandara Internasional Hasanuddin', dist: '13 km', time: '30 mnt', icon: '✈️' },
+                  { name: 'Pusat Ke Kota Makassar', dist: '4,4 km', time: '10 mnt', icon: '🏢' },
+                  { name: 'SPBU Moncongloe', dist: '2,6 km', time: '6 mnt', icon: '⛽️' },
+                  { name: 'Universitas Hasanuddin', dist: '9 km', time: '20 mnt', icon: '🏫' },
                 ].map((item, i) => (
                   <tr key={i} className="border-b border-brand-charcoal/5 dark:border-brand-ivory/5 last:border-0">
                     <td className="py-4 flex items-center gap-3">

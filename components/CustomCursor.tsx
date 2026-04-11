@@ -8,9 +8,15 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
+  // Fix hydration: mount after first render
   useEffect(() => {
-    setIsMounted(true);
-    
+    const timeout = setTimeout(() => {
+      setIsMounted(true);
+    }, 0);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -33,7 +39,6 @@ export default function CustomCursor() {
     };
   }, []);
 
-  // Only show on desktop and after mount
   if (!isMounted || window.innerWidth < 768) return null;
 
   return (

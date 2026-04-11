@@ -15,7 +15,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'Grand Estate | Hunian Impian, Harga Nyata',
+  title: 'Alizah Property | Hunian Impian, Harga Nyata',
   description: 'Website properti single-page modern minimalis.',
 };
 

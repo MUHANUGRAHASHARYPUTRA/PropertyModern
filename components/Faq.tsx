@@ -35,16 +35,21 @@ export default function Faq() {
               pertanyaan <span className="text-brand-gold italic">umum</span>
             </h2>
             <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 mb-8">
-              Temukan jawaban untuk pertanyaan yang sering diajukan seputar proses pembelian rumah, KPR, dan fasilitas Grand Estate.
+              Temukan jawaban untuk pertanyaan yang sering diajukan seputar proses pembelian rumah, KPR, dan fasilitas Bukit Panaikang Residence.
             </p>
             
             <div className="bg-brand-offwhite dark:bg-brand-dark-surface p-6 rounded-2xl border border-brand-charcoal/5 dark:border-brand-ivory/5">
               <h4 className="font-serif text-xl mb-2">Masih punya pertanyaan?</h4>
               <p className="text-sm text-brand-charcoal/70 dark:text-brand-ivory/70 mb-6">Tim konsultan kami siap membantu Anda 24/7.</p>
-              <button className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] text-white rounded-xl font-medium hover:bg-[#20bd5a] transition-colors">
-                <MessageCircle className="w-5 h-5" />
-                Chat WhatsApp
-              </button>
+              <a 
+  href="https://wa.me/62895403047867?text=Halo%20Alizah%20Property%2C%20saya%20ingin%20bertanya%20mengenai%20perumahan%20Bukit%20Panaikang%20Residence."
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] text-white rounded-xl font-medium hover:bg-[#20bd5a] transition-all hover:scale-[1.02] shadow-sm"
+>
+  <MessageCircle className="w-5 h-5" />
+  Chat WhatsApp
+</a>
             </div>
           </div>
 

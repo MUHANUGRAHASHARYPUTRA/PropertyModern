@@ -16,7 +16,7 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     letter-spacing: 0.04em;
-    text-transform: lowercase;
+    text-transform: none; /* Diubah agar huruf kapital muncul sesuai ketikan Anda */
   }
 }
 
@@ -43,3 +43,6 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Bagian logo N bisa dihapus jika Anda tidak terganggu di localhost, 
+   karena di produksi otomatis hilang sendiri. */

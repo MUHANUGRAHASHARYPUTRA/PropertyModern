@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Maximize, Bed, Bath, ArrowRight, Video, X, ChevronLeft, ChevronRight, MoveHorizontal } from 'lucide-react';
 import Image from 'next/image';
@@ -9,49 +9,57 @@ import { useCompareStore } from '@/lib/store';
 const komersilData = [
   {
     id: 'k1',
-    name: 'The Signature Villa',
-    price: 'Rp 1.250.000.000',
+    name: 'Komersil Blok D11',
+    price: 'Rp 380.000.000 (Free Biaya Akad KPR)',
     type: 'komersil' as const,
-    luasTanah: 120,
-    luasBangunan: 90,
-    kamarTidur: 3,
-    kamarMandi: 2,
-    badge: 'EXCLUSIVE',
-    image: 'https://picsum.photos/seed/villa1/800/600',
+    luasTanah: 84,
+    luasBangunan: 51,
+    kamarTidur: 2,
+    kamarMandi: 1,
+    badge: 'Commercial',
+    image: '/images/komersil1.jpg',
+    video: '/videos/komersil1.MOV', // Pastikan file ada di public/images/
     gallery: [
-      'https://picsum.photos/seed/villa1/800/600',
-      'https://picsum.photos/seed/villa1_2/800/600',
-      'https://picsum.photos/seed/villa1_3/800/600',
-      'https://picsum.photos/seed/villa1_4/800/600',
+      '/images/komersil1.jpg',
+      '/images/gallery1.jpg',
+      '/images/gallery2.jpg',
+      '/images/gallery3.jpg',
+      '/images/gallery4.jpg',
+      '/images/gallery5.jpg',
+      '/images/gallery6.jpg',
     ],
-    deskripsi: 'Hunian eksklusif dengan desain tropis modern, dilengkapi dengan smart home system dan sirkulasi udara optimal.',
-    fasilitas: ['Smart Home', 'Carport 2 Mobil', 'Taman Belakang', 'CCTV 24 Jam']
+    deskripsi: 'Hunian eksklusif dengan desain modern, dilengkapi dengan system keamanan lengkap dan sirkulasi udara optimal.',
+    fasilitas: ['Pintu Import Baja', 'Carport Mobil', 'Taman Depan', 'Dapur Bersih']
   },
   {
     id: 'k2',
-    name: 'Grand Boulevard',
-    price: 'Rp 850.000.000',
+    name: 'Komersil Blok D12',
+    price: 'Rp 380.000.000 (Free Biaya Akad KPR)',
     type: 'komersil' as const,
-    luasTanah: 90,
-    luasBangunan: 70,
-    kamarTidur: 3,
-    kamarMandi: 2,
-    badge: 'BEST SELLER',
-    image: 'https://picsum.photos/seed/villa2/800/600',
+    luasTanah: 84,
+    luasBangunan: 51,
+    kamarTidur: 2,
+    kamarMandi: 1,
+    badge: 'Commercial',
+    image: '/images/komersil2.jpg',
+    video: '/videos/komersil2.MOV', // Pastikan file ada di public/images/
     gallery: [
-      'https://picsum.photos/seed/villa2/800/600',
-      'https://picsum.photos/seed/villa2_2/800/600',
-      'https://picsum.photos/seed/villa2_3/800/600',
-      'https://picsum.photos/seed/villa2_4/800/600',
+      '/images/komersil2.jpg',
+      '/images/gallerykomersil1.png',
+      '/images/gallerykomersil2.jpg',
+      '/images/gallerykomersil3.png',
+      '/images/gallerykomersil4.png',
+      
     ],
-    deskripsi: 'Rumah 2 lantai di jalan utama kawasan, akses langsung ke fasilitas komersial dan clubhouse.',
-    fasilitas: ['One Gate System', 'Balkon Luas', 'High Ceiling', 'Clubhouse Access']
+    deskripsi: 'Nikmati kemewahan hidup di rumah bergaya modern. Dirancang khusus dengan sirkulasi udara yang cerdas agar rumah selalu sejuk.',
+    fasilitas: ['Pintu Import Baja', 'Carport Mobil', 'Taman Depan', 'Dapur Bersih']
   }
 ];
 
 export default function Komersil() {
   const { toggleProperty, selectedProperties } = useCompareStore();
   const [selectedDetail, setSelectedDetail] = useState<typeof komersilData[0] | null>(null);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const openDetail = (item: typeof komersilData[0]) => {
@@ -84,7 +92,7 @@ export default function Komersil() {
         </div>
         <div className="flex items-center gap-2 text-brand-gold text-sm font-medium animate-pulse bg-brand-gold/10 px-4 py-2 rounded-full shrink-0">
           <MoveHorizontal className="w-4 h-4" />
-          <span>Geser ke samping</span>
+          <span>Geser lihat lainnya</span>
         </div>
       </div>
 
@@ -162,7 +170,11 @@ export default function Komersil() {
                   </div>
 
                   <div className="flex gap-3">
-                    <button className="p-2 border border-brand-charcoal/20 dark:border-brand-ivory/20 rounded-full hover:bg-brand-gold hover:text-white hover:border-brand-gold transition-colors" title="Virtual Tour 360">
+                    <button 
+                      onClick={() => setActiveVideo(item.video)}
+                      className="p-2 border border-brand-charcoal/20 dark:border-brand-ivory/20 rounded-full hover:bg-brand-gold hover:text-white hover:border-brand-gold transition-colors" 
+                      title="Virtual Tour 360"
+                    >
                       <Video className="w-4 h-4" />
                     </button>
                     {!isSoldOut && (
@@ -254,7 +266,6 @@ export default function Komersil() {
                     referrerPolicy="no-referrer"
                   />
                   
-                  {/* Navigation Arrows */}
                   <button 
                     onClick={prevImage}
                     className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-brand-gold transition-colors"
@@ -269,7 +280,6 @@ export default function Komersil() {
                   </button>
                 </div>
                 
-                {/* Thumbnails */}
                 <div className="h-24 bg-brand-charcoal flex gap-2 p-2 overflow-x-auto no-scrollbar">
                   {selectedDetail.gallery.map((img, i) => (
                     <button 
@@ -335,7 +345,7 @@ export default function Komersil() {
 
                 <button 
                   onClick={() => {
-                    const text = `Halo Grand Estate, saya tertarik dengan unit ${selectedDetail.name} (${selectedDetail.price}). Mohon info lebih lanjut.`;
+                    const text = `Halo Alizah Property, saya tertarik dengan unit ${selectedDetail.name} (${selectedDetail.price}). Mohon info lebih lanjut.`;
                     window.open(`https://wa.me/62895403047867?text=${encodeURIComponent(text)}`, '_blank');
                   }}
                   className="w-full py-4 bg-brand-gold text-white font-medium hover:bg-brand-gold/90 transition-colors rounded-xl"
@@ -343,6 +353,43 @@ export default function Komersil() {
                   Hubungi Marketing
                 </button>
               </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Video Player Modal */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-brand-charcoal/95 backdrop-blur-md"
+            onClick={() => setActiveVideo(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl"
+              onClick={e => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setActiveVideo(null)}
+                className="absolute top-4 right-4 z-10 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              <video 
+                controls 
+                autoPlay 
+                className="w-full h-full object-contain"
+              >
+                <source src={activeVideo} type="video/mp4" />
+                Browser Anda tidak mendukung tag video.
+              </video>
             </motion.div>
           </motion.div>
         )}

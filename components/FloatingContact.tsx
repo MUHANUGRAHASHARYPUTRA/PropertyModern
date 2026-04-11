@@ -8,8 +8,8 @@ export default function FloatingContact() {
   const [isOpen, setIsOpen] = useState(false);
 
   const contacts = [
-    { id: 'wa', icon: MessageCircle, label: 'WhatsApp', color: 'bg-[#25D366]', href: 'https://wa.me/6281234567890' },
-    { id: 'phone', icon: Phone, label: 'Telepon', color: 'bg-brand-charcoal dark:bg-brand-ivory dark:text-brand-charcoal', href: 'tel:+6281234567890' },
+    { id: 'wa', icon: MessageCircle, label: 'WhatsApp', color: 'bg-[#25D366]', href: 'https://wa.me/62895403047867' },
+    { id: 'phone', icon: Phone, label: 'Telepon', color: 'bg-brand-charcoal dark:bg-brand-ivory dark:text-brand-charcoal', href: 'tel:+62895403047867' },
     { id: 'email', icon: Mail, label: 'Email', color: 'bg-brand-gold', href: 'mailto:info@grandestate.com' },
   ];
 

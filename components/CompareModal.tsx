@@ -88,7 +88,7 @@ export default function CompareModal() {
                         <span className="font-medium flex items-center"><Check className="w-4 h-4 text-[#1D9E75] mr-1" /> Ya</span>
                       </div>
                       <div className="flex justify-between pb-2">
-                        <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Smart Home</span>
+                        <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Dapur</span>
                         <span className="font-medium flex items-center">
                           {property.type === 'komersil' ? <Check className="w-4 h-4 text-[#1D9E75] mr-1" /> : <X className="w-4 h-4 text-red-500 mr-1" />}
                           {property.type === 'komersil' ? 'Ya' : 'Tidak'}

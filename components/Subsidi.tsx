@@ -8,25 +8,25 @@ import Image from 'next/image';
 const subsidiData = [
   {
     id: 's1',
-    name: 'Cluster Asri 1',
-    price: 'Rp 162.000.000',
+    name: 'Subsidi 1',
+    price: 'Rp 156.000.000',
     luasTanah: 60,
-    luasBangunan: 30,
+    luasBangunan: 36,
     kamarTidur: 2,
     kamarMandi: 1,
     status: 'SOLD OUT',
-    image: 'https://picsum.photos/seed/house1/600/400'
+    image: '/images/subsidi1.jpg'
   },
   {
     id: 's2',
-    name: 'Cluster Asri 2',
-    price: 'Rp 162.000.000',
+    name: 'Subsidi 2+',
+    price: 'Rp 156.000.000',
     luasTanah: 60,
-    luasBangunan: 30,
+    luasBangunan: 36,
     kamarTidur: 2,
     kamarMandi: 1,
     status: 'SOLD OUT',
-    image: 'https://picsum.photos/seed/house2/600/400'
+    image: '/images/subsidi2.jpg'
   }
 ];
 
@@ -54,7 +54,7 @@ export default function Subsidi() {
             </button>
             <div className="flex items-center gap-2 text-brand-gold text-sm font-medium animate-pulse bg-brand-gold/10 px-4 py-2 rounded-full shrink-0">
               <MoveHorizontal className="w-4 h-4" />
-              <span>Geser ke samping</span>
+              <span>Geser lihat lainnya</span>
             </div>
           </div>
         </div>

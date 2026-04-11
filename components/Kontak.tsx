@@ -21,7 +21,7 @@ export default function Kontak() {
       return;
     }
 
-    const text = `Halo Grand Estate, saya ${nama}.\n\nEmail: ${email}\nMinat: ${minat}\n\nPesan:\n${pesan}`;
+    const text = `Halo Alizah Property, saya ${nama}.\n\nEmail: ${email}\nMinat: ${minat}\n\nPesan:\n${pesan}`;
     const encodedText = encodeURIComponent(text);
     const waUrl = `https://wa.me/62895403047867?text=${encodedText}`;
     
@@ -54,9 +54,9 @@ export default function Kontak() {
                   <div>
                     <h4 className="font-medium mb-1">Kantor Pemasaran</h4>
                     <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-sm leading-relaxed">
-                      Jl. Boulevard Grand Estate No. 1<br />
-                      Kawasan Bisnis Terpadu<br />
-                      Makassar, Sulawesi Selatan 90245
+                      Jl. Borong Raya Inspeksi Kanal No. 2<br />
+                      Kawasan Borong Raya<br />
+                      Makassar, Sulawesi Selatan 90234
                     </p>
                   </div>
                 </div>
@@ -69,7 +69,7 @@ export default function Kontak() {
                     <h4 className="font-medium mb-1">Telepon & WhatsApp</h4>
                     <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-sm">
                       +62 895 4030 47867<br />
-                      (0411) 123456
+                      0895403047867
                     </p>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ export default function Kontak() {
                   <div>
                     <h4 className="font-medium mb-1">Email</h4>
                     <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-sm">
-                      halo@grandestate.com
+                    ptanugrahayunalizah@gmail.com
                     </p>
                   </div>
                 </div>

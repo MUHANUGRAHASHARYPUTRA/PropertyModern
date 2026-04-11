@@ -1,69 +1,113 @@
 'use client';
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
-const videoTestimonials = [
-  {
-    id: 1,
-    name: 'Keluarga Pratama',
-    unit: 'The Signature Villa',
-    youtubeId: 'LXb3EKWsInQ', // Placeholder YouTube ID
-  },
-  {
-    id: 2,
-    name: 'Sarah & Budi',
-    unit: 'Cluster Asri 1',
-    youtubeId: 'aqz-KE-bpKQ', // Placeholder YouTube ID
-  },
-  {
-    id: 3,
-    name: 'Andi Wijaya',
-    unit: 'Grand Boulevard',
-    youtubeId: 'tgbNymZ7vqY', // Placeholder YouTube ID
-  }
+// DATA TESTIMONI
+const youtubeTestimonials = [
+  { id: 1, name: 'AlizahProperty', unit: 'Commercial', ytId: '7IUIQtTuhGE' },
+  
 ];
 
-export default function VideoTestimonial() {
+const instagramTestimonials = [
+  { id: 1, name: '@alizah_property', unit: 'Progress Cluster', postCode: 'DIqYWkIRVwh' },
+];
+
+const tiktokTestimonials = [
+  { id: 1, name: 'alizah.property', unit: 'Promo Hunian', videoId: '7506838238745726215' },
+];
+
+export default function SocialTestimonials() {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
   return (
     <section className="py-24 bg-brand-offwhite dark:bg-brand-dark-surface">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4">
-            video <span className="text-brand-gold italic">testimoni</span>
+        
+        {/* HEADER */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4 lowercase tracking-tight">
+            social <span className="text-brand-gold italic">testimoni</span>
           </h2>
           <p className="text-brand-charcoal/70 dark:text-brand-ivory/70">
-            Tonton langsung pengalaman nyata dari para penghuni yang telah mempercayakan hunian mereka kepada Grand Estate.
+            Cerita nyata dari mereka yang telah menemukan hunian impian bersama kami.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {videoTestimonials.map((testi, index) => (
-            <motion.div 
-              key={testi.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white dark:bg-brand-dark rounded-2xl overflow-hidden shadow-lg border border-brand-charcoal/5 dark:border-brand-ivory/5"
-            >
-              <div className="relative aspect-video w-full bg-black">
-                <iframe 
-                  width="100%" 
-                  height="100%" 
-                  src={`https://www.youtube.com/embed/${testi.youtubeId}`} 
-                  title={`Testimoni ${testi.name}`} 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowFullScreen
-                  className="absolute inset-0"
-                ></iframe>
-              </div>
-              <div className="p-6">
-                <h4 className="font-serif text-xl mb-1">{testi.name}</h4>
-                <p className="text-sm text-brand-gold font-medium">{testi.unit}</p>
-              </div>
-            </motion.div>
-          ))}
+        {/* GRID UTAMA */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+          
+          {/* KOLOM YOUTUBE */}
+          <div className="space-y-8">
+            <h3 className="text-xl font-serif text-brand-gold mb-6 uppercase tracking-widest border-b border-brand-gold/20 pb-2">YouTube</h3>
+            {youtubeTestimonials.map((item) => (
+              <motion.div 
+                key={item.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={cardVariants}
+                className="bg-white dark:bg-brand-dark rounded-2xl overflow-hidden shadow-xl border border-brand-charcoal/5"
+              >
+                <div className="relative pb-[56.25%] bg-black">
+                  <iframe 
+                    className="absolute inset-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${item.ytId}?rel=0`}
+                    allowFullScreen
+                  />
+                </div>
+                <div className="p-5">
+                  <h4 className="font-serif text-lg text-brand-charcoal dark:text-brand-ivory">{item.name}</h4>
+                  <p className="text-xs text-brand-gold font-bold uppercase">{item.unit}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* KOLOM INSTAGRAM */}
+          <div className="space-y-8">
+            <h3 className="text-xl font-serif text-brand-gold mb-6 uppercase tracking-widest border-b border-brand-gold/20 pb-2">Instagram</h3>
+            {instagramTestimonials.map((item) => (
+              <motion.div 
+                key={item.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={cardVariants}
+                className="bg-white dark:bg-brand-dark rounded-2xl overflow-hidden shadow-xl border border-brand-charcoal/5"
+              >
+                <div className="w-full aspect-[4/5] bg-brand-offwhite">
+                  <iframe
+                    src={`https://www.instagram.com/p/${item.postCode}/embed`}
+                    className="w-full h-full border-0"
+                    allowTransparency
+                  ></iframe>
+                </div>
+                <div className="p-5">
+                  <h4 className="font-serif text-lg text-brand-charcoal dark:text-brand-ivory">{item.name}</h4>
+                  <p className="text-xs text-brand-gold font-bold uppercase">{item.unit}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* KOLOM TIKTOK */}
+          <div className="space-y-8">
+            <h3 className="text-xl font-serif text-brand-gold mb-6 uppercase tracking-widest border-b border-brand-gold/20 pb-2">TikTok</h3>
+            {tiktokTestimonials.map((item) => (
+              <motion.div 
+                key={item.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={cardVariants}
+                className="bg-white dark:bg-brand-dark rounded-2xl overflow-hidden shadow-xl border border-brand-charcoal/5"
+              >
+                <div className="w-full aspect-[9/16] bg-black">
+                  <iframe
+                    src={`https://www.tiktok.com/embed/v2/${item.videoId}`}
+                    className="w-full h-full border-0"
+                    allow="fullscreen"
+                  ></iframe>
+                </div>
+                <div className="p-5">
+                  <h4 className="font-serif text-lg text-brand-charcoal dark:text-brand-ivory">{item.name}</h4>
+                  <p className="text-xs text-brand-gold font-bold uppercase">{item.unit}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

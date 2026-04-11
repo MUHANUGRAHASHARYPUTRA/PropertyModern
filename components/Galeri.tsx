@@ -8,12 +8,19 @@ import Image from 'next/image';
 const categories = ['Semua', 'Eksterior', 'Interior', 'Fasilitas', 'Lingkungan'];
 
 const galleryData = [
-  { id: 1, category: 'Eksterior', src: 'https://picsum.photos/seed/ext1/800/800', alt: 'Fasad Depan' },
-  { id: 2, category: 'Interior', src: 'https://picsum.photos/seed/int1/800/600', alt: 'Ruang Tamu' },
-  { id: 3, category: 'Fasilitas', src: 'https://picsum.photos/seed/fac1/600/800', alt: 'Kolam Renang' },
-  { id: 4, category: 'Lingkungan', src: 'https://picsum.photos/seed/env1/800/600', alt: 'Taman Bermain' },
-  { id: 5, category: 'Eksterior', src: 'https://picsum.photos/seed/ext2/600/800', alt: 'Tampak Samping' },
-  { id: 6, category: 'Interior', src: 'https://picsum.photos/seed/int2/800/800', alt: 'Kamar Tidur Utama' },
+  { id: 1, category: 'Eksterior', src: '/images/eksterior1.jpg', alt: 'Fasad Depan' },
+  { id: 9, category: 'Eksterior', src: '/images/eksterior2.jpg', alt: 'Renovasi Modern' },
+  { id: 2, category: 'Interior', src: '/images/interior.jpg', alt: 'Interior Komersil' },
+  { id: 3, category: 'Fasilitas', src: '/images/fasilitas.jpg', alt: 'Gerbang' },
+  { id: 4, category: 'Lingkungan', src: '/images/lingkungan.jpg', alt: 'Area Subsidi' },
+  { id: 5, category: 'Eksterior', src: '/images/eksterior4.jpg', alt: 'Subsidi' },
+  { id: 6, category: 'Interior', src: '/images/interior2.jpg', alt: 'Dapur' },
+  { id: 7, category: 'Semua', src: '/images/dokumentasi.jpg', alt: 'Unit Cash' },
+  { id: 8, category: 'Semua', src: '/images/dokumentasi2.jpg', alt: 'Unit Komersil' },
+  { id: 12, category: 'Lingkungan', src: '/images/lingkungan3.jpg', alt: 'Area Komersil' },
+  { id: 10, category: 'Lingkungan', src: '/images/lingkungan2.jpg', alt: 'Area Komersil' },
+  { id: 11, category: 'Lingkungan', src: '/images/fasilitas2.jpg', alt: 'Masjid' },
+  { id: 13, category: 'Fasilitas', src: '/images/fasilitas3.png', alt: 'Cctv' },
 ];
 
 export default function Galeri() {
@@ -48,13 +55,17 @@ export default function Galeri() {
               galeri <span className="text-brand-gold italic">perumahan</span>
             </h2>
             <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 max-w-xl">
-              Jelajahi setiap sudut kawasan Grand Estate melalui galeri foto eksklusif kami.
+              Jelajahi setiap sudut kawasan Panaikang Residence melalui galeri foto eksklusif kami.
             </p>
           </div>
-          <button className="flex items-center gap-2 px-6 py-3 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-white transition-colors font-medium">
+          <a 
+            href="/brosuralizahproperty.pdf" 
+            download="Brosur-Alizah-Property.pdf"
+            className="flex items-center gap-2 px-6 py-3 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-white transition-colors font-medium"
+          >
             <Download className="w-4 h-4" />
             Brosur PDF
-          </button>
+          </a>
         </div>
 
         {/* Filter Tabs */}
