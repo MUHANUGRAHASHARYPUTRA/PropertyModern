@@ -1,21 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { useTheme } from 'next-themes';
-import { Menu, X, Home, Moon, Sun } from 'lucide-react';
+import { Menu, X } from 'lucide-react'; // Hapus Home dari sini
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Mencegah error hidrasi pada Next.js
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
@@ -31,10 +23,7 @@ export default function Navbar() {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    
-    // Tutup menu mobile terlebih dahulu
     setIsMobileMenuOpen(false);
-
     const targetId = href.replace('#', '');
     
     if (targetId === 'home' || href === '#') {
@@ -42,11 +31,10 @@ export default function Navbar() {
       return;
     }
 
-    // Berikan sedikit delay agar menu mobile tertutup sempurna sebelum scroll
     setTimeout(() => {
       const element = document.getElementById(targetId);
       if (element) {
-        const offset = 80; // Sesuaikan dengan tinggi navbar Anda
+        const offset = 80; 
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
@@ -56,19 +44,12 @@ export default function Navbar() {
           top: offsetPosition,
           behavior: 'smooth'
         });
-      } else {
-        // Fallback jika getElementById gagal, coba pakai querySelector
-        const fallback = document.querySelector(href);
-        if (fallback) {
-          fallback.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
       }
     }, 100);
   };
 
   return (
     <motion.nav
-      // Menggunakan style zIndex manual untuk memastikan berada di atas CustomCursor
       style={{ zIndex: 99999 }}
       className={`fixed top-0 left-0 right-0 transition-all duration-300 ${
         isScrolled 
@@ -83,9 +64,17 @@ export default function Navbar() {
         <a 
           href="#home" 
           onClick={(e) => scrollToSection(e, '#home')} 
-          className="flex items-center gap-2 group cursor-pointer"
+          className="flex items-center gap-3 group cursor-pointer"
         >
-          <Home className="w-6 h-6 text-brand-gold group-hover:scale-110 transition-transform" />
+          {/* LOGO PERUSAHAAN GANTIKAN IKON HOME */}
+          <div className="relative w-8 h-8 flex items-center justify-center overflow-hidden">
+            <img 
+              src="images/logo.png" // Pastikan path file benar di folder public
+              alt="Alizah Property Logo"
+              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+            />
+          </div>
+          
           <span className="font-serif text-2xl font-medium tracking-wide text-brand-charcoal dark:text-brand-ivory">
             Alizah Property
           </span>
@@ -104,15 +93,6 @@ export default function Navbar() {
             </a>
           ))}
           
-          {mounted && (
-            <button 
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 rounded-full hover:bg-brand-charcoal/5 dark:hover:bg-brand-ivory/10 transition-colors"
-            >
-              {theme === 'dark' ? <Sun className="w-5 h-5 text-brand-gold" /> : <Moon className="w-5 h-5" />}
-            </button>
-          )}
-          
           <a 
             href="#kontak"
             onClick={(e) => scrollToSection(e, '#kontak')}
@@ -123,15 +103,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center gap-4">
-          {mounted && (
-            <button 
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2"
-            >
-              {theme === 'dark' ? <Sun className="w-5 h-5 text-brand-gold" /> : <Moon className="w-5 h-5" />}
-            </button>
-          )}
+        <div className="md:hidden flex items-center">
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 text-brand-charcoal dark:text-brand-ivory"
@@ -141,7 +113,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu (Sama seperti sebelumnya) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
@@ -163,21 +135,19 @@ export default function Navbar() {
                 </a>
               ))}
               <a 
-  href="https://wa.me/62895403047867" // Ganti dengan nomor WhatsApp Anda
-  target="_blank" 
-  rel="noopener noreferrer"
-  onClick={(e) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false); // Tutup menu mobile
-    
-    // Pesan otomatis yang akan muncul di chat
-    const message = encodeURIComponent("Halo Alizah Property, saya ingin bertanya mengenai unit yang tersedia.");
-    window.open(`https://wa.me/62895403047867?text=${message}`, '_blank');
-  }}
-  className="mt-4 px-6 py-4 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal text-center font-medium rounded-xl cursor-pointer active:scale-95 transition-transform"
->
-  Hubungi Kami via WhatsApp
-</a>
+                href="https://wa.me/62895403047867"
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMobileMenuOpen(false);
+                  const message = encodeURIComponent("Halo Alizah Property, saya ingin bertanya mengenai unit yang tersedia.");
+                  window.open(`https://wa.me/62895403047867?text=${message}`, '_blank');
+                }}
+                className="mt-4 px-6 py-4 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal text-center font-medium rounded-xl cursor-pointer active:scale-95 transition-transform"
+              >
+                Hubungi Kami via WhatsApp
+              </a>
             </div>
           </motion.div>
         )}

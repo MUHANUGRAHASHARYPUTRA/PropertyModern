@@ -132,40 +132,43 @@ export default function Hero() {
           </motion.p>
 
           {/* Search Bar */}
-          <motion.div variants={itemVariants} className="w-full max-w-3xl bg-brand-ivory/95 backdrop-blur-md dark:bg-brand-dark-surface/95 p-4 md:p-2 rounded-3xl md:rounded-full shadow-2xl flex flex-col md:flex-row gap-4 md:gap-4 items-center border border-brand-gold/20">
-            <div className="flex-1 flex items-center gap-3 px-4 md:px-6 py-2 md:py-3 w-full border-b md:border-b-0 md:border-r border-brand-charcoal/10 dark:border-brand-ivory/10">
-              <MapPin className="w-5 h-5 text-brand-gold shrink-0" />
-              <input 
-                type="text" 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Cari lokasi atau nama cluster..." 
-                className="w-full bg-transparent border-none outline-none text-brand-charcoal dark:text-brand-ivory placeholder:text-brand-charcoal/50 dark:placeholder:text-brand-ivory/50 font-medium"
-              />
-            </div>
-            
-            <div className="flex-1 flex items-center gap-3 px-4 md:px-6 py-2 md:py-3 w-full">
-              <Home className="w-5 h-5 text-brand-gold shrink-0" />
-              <select 
-                value={searchType}
-                onChange={(e) => setSearchType(e.target.value)}
-                className="w-full bg-transparent border-none outline-none text-brand-charcoal dark:text-brand-ivory appearance-none cursor-pointer font-medium"
-              >
-                <option value="">Semua Tipe</option>
-                <option value="subsidi">Subsidi</option>
-                <option value="komersil">Komersil</option>
-              </select>
-              <ChevronDown className="w-4 h-4 text-brand-charcoal/50 dark:text-brand-ivory/50 shrink-0" />
-            </div>
+<motion.div 
+  variants={itemVariants} 
+  className="w-full max-w-3xl bg-white/10 backdrop-blur-xl dark:bg-black/20 p-4 md:p-2 rounded-3xl md:rounded-full shadow-2xl flex flex-col md:flex-row gap-4 md:gap-4 items-center border border-white/20"
+>
+  <div className="flex-1 flex items-center gap-3 px-4 md:px-6 py-2 md:py-3 w-full border-b md:border-b-0 md:border-r border-white/10">
+    <MapPin className="w-5 h-5 text-brand-gold shrink-0" />
+    <input 
+      type="text" 
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      placeholder="Cari lokasi atau nama cluster..." 
+      className="w-full bg-transparent border-none outline-none text-white placeholder:text-white/60 font-medium"
+    />
+  </div>
+  
+  <div className="flex-1 flex items-center gap-3 px-4 md:px-6 py-2 md:py-3 w-full">
+    <Home className="w-5 h-5 text-brand-gold shrink-0" />
+    <select 
+      value={searchType}
+      onChange={(e) => setSearchType(e.target.value)}
+      className="w-full bg-transparent border-none outline-none text-white appearance-none cursor-pointer font-medium"
+    >
+      <option value="" className="text-brand-charcoal">Semua Tipe</option>
+      <option value="subsidi" className="text-brand-charcoal">Subsidi</option>
+      <option value="komersil" className="text-brand-charcoal">Komersil</option>
+    </select>
+    <ChevronDown className="w-4 h-4 text-white/60 shrink-0" />
+  </div>
 
-            <button 
-              onClick={handleSearch}
-              className="w-full md:w-auto px-8 py-4 bg-brand-gold text-white font-medium rounded-2xl md:rounded-full hover:bg-brand-gold/90 transition-colors flex items-center justify-center gap-2"
-            >
-              <Search className="w-5 h-5" />
-              <span>Cari</span>
-            </button>
-          </motion.div>
+  <button 
+    onClick={handleSearch}
+    className="w-full md:w-auto px-8 py-4 bg-brand-gold text-white font-medium rounded-2xl md:rounded-full hover:bg-brand-gold/90 transition-all shadow-lg hover:shadow-brand-gold/20 flex items-center justify-center gap-2"
+  >
+    <Search className="w-5 h-5" />
+    <span>Cari</span>
+  </button>
+</motion.div>
         </motion.div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion'; // Menggunakan framer-motion standar
+import { motion } from 'framer-motion';
 import { CheckCircle2, Clock, Calendar, Send } from 'lucide-react';
 
 const timeline = [
@@ -13,57 +13,77 @@ const timeline = [
 
 export default function Timeline() {
   const [email, setEmail] = useState('');
-  
-  // Ganti dengan email Gmail kamu
   const targetEmail = "anugrahasharyabubakar@gmail.com"; 
 
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent("Langganan Update Progres Properti");
+    const body = encodeURIComponent(`Halo Tim Bukit Panaikang,\n\nSaya ingin berlangganan update progres pembangunan terbaru.\n\nEmail saya: ${email}\n\nTerima kasih.`);
+    window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+  };
+
   return (
-    <section className="py-24 bg-brand-ivory dark:bg-brand-dark overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12">
+    <section className="py-16 md:py-24 bg-brand-ivory dark:bg-brand-dark overflow-hidden">
+      <div className="container mx-auto px-5 md:px-12">
         
-        {/* HEADER */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4 lowercase tracking-tight">
+        {/* HEADER - Lebih responsif */}
+        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-3xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4 lowercase tracking-tight"
+          >
             progress <span className="text-brand-gold italic">pembangunan</span>
-          </h2>
-          <p className="text-brand-charcoal/70 dark:text-brand-ivory/70">
-            Transparansi adalah komitmen kami. Pantau perkembangan proyek Perumahan Bukit Panaikang Residence secara real-time.
+          </motion.h2>
+          <p className="text-sm md:text-base text-brand-charcoal/70 dark:text-brand-ivory/70 leading-relaxed">
+            Transparansi adalah komitmen kami. Pantau perkembangan proyek Perumahan Bukit Panaikang Residence secara berkala.
           </p>
         </div>
 
         {/* TIMELINE SECTION */}
         <div className="relative max-w-4xl mx-auto">
-          <div className="absolute left-[24px] md:left-1/2 top-0 bottom-0 w-0.5 bg-brand-charcoal/10 dark:bg-brand-ivory/10 transform md:-translate-x-1/2" />
+          {/* Garis Tengah - Disesuaikan untuk mobile (tetap di kiri) */}
+          <div className="absolute left-[18px] md:left-1/2 top-0 bottom-0 w-[1px] bg-brand-charcoal/10 dark:bg-brand-ivory/10 transform md:-translate-x-1/2" />
 
-          <div className="space-y-12">
+          <div className="space-y-10 md:space-y-16">
             {timeline.map((item, index) => (
               <motion.div 
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6 }}
                 className={`relative flex flex-col md:flex-row items-start md:items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
               >
-                {/* Icon Status */}
-                <div className="absolute left-0 md:left-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full border-4 border-brand-ivory dark:border-brand-dark bg-white dark:bg-brand-dark-surface flex items-center justify-center transform -translate-x-0 md:-translate-x-1/2 z-10 shadow-sm mt-4 md:mt-0">
+                {/* Icon Status - Ukuran lebih proporsional di mobile */}
+                <div className="absolute left-0 md:left-1/2 w-9 h-9 md:w-12 md:h-12 rounded-full border-2 border-brand-ivory dark:border-brand-dark bg-white dark:bg-brand-dark-surface flex items-center justify-center transform -translate-x-0 md:-translate-x-1/2 z-10 shadow-sm">
                   {item.status === 'completed' ? (
-                    <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6 text-[#1D9E75]" />
+                    <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-[#1D9E75]" />
                   ) : item.status === 'current' ? (
-                    <Clock className="w-5 h-5 md:w-6 md:h-6 text-brand-gold animate-pulse" />
+                    <Clock className="w-4 h-4 md:w-5 md:h-5 text-brand-gold animate-pulse" />
                   ) : (
-                    <Calendar className="w-5 h-5 md:w-6 md:h-6 text-brand-charcoal/30 dark:text-brand-ivory/30" />
+                    <Calendar className="w-4 h-4 md:w-5 md:h-5 text-brand-charcoal/30 dark:text-brand-ivory/30" />
                   )}
                 </div>
 
-                {/* Content Card */}
-                <div className={`ml-16 md:ml-0 w-full md:w-1/2 ${index % 2 === 0 ? 'md:pl-16' : 'md:pr-16 text-left md:text-right'}`}>
-                  <div className={`p-6 rounded-2xl border ${item.status === 'current' ? 'border-brand-gold bg-brand-gold/5 shadow-md' : 'border-brand-charcoal/5 dark:border-brand-ivory/5 bg-white dark:bg-brand-dark-surface'}`}>
-                    <span className={`text-xs font-bold tracking-wider uppercase mb-2 block ${item.status === 'completed' ? 'text-[#1D9E75]' : item.status === 'current' ? 'text-brand-gold' : 'text-brand-charcoal/50 dark:text-brand-ivory/50'}`}>
+                {/* Content Card - Padding & Text disesuaikan */}
+                <div className={`pl-12 md:pl-0 w-full md:w-1/2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12 text-left md:text-right'}`}>
+                  <div className={`p-5 md:p-6 rounded-2xl border transition-all duration-300 ${
+                    item.status === 'current' 
+                      ? 'border-brand-gold bg-brand-gold/5 shadow-lg shadow-brand-gold/5' 
+                      : 'border-brand-charcoal/5 dark:border-brand-ivory/5 bg-white/50 dark:bg-brand-dark-surface/50 backdrop-blur-sm'
+                  }`}>
+                    <span className={`text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1 block ${
+                      item.status === 'completed' ? 'text-[#1D9E75]' : item.status === 'current' ? 'text-brand-gold' : 'text-brand-charcoal/40'
+                    }`}>
                       {item.date}
                     </span>
-                    <h4 className="text-xl font-serif mb-2 text-brand-charcoal dark:text-brand-ivory lowercase">{item.phase}</h4>
-                    <p className="text-sm text-brand-charcoal/70 dark:text-brand-ivory/70">{item.desc}</p>
+                    <h4 className="text-lg md:text-xl font-serif mb-1.5 text-brand-charcoal dark:text-brand-ivory lowercase">
+                      {item.phase}
+                    </h4>
+                    <p className="text-xs md:text-sm text-brand-charcoal/60 dark:text-brand-ivory/60 leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -71,39 +91,44 @@ export default function Timeline() {
           </div>
         </div>
 
-        {/* FORMSUBMIT INTEGRATION */}
-        <div className="mt-16 text-center">
-          <form 
-            action={`https://formsubmit.co/${targetEmail}`}
-            method="POST"
-            className="inline-flex flex-col md:flex-row items-center gap-4 bg-white dark:bg-brand-dark-surface p-2 pr-2 md:pr-2 pl-6 rounded-3xl md:rounded-full shadow-md border border-brand-charcoal/5 dark:border-brand-ivory/5"
+        {/* FORM SECTION - Diperbaiki untuk Mobile agar tidak overflow */}
+        <div className="mt-20 md:mt-28 text-center px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="inline-block w-full max-w-xl"
           >
-            {/* Konfigurasi FormSubmit */}
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_subject" value="New Progress Update Subscriber!" />
-            <input type="text" name="_honey" style={{ display: 'none' }} />
-
-            <span className="text-sm font-medium text-brand-charcoal/70 dark:text-brand-ivory/70 py-2 md:py-0 lowercase">langganan update progres via email</span>
-            
-            <div className="flex w-full md:w-auto bg-brand-offwhite dark:bg-brand-dark rounded-full p-1 border border-brand-charcoal/10 dark:border-brand-ivory/10">
-              <input 
-                type="email" 
-                name="email"
-                required 
-                placeholder="Email Anda" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-transparent border-none outline-none px-4 py-2 w-full md:w-48 text-sm text-brand-charcoal dark:text-brand-ivory" 
-              />
+            <form 
+              onSubmit={handleSubscribe}
+              className="flex flex-col md:flex-row items-center gap-3 bg-white dark:bg-brand-dark-surface p-2 md:p-2 rounded-3xl md:rounded-full shadow-xl border border-brand-charcoal/5"
+            >
+              <div className="flex-1 w-full flex flex-col md:flex-row items-center pl-4 pr-2">
+                <span className="text-[11px] md:text-sm font-medium text-brand-charcoal/50 dark:text-brand-ivory/50 whitespace-nowrap mb-2 md:mb-0 md:mr-4 lowercase">
+                  update via email
+                </span>
+                <input 
+                  type="email" 
+                  required 
+                  placeholder="Email Anda" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-brand-offwhite dark:bg-brand-dark px-5 py-3 md:py-2.5 rounded-full md:bg-transparent border-none outline-none w-full text-sm text-brand-charcoal dark:text-brand-ivory placeholder:text-brand-charcoal/30" 
+                />
+              </div>
+              
               <button 
                 type="submit" 
-                className="bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal px-6 py-2 rounded-full text-sm font-medium hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-white transition-all flex items-center gap-2"
+                className="w-full md:w-auto bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal px-8 py-3.5 md:py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg"
               >
-                <Send className="w-3 h-3" />
+                <Send className="w-3.5 h-3.5" />
                 Subscribe
               </button>
-            </div>
-          </form>
+            </form>
+            
+            <p className="mt-6 text-[9px] md:text-[10px] text-brand-charcoal/40 dark:text-brand-ivory/40 uppercase tracking-[0.2em]">
+              *Membuka aplikasi email default perangkat anda
+            </p>
+          </motion.div>
         </div>
       </div>
     </section>
