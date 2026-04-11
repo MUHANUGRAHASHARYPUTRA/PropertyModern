@@ -163,12 +163,21 @@ export default function Navbar() {
                 </a>
               ))}
               <a 
-                href="#kontak"
-                onClick={(e) => scrollToSection(e, '#kontak')}
-                className="mt-4 px-6 py-4 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal text-center font-medium rounded-xl cursor-pointer"
-              >
-                Hubungi Kami
-              </a>
+  href="https://wa.me/62895403047867" // Ganti dengan nomor WhatsApp Anda
+  target="_blank" 
+  rel="noopener noreferrer"
+  onClick={(e) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false); // Tutup menu mobile
+    
+    // Pesan otomatis yang akan muncul di chat
+    const message = encodeURIComponent("Halo Alizah Property, saya ingin bertanya mengenai unit yang tersedia.");
+    window.open(`https://wa.me/62895403047867?text=${message}`, '_blank');
+  }}
+  className="mt-4 px-6 py-4 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal text-center font-medium rounded-xl cursor-pointer active:scale-95 transition-transform"
+>
+  Hubungi Kami via WhatsApp
+</a>
             </div>
           </motion.div>
         )}
