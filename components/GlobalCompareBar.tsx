@@ -24,7 +24,7 @@ export default function GlobalCompareBar() {
                 <span className="font-serif text-xl text-brand-gold">{selectedProperties.length}<span className="text-sm text-brand-ivory/60">/3</span></span>
             </div>
             <div className="flex -space-x-4">
-              {selectedProperties.map(p => (
+              {selectedProperties.map((p: any) => (
                 <div key={p.id} className="w-12 h-12 rounded-full border-2 border-brand-charcoal overflow-hidden relative group">
                     <Image src={p.image_url || '/images/komersil1.jpg'} alt="Unit" fill className="object-cover" />
                     <button onClick={() => toggleProperty(p)} className="absolute inset-0 bg-red-500/80 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">

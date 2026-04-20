@@ -240,7 +240,7 @@ export default function Komersil() {
                 
                 {selectedDetail.features && (
                     <div className="mb-8 grid grid-cols-2 gap-4">
-                        {selectedDetail.features.map((f, i) => (
+                        {selectedDetail.features.map((f: string, i: number) => (
                             <div key={i} className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/60 dark:text-brand-ivory/60">
                                 <Check className="w-3 h-3 text-brand-gold" />
                                 {f}

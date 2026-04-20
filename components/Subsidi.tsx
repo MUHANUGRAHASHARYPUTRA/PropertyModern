@@ -340,7 +340,7 @@ export default function Subsidi() {
                     'Masa kerja atau usaha minimal 1 tahun',
                     'Memiliki NPWP dan SPT Tahunan PPh yang aktif',
                     'Lolos BI Checking (Slik OJK)'
-                  ].map((syarat, i) => (
+                  ].map((syarat: string, i: number) => (
                     <motion.div 
                       key={i} 
                       initial={{ opacity: 0, y: 5 }}
