@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Subsidi from '@/components/Subsidi';
@@ -22,8 +24,7 @@ export default function Home() {
     <main className="relative min-h-screen">
       <PageLoader />
       <Navbar />
-      
-      {/* Bungkus setiap bagian dengan ID yang sesuai dengan navLinks di Navbar */}
+
       <section id="home">
         <Hero />
       </section>
@@ -59,7 +60,7 @@ export default function Home() {
       <section id="kontak">
         <Kontak />
       </section>
-      
+
       <Footer />
       <FloatingContact />
       <GlobalCompareBar />
