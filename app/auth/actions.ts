@@ -136,7 +136,7 @@ export async function addProperty(formData: FormData) {
     kamar_mandi: parseInt(formData.get('kamar_mandi') as string),
     image_url: formData.get('image_url') as string,
     video_url: formData.get('video_url') as string,
-    gallery_urls: (formData.get('gallery_urls') as string)?.split(',').map(u => u.trim()).filter(u => u !== '') || [],
+    gallery_urls: (formData.get('gallery_urls') as string)?.split(',').map((u: string) => u.trim()).filter((u: string) => u !== '') || [],
   }
 
   const { error } = await supabase.from('properties').insert(newProperty)
