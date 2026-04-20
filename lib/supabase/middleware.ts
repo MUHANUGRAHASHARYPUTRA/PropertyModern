@@ -6,9 +6,13 @@ export async function updateSession(request: NextRequest) {
     request,
   })
 
+  // Tambahkan cadangan URL dan Key agar tidak menyebabkan 500 Error
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://npetttkklcwcpojnyppk.supabase.co'
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_7TFYm4CbNm2TuD5QFB8Y8Q_VGgzKLBX'
+
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         getAll() {
@@ -27,43 +31,28 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  // IMPORTANT: Avoid writing any logic between createServerClient and
-  // supabase.auth.getUser(). A simple mistake can make it very hard to debug
-  // issues with users being logged out unnecessarily.
-
   const {
     data: { user },
   } = await supabase.auth.getUser()
 
+  // Logic Redirect Login
   if (
     !user &&
     !request.nextUrl.pathname.startsWith('/login') &&
     !request.nextUrl.pathname.startsWith('/auth') &&
     (request.nextUrl.pathname.startsWith('/admin') || request.nextUrl.pathname.startsWith('/user'))
   ) {
-    // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 
-  // Role based access control (Simplified- will add profiles check later)
+  // Redirect jika sudah login
   if (user && request.nextUrl.pathname === '/login') {
-      // If user is logged in and tries to go to login page, redirect to their dashboard
-      // We'll need a way to fetch the role. For now just redirect to /
-      const url = request.nextUrl.clone()
-      url.pathname = '/'
-      return NextResponse.redirect(url)
+    const url = request.nextUrl.clone()
+    url.pathname = '/'
+    return NextResponse.redirect(url)
   }
-
-  // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
-  // creating a new response object with NextResponse.next() make sure to:
-  // 1. Pass the request in it, like so:
-  //    const myNewResponse = NextResponse.next({ request })
-  // 2. Copy over the cookies, like so:
-  //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
-  // 3. Change the myNewResponse object to fit your needs, but make sure it accepts the `request`.
-  // 4. Return the myNewResponse object.
 
   return supabaseResponse
 }
