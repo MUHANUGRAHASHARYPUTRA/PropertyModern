@@ -116,6 +116,25 @@ export async function toggleWishlist(propertyId: string) {
   return { success: true }
 }
 
+async function uploadFile(file: File, path: string) {
+  const supabase = await createClient()
+  const fileExt = file.name.split('.').pop()
+  const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`
+  const filePath = `${path}/${fileName}`
+
+  const { data, error } = await supabase.storage
+    .from('properties')
+    .upload(filePath, file)
+
+  if (error) throw error
+
+  const { data: { publicUrl } } = supabase.storage
+    .from('properties')
+    .getPublicUrl(filePath)
+
+  return publicUrl
+}
+
 export async function addProperty(formData: FormData) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -124,27 +143,50 @@ export async function addProperty(formData: FormData) {
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user?.id).single()
   if (profile?.role !== 'admin') return { error: 'Unauthorized' }
 
-  const newProperty = {
-    name: formData.get('name') as string,
-    price: formData.get('price') as string,
-    category: formData.get('category') as string,
-    status: formData.get('status') as string || 'AVAILABLE',
-    description: formData.get('description') as string,
-    luas_tanah: parseInt(formData.get('luas_tanah') as string),
-    luas_bangunan: parseInt(formData.get('luas_bangunan') as string),
-    kamar_tidur: parseInt(formData.get('kamar_tidur') as string),
-    kamar_mandi: parseInt(formData.get('kamar_mandi') as string),
-    image_url: formData.get('image_url') as string,
-    video_url: formData.get('video_url') as string,
-    gallery_urls: (formData.get('gallery_urls') as string)?.split(',').map((u: string) => u.trim()).filter((u: string) => u !== '') || [],
+  try {
+    // Handle Main Image Upload
+    const imageFile = formData.get('image_file') as File
+    let image_url = formData.get('image_url') as string
+    
+    if (imageFile && imageFile.size > 0) {
+      image_url = await uploadFile(imageFile, 'main')
+    }
+
+    // Handle Gallery Uploads
+    const galleryFiles = formData.getAll('gallery_files') as File[]
+    const galleryUrlsFromFiles = await Promise.all(
+      galleryFiles
+        .filter(file => file.size > 0)
+        .map(file => uploadFile(file, 'gallery'))
+    )
+    
+    const existingGalleryUrls = (formData.get('gallery_urls') as string)?.split(',').map((u: string) => u.trim()).filter((u: string) => u !== '') || []
+    const gallery_urls = [...existingGalleryUrls, ...galleryUrlsFromFiles]
+
+    const newProperty = {
+      name: formData.get('name') as string,
+      price: formData.get('price') as string,
+      category: formData.get('category') as string,
+      status: formData.get('status') as string || 'AVAILABLE',
+      description: formData.get('description') as string,
+      luas_tanah: parseInt(formData.get('luas_tanah') as string),
+      luas_bangunan: parseInt(formData.get('luas_bangunan') as string),
+      kamar_tidur: parseInt(formData.get('kamar_tidur') as string),
+      kamar_mandi: parseInt(formData.get('kamar_mandi') as string),
+      image_url,
+      video_url: formData.get('video_url') as string,
+      gallery_urls: gallery_urls,
+    }
+
+    const { error } = await supabase.from('properties').insert(newProperty)
+    if (error) return { error: error.message }
+
+    revalidatePath('/', 'layout')
+    revalidatePath('/admin/dashboard')
+    return { success: true }
+  } catch (err: any) {
+    return { error: err.message }
   }
-
-  const { error } = await supabase.from('properties').insert(newProperty)
-  if (error) return { error: error.message }
-
-  revalidatePath('/', 'layout')
-  revalidatePath('/admin/dashboard')
-  return { success: true }
 }
 
 export async function deleteProperty(id: string) {
@@ -201,28 +243,51 @@ export async function updateProperty(id: string, formData: FormData) {
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user?.id).single()
   if (profile?.role !== 'admin') return { error: 'Unauthorized' }
 
-  const updatedProperty = {
-    name: formData.get('name') as string,
-    price: formData.get('price') as string,
-    category: formData.get('category') as string,
-    status: formData.get('status') as string,
-    description: formData.get('description') as string,
-    luas_tanah: parseInt(formData.get('luas_tanah') as string),
-    luas_bangunan: parseInt(formData.get('luas_bangunan') as string),
-    kamar_tidur: parseInt(formData.get('kamar_tidur') as string),
-    kamar_mandi: parseInt(formData.get('kamar_mandi') as string),
-    image_url: formData.get('image_url') as string,
-    video_url: formData.get('video_url') as string,
-    gallery_urls: (formData.get('gallery_urls') as string)?.split(',').map(u => u.trim()).filter(u => u !== '') || [],
+  try {
+    // Handle Main Image Upload (Update)
+    const imageFile = formData.get('image_file') as File
+    let image_url = formData.get('image_url') as string
+    
+    if (imageFile && imageFile.size > 0) {
+      image_url = await uploadFile(imageFile, 'main')
+    }
+
+    // Handle Gallery Uploads (Update)
+    const galleryFiles = formData.getAll('gallery_files') as File[]
+    const galleryUrlsFromFiles = await Promise.all(
+      galleryFiles
+        .filter(file => file.size > 0)
+        .map(file => uploadFile(file, 'gallery'))
+    )
+    
+    const existingGalleryUrls = (formData.get('gallery_urls') as string)?.split(',').map(u => u.trim()).filter(u => u !== '') || []
+    const gallery_urls = [...existingGalleryUrls, ...galleryUrlsFromFiles]
+
+    const updatedProperty = {
+      name: formData.get('name') as string,
+      price: formData.get('price') as string,
+      category: formData.get('category') as string,
+      status: formData.get('status') as string,
+      description: formData.get('description') as string,
+      luas_tanah: parseInt(formData.get('luas_tanah') as string),
+      luas_bangunan: parseInt(formData.get('luas_bangunan') as string),
+      kamar_tidur: parseInt(formData.get('kamar_tidur') as string),
+      kamar_mandi: parseInt(formData.get('kamar_mandi') as string),
+      image_url,
+      video_url: formData.get('video_url') as string,
+      gallery_urls: gallery_urls,
+    }
+
+    const { error } = await supabase.from('properties').update(updatedProperty).eq('id', id)
+    if (error) return { error: error.message }
+
+    revalidatePath('/', 'layout')
+    revalidatePath('/admin/dashboard')
+    revalidatePath('/admin/properties')
+    return { success: true }
+  } catch (err: any) {
+    return { error: err.message }
   }
-
-  const { error } = await supabase.from('properties').update(updatedProperty).eq('id', id)
-  if (error) return { error: error.message }
-
-  revalidatePath('/', 'layout')
-  revalidatePath('/admin/dashboard')
-  revalidatePath('/admin/properties')
-  return { success: true }
 }
 
 export async function submitInquiry(formData: FormData) {

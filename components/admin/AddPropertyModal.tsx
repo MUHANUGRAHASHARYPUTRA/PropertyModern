@@ -8,6 +8,32 @@ export default function AddPropertyModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [galleryPreviews, setGalleryPreviews] = useState<string[]>([]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    const newPreviews: string[] = [];
+    
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setGalleryPreviews(prev => [...prev, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,7 +73,7 @@ export default function AddPropertyModal() {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-8 max-h-[70vh] overflow-y-auto space-y-6">
+            <form onSubmit={handleSubmit} className="p-8 max-h-[70vh] overflow-y-auto space-y-6 scrollbar-hide">
               {error && (
                 <div className="p-4 bg-red-50 text-red-500 rounded-xl text-xs border border-red-100 italic">
                   {error}
@@ -63,6 +89,7 @@ export default function AddPropertyModal() {
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Harga (IDR)</label>
                   <input name="price" required placeholder="Rp 500.000.000" className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
                 </div>
+                {/* ... other fields remains the same ... */}
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Kategori</label>
                   <select name="category" required className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white">
@@ -95,25 +122,62 @@ export default function AddPropertyModal() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">URL Gambar (Luar)</label>
-                  <input name="image_url" placeholder="/images/subsidi1.jpg" className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Unggah Gambar Utama</label>
+                  <div className="relative group">
+                    <input 
+                       type="file" 
+                       name="image_file" 
+                       accept="image/*"
+                       onChange={handleImageChange}
+                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+                    />
+                    <div className="w-full h-32 border-2 border-dashed border-brand-gold/20 rounded-2xl flex flex-center flex-col items-center justify-center bg-brand-offwhite/50 dark:bg-brand-dark/50 group-hover:bg-brand-gold/5 transition-all">
+                      {imagePreview ? (
+                        <img src={imagePreview} className="h-full w-full object-cover rounded-2xl" alt="Preview" />
+                      ) : (
+                        <>
+                          <Plus className="w-6 h-6 text-brand-gold/40 mb-2" />
+                          <span className="text-[10px] font-bold text-brand-charcoal/40 dark:text-brand-ivory/40 uppercase tracking-widest">Pilih Gambar Utama</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
                 </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">URL Video (YouTube/MP4)</label>
+                        <input name="video_url" placeholder="https://youtube.com/watch?v=..." className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                    </div>
+                    <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Unggah Galeri Foto</label>
+                        <input 
+                            type="file" 
+                            name="gallery_files" 
+                            multiple 
+                            accept="image/*"
+                            onChange={handleGalleryChange}
+                            className="w-full text-xs text-brand-charcoal/40 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-brand-gold file:text-white hover:file:bg-brand-charcoal cursor-pointer" 
+                        />
+                    </div>
+                </div>
+                
+                {galleryPreviews.length > 0 && (
+                    <div className="grid grid-cols-4 gap-2">
+                        {galleryPreviews.map((src, idx) => (
+                            <div key={idx} className="relative h-16 rounded-lg overflow-hidden border border-brand-gold/20">
+                                <img src={src} className="w-full h-full object-cover" alt="Gallery Preview" />
+                            </div>
+                        ))}
+                    </div>
+                )}
+
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">URL Video (YouTube/MP4)</label>
-                  <input name="video_url" placeholder="https://youtube.com/watch?v=..." className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Deskripsi Singkat</label>
+                    <textarea name="description" rows={3} placeholder="Hunian minimalis di lokasi strategis..." className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white resize-none"></textarea>
                 </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">URL Galeri Foto (Pisahkan dengan koma)</label>
-                <textarea name="gallery_urls" rows={2} placeholder="/images/gallery1.jpg, /images/gallery2.jpg, ..." className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white resize-none"></textarea>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Deskripsi Singkat</label>
-                <textarea name="description" rows={3} placeholder="Hunian minimalis di lokasi strategis..." className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white"></textarea>
               </div>
 
               <div className="pt-6 flex gap-4">
