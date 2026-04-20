@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Maximize, Bed, Bath, ArrowRight, Video, X, ChevronLeft, ChevronRight, MoveHorizontal, Loader2 } from 'lucide-react';
+import { Maximize, Bed, Bath, ArrowRight, Video, X, ChevronLeft, ChevronRight, MoveHorizontal, Loader2, Check } from 'lucide-react';
 import Image from 'next/image';
 import { useCompareStore } from '@/lib/store';
 import { createClient } from '@/lib/supabase/client';
