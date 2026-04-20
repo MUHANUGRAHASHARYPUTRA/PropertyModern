@@ -13,15 +13,14 @@ import Faq from '@/components/Faq';
 import Kontak from '@/components/Kontak';
 import Footer from '@/components/Footer';
 import FloatingContact from '@/components/FloatingContact';
-import CustomCursor from '@/components/CustomCursor';
 import PageLoader from '@/components/PageLoader';
 import CompareModal from '@/components/CompareModal';
+import GlobalCompareBar from '@/components/GlobalCompareBar';
 
 export default function Home() {
   return (
     <main className="relative min-h-screen">
       <PageLoader />
-      <CustomCursor />
       <Navbar />
       
       {/* Bungkus setiap bagian dengan ID yang sesuai dengan navLinks di Navbar */}
@@ -63,6 +62,7 @@ export default function Home() {
       
       <Footer />
       <FloatingContact />
+      <GlobalCompareBar />
       <CompareModal />
     </main>
   );

@@ -51,7 +51,7 @@ export default function CompareModal() {
                   </button>
                   <div className="relative h-48 w-full">
                     <Image 
-                      src={property.image} 
+                      src={property.image_url || '/images/komersil1.jpg'} 
                       alt={property.name} 
                       fill 
                       className="object-cover"
@@ -65,23 +65,23 @@ export default function CompareModal() {
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
                         <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Tipe</span>
-                        <span className="font-medium capitalize">{property.type}</span>
+                        <span className="font-medium capitalize">{property.category}</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
                         <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Luas Tanah</span>
-                        <span className="font-medium">{property.luasTanah} m²</span>
+                        <span className="font-medium">{property.luas_tanah} m²</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
                         <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Luas Bangunan</span>
-                        <span className="font-medium">{property.luasBangunan} m²</span>
+                        <span className="font-medium">{property.luas_bangunan} m²</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
                         <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Kamar Tidur</span>
-                        <span className="font-medium">{property.kamarTidur}</span>
+                        <span className="font-medium">{property.kamar_tidur}</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
                         <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Kamar Mandi</span>
-                        <span className="font-medium">{property.kamarMandi}</span>
+                        <span className="font-medium">{property.kamar_mandi}</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
                         <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Carport</span>
@@ -90,8 +90,8 @@ export default function CompareModal() {
                       <div className="flex justify-between pb-2">
                         <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Dapur</span>
                         <span className="font-medium flex items-center">
-                          {property.type === 'komersil' ? <Check className="w-4 h-4 text-[#1D9E75] mr-1" /> : <X className="w-4 h-4 text-red-500 mr-1" />}
-                          {property.type === 'komersil' ? 'Ya' : 'Tidak'}
+                          {property.category === 'komersil' ? <Check className="w-4 h-4 text-[#1D9E75] mr-1" /> : <X className="w-4 h-4 text-red-500 mr-1" />}
+                          {property.category === 'komersil' ? 'Ya' : 'Ada (Belum Tutup)'}
                         </span>
                       </div>
                     </div>

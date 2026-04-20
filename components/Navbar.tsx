@@ -1,16 +1,68 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User as UserIcon, LogOut, LayoutDashboard } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
+import { signOut } from '@/app/auth/actions';
+import Link from 'next/link';
+import { Bell, ArrowRight } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
+  const [activePromo, setActivePromo] = useState<any>(null);
   const { scrollY } = useScroll();
+  const supabase = createClient();
+
+  useEffect(() => {
+    const getData = async () => {
+      // Fetch user & profile
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+        setProfile(profile);
+      }
+
+      // Fetch active announcement
+      const { data: promo } = await supabase
+        .from('announcements')
+        .select('*')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      setActivePromo(promo);
+    };
+    getData();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single();
+        setProfile(profile);
+      } else {
+        setProfile(null);
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // Navbar bertransformasi setelah scroll lebih dari 10px
     setIsScrolled(latest > 10);
   });
 
@@ -22,7 +74,9 @@ export default function Navbar() {
     { name: 'Lokasi', href: '#lokasi' },
   ];
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const scrollToSection = (e: React.MouseEvent<HTMLElement>, href: string) => {
+    if (!href.startsWith('#')) return; // Allow normal links
+    
     e.preventDefault();
     setIsMobileMenuOpen(false);
     const targetId = href.replace('#', '');
@@ -42,6 +96,10 @@ export default function Navbar() {
         const offsetPosition = elementPosition - offset;
 
         window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      } else {
+          // If element not found (e.g. on dashboard), go to home first then scroll? 
+          // For now just navigate if it's not on the main page
+          window.location.href = '/' + href;
       }
     }, 100);
   };
@@ -52,15 +110,37 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 transition-all duration-700 ease-in-out ${
         isScrolled 
           ? 'py-3 bg-brand-ivory/10 dark:bg-brand-dark/10 backdrop-blur-md shadow-sm border-b border-brand-gold/5' 
-          : 'py-6 bg-transparent border-b border-transparent'
+          : 'bg-transparent border-b border-transparent'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
     >
-      <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-        {/* Logo & Brand - Font asli tetap dipertahankan */}
-        <a 
-          href="#home" 
+      {/* Integrated Promo Banner */}
+      <AnimatePresence>
+        {activePromo && !isScrolled && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="bg-brand-charcoal text-white py-2 px-6 overflow-hidden border-b border-brand-gold/10"
+          >
+            <div className="container mx-auto flex items-center justify-center gap-4 text-center">
+              <span className="px-1.5 py-0.5 bg-brand-gold text-brand-charcoal text-[8px] font-black uppercase rounded">
+                {activePromo.badge}
+              </span>
+              <p className="text-[10px] md:text-xs font-medium truncate">
+                <span className="text-brand-gold font-bold">{activePromo.title}</span> {activePromo.content}
+              </p>
+              <ArrowRight className="w-3 h-3 text-brand-gold animate-bounce-x" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className={`container mx-auto px-6 md:px-12 flex justify-between items-center ${isScrolled ? '' : 'py-4'}`}>
+        {/* Logo & Brand */}
+        <Link 
+          href="/" 
           onClick={(e) => scrollToSection(e, '#home')} 
           className="flex items-center gap-3 group cursor-pointer"
         >
@@ -79,7 +159,7 @@ export default function Navbar() {
           } text-brand-charcoal dark:text-brand-ivory`}>
             Alizah <span className="text-brand-gold italic">Property</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8 text-brand-charcoal dark:text-brand-ivory">
@@ -94,21 +174,42 @@ export default function Navbar() {
             </a>
           ))}
           
-          <a 
-            href="#kontak"
-            onClick={(e) => scrollToSection(e, '#kontak')}
-            className={`transition-all duration-500 font-medium rounded-full shadow-md ${
-              isScrolled 
-                ? 'px-5 py-2 bg-brand-gold text-white text-xs' 
-                : 'px-6 py-2.5 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal text-sm'
-            }`}
-          >
-            Hubungi Kami
-          </a>
+          {user ? (
+              <div className="flex items-center gap-4 border-l border-brand-charcoal/10 dark:border-brand-ivory/10 pl-8">
+                  <Link 
+                    href={profile?.role === 'admin' ? '/admin/dashboard' : '/user/dashboard'}
+                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-gold hover:text-brand-charcoal dark:hover:text-brand-ivory transition-colors"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    Dashboard
+                  </Link>
+                  <form action={signOut}>
+                      <button type="submit" className="text-brand-charcoal/40 dark:text-brand-ivory/40 hover:text-red-500 transition-colors">
+                          <LogOut className="w-5 h-5" />
+                      </button>
+                  </form>
+              </div>
+          ) : (
+            <Link 
+              href="/login"
+              className={`transition-all duration-500 font-medium rounded-full shadow-md ${
+                isScrolled 
+                  ? 'px-6 py-2 bg-brand-gold text-white text-xs' 
+                  : 'px-8 py-2.5 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal text-sm'
+              }`}
+            >
+              Sign In
+            </Link>
+          )}
         </div>
 
         {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center gap-4">
+          {user && (
+              <Link href={profile?.role === 'admin' ? '/admin/dashboard' : '/user/dashboard'} className="text-brand-gold">
+                  <UserIcon className="w-6 h-6" />
+              </Link>
+          )}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`p-2 rounded-lg transition-all duration-300 ${
@@ -142,12 +243,29 @@ export default function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <button 
-                onClick={() => window.open('https://wa.me/62895403047867', '_blank')}
-                className="mt-4 px-6 py-4 bg-brand-gold text-white text-center font-bold rounded-xl"
-              >
-                WhatsApp Sekarang
-              </button>
+              
+              {!user ? (
+                  <Link 
+                    href="/login" 
+                    className="mt-4 px-6 py-4 bg-brand-gold text-white text-center font-bold rounded-xl"
+                  >
+                    Login / Register
+                  </Link>
+              ) : (
+                <div className="flex flex-col gap-2 mt-4">
+                    <Link 
+                      href={profile?.role === 'admin' ? '/admin/dashboard' : '/user/dashboard'}
+                      className="px-6 py-4 bg-brand-gold text-white text-center font-bold rounded-xl"
+                    >
+                      Dashboard
+                    </Link>
+                    <form action={signOut} className="w-full">
+                        <button type="submit" className="w-full px-6 py-4 bg-red-500/10 text-red-500 font-bold rounded-xl">
+                            Log Out
+                        </button>
+                    </form>
+                </div>
+              )}
             </div>
           </motion.div>
         )}

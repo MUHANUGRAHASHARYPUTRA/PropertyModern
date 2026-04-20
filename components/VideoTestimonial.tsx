@@ -74,7 +74,7 @@ export default function SocialTestimonials() {
                   <iframe
                     src={`https://www.instagram.com/p/${item.postCode}/embed`}
                     className="w-full h-full border-0"
-                    allowTransparency
+                    allowtransparency="true"
                   ></iframe>
                 </div>
                 <div className="p-5">

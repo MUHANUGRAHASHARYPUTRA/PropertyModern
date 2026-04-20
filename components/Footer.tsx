@@ -1,9 +1,33 @@
 'use client';
 
-import { Instagram, Facebook, Youtube, Send } from 'lucide-react';
+import { Instagram, Facebook, Youtube, Send, CheckCircle2, Loader2 } from 'lucide-react';
+import { useState } from 'react';
+import { submitInquiry } from '@/app/auth/actions';
 
 export default function Footer() {
+  const [loading, setLoading] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
   const targetEmail = "anugrahasharyabubakar@gmail.com"; 
+
+  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    
+    setLoading(true);
+    const data = new FormData();
+    data.append('name', 'Pendaftar Newsletter');
+    data.append('email', email);
+    data.append('phone', '-');
+    data.append('message', 'Pendaftaran Newsletter Baru');
+    
+    const result = await submitInquiry(data);
+    setLoading(false);
+    
+    if (!result?.error) {
+      setSubscribed(true);
+    }
+  };
 
   return (
     <footer className="bg-brand-charcoal text-brand-ivory pt-20 pb-10 border-t-4 border-brand-gold">
@@ -13,25 +37,23 @@ export default function Footer() {
           {/* Col 1: Brand */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              {/* PERBAIKAN DI SINI */}
               <img 
                 src="images/logo.png" 
                 alt="Logo Alizah Property"
                 className="w-10 h-10 object-contain" 
                 onError={(e) => {
-                  e.currentTarget.src = "https://placehold.co/40x40?text=A"; // Fallback jika link mati
+                  e.currentTarget.src = "https://placehold.co/40x40?text=A"; 
                 }}
               />
               <span className="font-serif text-3xl font-medium tracking-wide">
-  Alizah <span className="text-brand-gold italic">Property</span>
-</span>
+                Alizah <span className="text-brand-gold italic">Property</span>
+              </span>
             </div>
             <p className="text-brand-ivory/70 text-sm leading-relaxed">
               Hunian Impian, Harga Nyata. Mengembangkan kawasan hunian modern terpadu dengan fasilitas lengkap dan lingkungan asri untuk keluarga Anda.
             </p>
           </div>
 
-          {/* ... Col 2 & 3 tetap sama ... */}
           <div>
             <h4 className="font-serif text-xl mb-6 text-brand-gold">Navigasi Cepat</h4>
             <ul className="space-y-3 text-sm text-brand-ivory/70">
@@ -56,15 +78,20 @@ export default function Footer() {
           {/* Col 4: Newsletter & Social */}
           <div>
             <h4 className="font-serif text-xl mb-6 text-brand-gold">Newsletter</h4>
-            <form action={`https://formsubmit.co/${targetEmail}`} method="POST" className="flex mb-8">
-              <input type="text" name="_honey" style={{ display: 'none' }} />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="email" name="email" placeholder="Email Anda" required className="bg-brand-ivory/10 border border-brand-ivory/20 px-4 py-2 w-full focus:outline-none focus:border-brand-gold text-sm rounded-l-md text-brand-ivory" />
-              <button type="submit" className="bg-brand-gold px-4 py-2 text-white text-sm font-medium rounded-r-md hover:bg-brand-gold/90 transition-all flex items-center gap-2">
-                <Send className="w-4 h-4" />
-                Daftar
-              </button>
-            </form>
+            {subscribed ? (
+              <div className="flex items-center gap-3 text-brand-gold text-sm font-medium h-10">
+                <CheckCircle2 className="w-5 h-5" />
+                Email Berhasil Terdaftar!
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex mb-8">
+                <input type="email" name="email" placeholder="Email Anda" required className="bg-brand-ivory/10 border border-brand-ivory/20 px-4 py-2 w-full focus:outline-none focus:border-brand-gold text-sm rounded-l-md text-brand-ivory" />
+                <button disabled={loading} type="submit" className="bg-brand-gold px-4 py-2 text-white text-sm font-medium rounded-r-md hover:bg-brand-gold/90 transition-all flex items-center gap-2 disabled:opacity-50">
+                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  Daftar
+                </button>
+              </form>
+            )}
 
             <div className="flex gap-4">
               {/* Instagram */}

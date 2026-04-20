@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Calculator, Building2, Percent, Calendar } from 'lucide-react';
+import AjukanKprModal from './AjukanKprModal';
 
 const banks = [
   { name: 'BTN', rate: 6.99, type: 'Komersil' },
@@ -16,6 +17,7 @@ export default function Kpr() {
   const [dpAmount, setDpAmount] = useState(5500000);
   const [tenor, setTenor] = useState(15);
   const [bunga, setBunga] = useState(6.99);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const pokokKredit = harga - dpAmount;
   const bungaPerBulan = bunga / 100 / 12;
@@ -29,15 +31,21 @@ export default function Kpr() {
   };
 
   const handleAjukanKPR = () => {
-    const text = `Halo Alizah Property, saya ingin mengajukan KPR dengan rincian simulasi berikut:\n\n- Harga Properti: ${formatRupiah(harga)}\n- Uang Muka (DP): ${formatRupiah(dpAmount)}\n- Pokok Kredit: ${formatRupiah(pokokKredit)}\n- Tenor: ${tenor} Tahun\n- Suku Bunga: ${bunga}% per tahun\n- Estimasi Cicilan: ${formatRupiah(cicilan)} per bulan\n\nMohon informasi lebih lanjut mengenai persyaratannya. Terima kasih.`;
-    const encodedText = encodeURIComponent(text);
-    const waUrl = `https://wa.me/62895403047867?text=${encodedText}`;
-    
-    window.open(waUrl, '_blank');
+    setIsModalOpen(true);
   };
 
   return (
     <section id="kpr" className="py-24 bg-brand-ivory dark:bg-brand-dark">
+      <AjukanKprModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        kprData={{
+            harga: formatRupiah(harga),
+            dp: formatRupiah(dpAmount),
+            cicilan: formatRupiah(cicilan),
+            tenor: `${tenor} Tahun`
+        }} 
+      />
       <div className="container mx-auto px-6 md:px-12">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4">

@@ -4,12 +4,12 @@ interface Property {
   id: string;
   name: string;
   price: string;
-  type: 'subsidi' | 'komersil';
-  image: string;
-  luasTanah: number;
-  luasBangunan: number;
-  kamarTidur: number;
-  kamarMandi: number;
+  category: 'subsidi' | 'komersil';
+  image_url: string;
+  luas_tanah: number;
+  luas_bangunan: number;
+  kamar_tidur: number;
+  kamar_mandi: number;
 }
 
 interface CompareStore {
