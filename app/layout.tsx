@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" suppressHydrationWarning>
       <body className={`${cormorant.variable} ${manrope.variable} font-sans bg-brand-ivory text-brand-charcoal dark:bg-brand-dark dark:text-brand-ivory transition-colors duration-300`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" forcedTheme="light">
           {children}
           <ChatBubble />
         </ThemeProvider>
