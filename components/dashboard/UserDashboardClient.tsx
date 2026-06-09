@@ -52,9 +52,9 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
     switch (activeTab) {
       case 'profile':
         return (
-          <div className="bg-white dark:bg-brand-dark-surface p-10 rounded-[2.5rem] border border-brand-charcoal/5 dark:border-brand-ivory/5 shadow-sm">
+          <div className="bg-white  p-10 rounded-[2.5rem] border border-brand-charcoal/5  shadow-sm">
             <div className="flex justify-between items-center mb-10">
-              <h2 className="text-2xl font-serif dark:text-white">Informasi <span className="text-brand-gold italic">Pribadi</span></h2>
+              <h2 className="text-2xl font-serif ">Informasi <span className="text-brand-gold italic">Pribadi</span></h2>
               {!isEditing && (
                 <button 
                   onClick={() => setIsEditing(true)}
@@ -82,7 +82,7 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                       name="fullName"
                       defaultValue={profile?.full_name}
                       required
-                      className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white"
+                      className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none "
                     />
                   </div>
                   <div className="space-y-2">
@@ -92,7 +92,7 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                       defaultValue={profile?.phone_number}
                       required
                       placeholder="08123456789"
-                      className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white"
+                      className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none "
                     />
                   </div>
                   <div className="space-y-2 opacity-50">
@@ -100,7 +100,7 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                     <input 
                       disabled
                       value={user?.email}
-                      className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm dark:text-white"
+                      className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm "
                     />
                   </div>
                 </div>
@@ -116,7 +116,7 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                   <button 
                     type="button"
                     onClick={() => setIsEditing(false)}
-                    className="px-8 py-3 border border-brand-charcoal/10 dark:border-brand-ivory/10 text-brand-charcoal/40 dark:text-brand-ivory/40 text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-red-50/50 hover:text-red-500 transition-all font-bold"
+                    className="px-8 py-3 border border-brand-charcoal/10  text-brand-charcoal/40  text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-red-50/50 hover:text-red-500 transition-all font-bold"
                   >
                     Batal
                   </button>
@@ -126,19 +126,19 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-1">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Nama Lengkap</p>
-                  <p className="text-lg dark:text-white font-medium">{profile?.full_name}</p>
+                  <p className="text-lg  font-medium">{profile?.full_name}</p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Email Address</p>
-                  <p className="text-lg dark:text-white font-medium">{user?.email}</p>
+                  <p className="text-lg  font-medium">{user?.email}</p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Nomor WhatsApp/HP</p>
-                  <p className="text-lg dark:text-white font-medium">{profile?.phone_number || '-'}</p>
+                  <p className="text-lg  font-medium">{profile?.phone_number || '-'}</p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Role Akun</p>
-                  <p className="text-lg dark:text-white uppercase tracking-widest text-xs font-bold">{profile?.role}</p>
+                  <p className="text-lg  uppercase tracking-widest text-xs font-bold">{profile?.role}</p>
                 </div>
               </div>
             )}
@@ -147,19 +147,19 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
       case 'favorites':
         return (
           <div className="space-y-6">
-             <h2 className="text-2xl font-serif dark:text-white">Unit <span className="text-brand-gold italic">Favorit</span></h2>
+             <h2 className="text-2xl font-serif ">Unit <span className="text-brand-gold italic">Favorit</span></h2>
              
              {wishlist.length > 0 ? (
                <div className="grid grid-cols-1 gap-6">
                  {wishlist.map((item) => (
-                   <div key={item.id} className="bg-white dark:bg-brand-dark-surface p-6 rounded-3xl border border-brand-charcoal/5 dark:border-brand-ivory/5 shadow-sm flex flex-col md:flex-row gap-8 items-center group">
+                   <div key={item.id} className="bg-white  p-6 rounded-3xl border border-brand-charcoal/5  shadow-sm flex flex-col md:flex-row gap-8 items-center group">
                       <div className="relative w-full md:w-48 h-32 rounded-2xl overflow-hidden shrink-0">
                          <Image src={item.properties.image_url || '/images/subsidi1.jpg'} alt={item.properties.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                       </div>
                       <div className="flex-1">
-                         <Link href={`/#${item.properties.category}`} className="text-lg font-serif dark:text-white hover:text-brand-gold transition-colors">{item.properties.name}</Link>
+                         <Link href={`/#${item.properties.category}`} className="text-lg font-serif  hover:text-brand-gold transition-colors">{item.properties.name}</Link>
                          <p className="text-brand-gold font-bold text-sm mt-1">{item.properties.price}</p>
-                         <div className="flex gap-4 mt-4 text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/40 dark:text-brand-ivory/40">
+                         <div className="flex gap-4 mt-4 text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/40 ">
                              <span>{item.properties.luas_bangunan}/{item.properties.luas_tanah} m²</span>
                              <span>{item.properties.kamar_tidur} Kamar</span>
                          </div>
@@ -167,7 +167,7 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                       <div className="flex gap-3">
                          <button 
                            onClick={() => handleRemoveWishlist(item.properties.id)}
-                           className="p-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-all"
+                           className="p-3 text-red-500 hover:bg-red-50  rounded-xl transition-all"
                            title="Hapus dari favorit"
                          >
                            <Trash2 className="w-5 h-5" />
@@ -177,9 +177,9 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                  ))}
                </div>
              ) : (
-               <div className="bg-white dark:bg-brand-dark-surface p-20 rounded-[2.5rem] border border-brand-charcoal/5 dark:border-brand-ivory/5 text-center">
-                  <Heart className="w-12 h-12 text-brand-charcoal/10 dark:text-brand-ivory/10 mx-auto mb-6" />
-                  <p className="text-brand-charcoal/40 dark:text-brand-ivory/40 text-sm font-medium">Belum ada unit yang disimpan.</p>
+               <div className="bg-white  p-20 rounded-[2.5rem] border border-brand-charcoal/5  text-center">
+                  <Heart className="w-12 h-12 text-brand-charcoal/10  mx-auto mb-6" />
+                  <p className="text-brand-charcoal/40  text-sm font-medium">Belum ada unit yang disimpan.</p>
                   <Link href="/#subsidi" className="mt-8 inline-block text-[10px] font-bold uppercase tracking-widest text-brand-gold hover:underline">Jelajahi Properti</Link>
                </div>
              )}
@@ -188,12 +188,12 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
       case 'consultation':
         return (
           <div className="space-y-8">
-             <h2 className="text-2xl font-serif dark:text-white">Konsultasi <span className="text-brand-gold italic">Marketing</span></h2>
+             <h2 className="text-2xl font-serif ">Konsultasi <span className="text-brand-gold italic">Marketing</span></h2>
              
-             <div className="bg-white dark:bg-brand-dark-surface p-10 rounded-[2.5rem] border border-brand-charcoal/5 dark:border-brand-ivory/5 shadow-sm text-center">
+             <div className="bg-white  p-10 rounded-[2.5rem] border border-brand-charcoal/5  shadow-sm text-center">
                 <MessageSquare className="w-16 h-16 text-brand-gold mx-auto mb-8 opacity-20" />
-                <h3 className="text-xl font-serif dark:text-white mb-4">Butuh panduan memilih hunian?</h3>
-                <p className="text-brand-charcoal/60 dark:text-brand-ivory/60 text-sm max-w-md mx-auto leading-relaxed mb-10">
+                <h3 className="text-xl font-serif  mb-4">Butuh panduan memilih hunian?</h3>
+                <p className="text-brand-charcoal/60  text-sm max-w-md mx-auto leading-relaxed mb-10">
                   Konsultasikan kebutuhan hunian, perhitungan KPR, hingga proses akad secara gratis dengan tim profesional kami.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto">
@@ -206,7 +206,7 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                    </button>
                    <button 
                      disabled
-                     className="w-full py-5 border border-brand-charcoal/10 dark:border-brand-ivory/10 text-brand-charcoal/30 dark:text-brand-ivory/30 text-[10px] font-bold uppercase tracking-[0.2em] rounded-2xl cursor-not-allowed"
+                     className="w-full py-5 border border-brand-charcoal/10  text-brand-charcoal/30  text-[10px] font-bold uppercase tracking-[0.2em] rounded-2xl cursor-not-allowed"
                    >
                      E-Mail Inquiry (Soon)
                    </button>
@@ -217,12 +217,12 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
       case 'kpr':
          return (
           <div className="space-y-8">
-            <h2 className="text-2xl font-serif dark:text-white">Riwayat <span className="text-brand-gold italic">Pengajuan & Pesan</span></h2>
+            <h2 className="text-2xl font-serif ">Riwayat <span className="text-brand-gold italic">Pengajuan & Pesan</span></h2>
             
             {inquiries.length > 0 ? (
               <div className="grid grid-cols-1 gap-6">
                 {inquiries.map((inquiry) => (
-                  <div key={inquiry.id} className="bg-white dark:bg-brand-dark-surface p-8 rounded-3xl border border-brand-charcoal/5 dark:border-brand-ivory/5 shadow-sm">
+                  <div key={inquiry.id} className="bg-white  p-8 rounded-3xl border border-brand-charcoal/5  shadow-sm">
                     <div className="flex justify-between items-start mb-4">
                       <div className="px-3 py-1 bg-brand-gold/10 text-brand-gold text-[10px] font-bold uppercase tracking-widest rounded-full">
                         {inquiry.message.includes('[PENGAJUAN KPR]') ? 'KPR Online' : 'Konsultasi'}
@@ -231,7 +231,7 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                         {new Date(inquiry.created_at).toLocaleDateString()}
                       </span>
                     </div>
-                    <p className="text-brand-charcoal/80 dark:text-brand-ivory/80 text-sm italic mb-4 whitespace-pre-line leading-relaxed">
+                    <p className="text-brand-charcoal/80  text-sm italic mb-4 whitespace-pre-line leading-relaxed">
                       "{inquiry.message.replace('[PENGAJUAN KPR]', '').trim()}"
                     </p>
                     <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-gold">
@@ -242,10 +242,10 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                 ))}
               </div>
             ) : (
-              <div className="bg-white dark:bg-brand-dark-surface p-20 rounded-[2.5rem] border border-brand-charcoal/5 dark:border-brand-ivory/5 text-center">
-                 <Home className="w-12 h-12 text-brand-charcoal/10 dark:text-brand-ivory/10 mx-auto mb-6" />
-                 <p className="text-brand-charcoal/40 dark:text-brand-ivory/40 text-sm font-medium">Belum ada pengajuan KPR yang terdaftar.</p>
-                 <p className="text-xs text-brand-charcoal/30 dark:text-brand-ivory/30 mt-2">Hubungi admin untuk memulai simulasi KPR.</p>
+              <div className="bg-white  p-20 rounded-[2.5rem] border border-brand-charcoal/5  text-center">
+                 <Home className="w-12 h-12 text-brand-charcoal/10  mx-auto mb-6" />
+                 <p className="text-brand-charcoal/40  text-sm font-medium">Belum ada pengajuan KPR yang terdaftar.</p>
+                 <p className="text-xs text-brand-charcoal/30  mt-2">Hubungi admin untuk memulai simulasi KPR.</p>
               </div>
             )}
           </div>
@@ -256,16 +256,16 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
   };
 
   return (
-    <div className="min-h-screen bg-brand-offwhite dark:bg-brand-dark">
+    <div className="min-h-screen bg-brand-offwhite ">
       {/* Top Navbar */}
-      <nav className="bg-white dark:bg-brand-dark-surface border-b border-brand-charcoal/5 dark:border-brand-ivory/5 px-6 md:px-12 py-6 flex justify-between items-center sticky top-0 z-50">
+      <nav className="bg-white  border-b border-brand-charcoal/5  px-6 md:px-12 py-6 flex justify-between items-center sticky top-0 z-50">
         <div className="flex items-center gap-12">
-          <Link href="/" className="text-2xl font-serif text-brand-charcoal dark:text-brand-ivory">
+          <Link href="/" className="text-2xl font-serif text-brand-charcoal ">
             Property<span className="text-brand-gold italic">Modern</span>
           </Link>
           <Link 
             href="/" 
-            className="hidden md:flex items-center gap-2 text-brand-charcoal/40 dark:text-brand-ivory/40 hover:text-brand-gold text-[10px] font-bold uppercase tracking-widest transition-colors"
+            className="hidden md:flex items-center gap-2 text-brand-charcoal/40  hover:text-brand-gold text-[10px] font-bold uppercase tracking-widest transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Kembali ke Beranda
@@ -278,13 +278,13 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                {profile?.full_name?.charAt(0)}
              </div>
              <div className="hidden sm:flex flex-col">
-                <span className="text-sm font-medium dark:text-white leading-tight">{profile?.full_name}</span>
+                <span className="text-sm font-medium  leading-tight">{profile?.full_name}</span>
                 <span className="text-[9px] font-bold uppercase tracking-widest text-brand-gold opacity-60">Role: {profile?.role}</span>
              </div>
           </div>
           <button 
             onClick={() => signOut()}
-            className="text-brand-charcoal/40 dark:text-brand-ivory/40 hover:text-red-500 transition-colors"
+            className="text-brand-charcoal/40  hover:text-red-500 transition-colors"
             title="Keluar"
           >
             <LogOut className="w-5 h-5" />
@@ -306,7 +306,7 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
                 key={item.id} 
                 onClick={() => setActiveTab(item.id)}
                 className={`w-full flex items-center justify-between px-6 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all ${
-                  activeTab === item.id ? 'bg-brand-gold text-white shadow-lg shadow-brand-gold/20' : 'text-brand-charcoal/40 dark:text-brand-ivory/40 hover:bg-brand-gold/5 hover:text-brand-gold'
+                  activeTab === item.id ? 'bg-brand-gold text-white shadow-lg shadow-brand-gold/20' : 'text-brand-charcoal/40  hover:bg-brand-gold/5 hover:text-brand-gold'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -323,7 +323,7 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
 
             <Link 
               href="/" 
-              className="md:hidden flex items-center gap-3 px-6 py-4 text-brand-charcoal/40 dark:text-brand-ivory/40 text-[10px] font-bold uppercase tracking-widest"
+              className="md:hidden flex items-center gap-3 px-6 py-4 text-brand-charcoal/40  text-[10px] font-bold uppercase tracking-widest"
             >
               <ArrowLeft className="w-4 h-4" />
               Beranda
@@ -337,8 +337,8 @@ export default function UserDashboardClient({ initialProfile, user, wishlist: in
             <div className="bg-brand-gold/5 border border-brand-gold/20 p-8 rounded-[2.5rem]">
                <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                  <div>
-                   <h3 className="text-xl font-serif text-brand-charcoal dark:text-white mb-2">Butuh Bantuan?</h3>
-                   <p className="text-brand-charcoal/60 dark:text-brand-ivory/60 text-sm">Tim marketing kami siap membantu proses pengajuan KPR Anda secara gratis.</p>
+                   <h3 className="text-xl font-serif text-brand-charcoal  mb-2">Butuh Bantuan?</h3>
+                   <p className="text-brand-charcoal/60  text-sm">Tim marketing kami siap membantu proses pengajuan KPR Anda secara gratis.</p>
                  </div>
                  <button 
                    onClick={() => window.open('https://wa.me/62895403047867', '_blank')}

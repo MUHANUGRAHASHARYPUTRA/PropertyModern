@@ -66,7 +66,7 @@ Tenor: ${kprData.tenor}`)
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white dark:bg-brand-dark w-full max-w-md rounded-[2.5rem] shadow-2xl p-8 relative overflow-hidden"
+            className="bg-white  w-full max-w-md rounded-[2.5rem] shadow-2xl p-8 relative overflow-hidden"
           >
             <button onClick={onClose} className="absolute top-6 right-6 p-2 hover:bg-brand-charcoal/5 rounded-full transition-colors"><X className="w-5 h-5"/></button>
 

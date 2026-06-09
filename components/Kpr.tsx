@@ -35,7 +35,7 @@ export default function Kpr() {
   };
 
   return (
-    <section id="kpr" className="py-24 bg-brand-ivory dark:bg-brand-dark">
+    <section id="kpr" className="py-24 bg-brand-ivory ">
       <AjukanKprModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
@@ -48,10 +48,10 @@ export default function Kpr() {
       />
       <div className="container mx-auto px-6 md:px-12">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4">
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal  mb-4">
             simulasi <span className="text-brand-gold italic">kpr</span>
           </h2>
-          <p className="text-brand-charcoal/70 dark:text-brand-ivory/70">
+          <p className="text-brand-charcoal/70 ">
             Hitung estimasi cicilan bulanan Anda (cicilan biasanya berubah sesuai ketentuan bank yang berlaku). Kami bekerja sama dengan bank terkemuka untuk memberikan suku bunga terbaik.
           </p>
         </div>
@@ -62,9 +62,9 @@ export default function Kpr() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-7 bg-white dark:bg-brand-dark-surface p-8 rounded-2xl shadow-xl border border-brand-charcoal/5 dark:border-brand-ivory/5"
+            className="lg:col-span-7 bg-white  p-8 rounded-2xl shadow-xl border border-brand-charcoal/5 "
           >
-            <div className="flex items-center gap-3 mb-8 pb-6 border-b border-brand-charcoal/10 dark:border-brand-ivory/10">
+            <div className="flex items-center gap-3 mb-8 pb-6 border-b border-brand-charcoal/10 ">
               <div className="p-3 bg-brand-gold/10 rounded-xl">
                 <Calculator className="w-6 h-6 text-brand-gold" />
               </div>
@@ -84,7 +84,7 @@ export default function Kpr() {
                   step="1000000"
                   value={harga} 
                   onChange={(e) => setHarga(Number(e.target.value))}
-                  className="w-full accent-brand-gold h-2 bg-brand-charcoal/10 dark:bg-brand-ivory/10 rounded-lg appearance-none cursor-pointer"
+                  className="w-full accent-brand-gold h-2 bg-brand-charcoal/10  rounded-lg appearance-none cursor-pointer"
                 />
               </div>
 
@@ -101,9 +101,9 @@ export default function Kpr() {
                     step="500000"
                     value={dpAmount} 
                     onChange={(e) => setDpAmount(Number(e.target.value))}
-                    className="w-full accent-brand-gold h-2 bg-brand-charcoal/10 dark:bg-brand-ivory/10 rounded-lg appearance-none cursor-pointer"
+                    className="w-full accent-brand-gold h-2 bg-brand-charcoal/10  rounded-lg appearance-none cursor-pointer"
                   />
-                  <p className="text-xs text-brand-charcoal/50 dark:text-brand-ivory/50 mt-2">{((dpAmount / harga) * 100).toFixed(1)}% dari harga</p>
+                  <p className="text-xs text-brand-charcoal/50  mt-2">{((dpAmount / harga) * 100).toFixed(1)}% dari harga</p>
                 </div>
 
                 <div>
@@ -118,7 +118,7 @@ export default function Kpr() {
                     step="1"
                     value={tenor} 
                     onChange={(e) => setTenor(Number(e.target.value))}
-                    className="w-full accent-brand-gold h-2 bg-brand-charcoal/10 dark:bg-brand-ivory/10 rounded-lg appearance-none cursor-pointer"
+                    className="w-full accent-brand-gold h-2 bg-brand-charcoal/10  rounded-lg appearance-none cursor-pointer"
                   />
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function Kpr() {
                   step="0.1"
                   value={bunga} 
                   onChange={(e) => setBunga(Number(e.target.value))}
-                  className="w-full accent-brand-gold h-2 bg-brand-charcoal/10 dark:bg-brand-ivory/10 rounded-lg appearance-none cursor-pointer"
+                  className="w-full accent-brand-gold h-2 bg-brand-charcoal/10  rounded-lg appearance-none cursor-pointer"
                 />
               </div>
             </div>
@@ -175,21 +175,21 @@ export default function Kpr() {
             </div>
 
             {/* Bank Partners */}
-            <div className="bg-white dark:bg-brand-dark-surface p-6 rounded-2xl shadow-md border border-brand-charcoal/5 dark:border-brand-ivory/5">
+            <div className="bg-white  p-6 rounded-2xl shadow-md border border-brand-charcoal/5 ">
               <h4 className="font-serif text-xl mb-4 flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-brand-gold" />
                 Bank Partner
               </h4>
               <div className="space-y-3">
                 {banks.map((bank) => (
-                  <div key={bank.name} className="flex justify-between items-center p-3 hover:bg-brand-offwhite dark:hover:bg-brand-dark rounded-lg transition-colors cursor-pointer" onClick={() => setBunga(bank.rate)}>
+                  <div key={bank.name} className="flex justify-between items-center p-3 hover:bg-brand-offwhite  rounded-lg transition-colors cursor-pointer" onClick={() => setBunga(bank.rate)}>
                     <div>
                       <p className="font-medium">{bank.name}</p>
-                      <p className="text-xs text-brand-charcoal/50 dark:text-brand-ivory/50">{bank.type}</p>
+                      <p className="text-xs text-brand-charcoal/50 ">{bank.type}</p>
                     </div>
                     <div className="text-right">
                       <p className="text-brand-gold font-bold">{bank.rate.toFixed(2)}%</p>
-                      <p className="text-xs text-brand-charcoal/50 dark:text-brand-ivory/50">p.a</p>
+                      <p className="text-xs text-brand-charcoal/50 ">p.a</p>
                     </div>
                   </div>
                 ))}

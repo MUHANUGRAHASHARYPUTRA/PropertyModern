@@ -65,9 +65,9 @@ export default function AddPropertyModal() {
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
           <div className="absolute inset-0 bg-brand-charcoal/80 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
-          <div className="relative w-full max-w-2xl bg-white dark:bg-brand-dark-surface rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
-            <div className="p-8 border-b border-brand-charcoal/5 dark:border-brand-ivory/5 flex justify-between items-center bg-brand-offwhite/50 dark:bg-brand-dark/20">
-              <h3 className="text-xl font-serif dark:text-white">Tambah Properti <span className="text-brand-gold italic">Baru</span></h3>
+          <div className="relative w-full max-w-2xl bg-white  rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+            <div className="p-8 border-b border-brand-charcoal/5  flex justify-between items-center bg-brand-offwhite/50 ">
+              <h3 className="text-xl font-serif ">Tambah Properti <span className="text-brand-gold italic">Baru</span></h3>
               <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-brand-charcoal/5 rounded-full transition-colors">
                 <X className="w-5 h-5 text-brand-charcoal/40" />
               </button>
@@ -83,42 +83,42 @@ export default function AddPropertyModal() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Nama Properti</label>
-                  <input name="name" required placeholder="Cluster Alizah Signature" className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                  <input name="name" required placeholder="Cluster Alizah Signature" className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none " />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Harga (IDR)</label>
-                  <input name="price" required placeholder="Rp 500.000.000" className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                  <input name="price" required placeholder="Rp 500.000.000" className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none " />
                 </div>
                 {/* ... other fields remains the same ... */}
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Kategori</label>
-                  <select name="category" required className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white">
+                  <select name="category" required className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none ">
                     <option value="subsidi">Subsidi</option>
                     <option value="komersil">Komersil</option>
                   </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Status</label>
-                  <select name="status" className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white">
+                  <select name="status" className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none ">
                     <option value="AVAILABLE">AVAILABLE</option>
                     <option value="SOLD OUT">SOLD OUT</option>
                   </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Luas Bangunan (m²)</label>
-                  <input name="luas_bangunan" type="number" required placeholder="36" className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                  <input name="luas_bangunan" type="number" required placeholder="36" className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none " />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Luas Tanah (m²)</label>
-                  <input name="luas_tanah" type="number" required placeholder="60" className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                  <input name="luas_tanah" type="number" required placeholder="60" className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none " />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Kamar Tidur</label>
-                  <input name="kamar_tidur" type="number" required placeholder="2" className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                  <input name="kamar_tidur" type="number" required placeholder="2" className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none " />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Kamar Mandi</label>
-                  <input name="kamar_mandi" type="number" required placeholder="1" className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                  <input name="kamar_mandi" type="number" required placeholder="1" className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none " />
                 </div>
               </div>
 
@@ -133,13 +133,13 @@ export default function AddPropertyModal() {
                        onChange={handleImageChange}
                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
                     />
-                    <div className="w-full h-32 border-2 border-dashed border-brand-gold/20 rounded-2xl flex flex-center flex-col items-center justify-center bg-brand-offwhite/50 dark:bg-brand-dark/50 group-hover:bg-brand-gold/5 transition-all">
+                    <div className="w-full h-32 border-2 border-dashed border-brand-gold/20 rounded-2xl flex flex-center flex-col items-center justify-center bg-brand-offwhite/50  group-hover:bg-brand-gold/5 transition-all">
                       {imagePreview ? (
                         <img src={imagePreview} className="h-full w-full object-cover rounded-2xl" alt="Preview" />
                       ) : (
                         <>
                           <Plus className="w-6 h-6 text-brand-gold/40 mb-2" />
-                          <span className="text-[10px] font-bold text-brand-charcoal/40 dark:text-brand-ivory/40 uppercase tracking-widest">Pilih Gambar Utama</span>
+                          <span className="text-[10px] font-bold text-brand-charcoal/40  uppercase tracking-widest">Pilih Gambar Utama</span>
                         </>
                       )}
                     </div>
@@ -149,7 +149,7 @@ export default function AddPropertyModal() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                         <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">URL Video (YouTube/MP4)</label>
-                        <input name="video_url" placeholder="https://youtube.com/watch?v=..." className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                        <input name="video_url" placeholder="https://youtube.com/watch?v=..." className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none " />
                     </div>
                     <div className="space-y-2">
                         <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Unggah Galeri Foto</label>
@@ -176,7 +176,7 @@ export default function AddPropertyModal() {
 
                 <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Deskripsi Singkat</label>
-                    <textarea name="description" rows={3} placeholder="Hunian minimalis di lokasi strategis..." className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white resize-none"></textarea>
+                    <textarea name="description" rows={3} placeholder="Hunian minimalis di lokasi strategis..." className="w-full bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none  resize-none"></textarea>
                 </div>
               </div>
 
@@ -191,7 +191,7 @@ export default function AddPropertyModal() {
                 <button 
                   type="button" 
                   onClick={() => setIsOpen(false)}
-                  className="flex-1 py-4 border border-brand-charcoal/10 dark:border-brand-ivory/10 text-brand-charcoal/40 dark:text-brand-ivory/40 text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-brand-charcoal hover:text-white transition-all font-bold"
+                  className="flex-1 py-4 border border-brand-charcoal/10  text-brand-charcoal/40  text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-brand-charcoal hover:text-white transition-all font-bold"
                 >
                   Batal
                 </button>

@@ -49,16 +49,16 @@ export default function Subsidi() {
   }, []);
 
   return (
-    <section id="subsidi" className="py-32 bg-brand-offwhite dark:bg-brand-dark-surface overflow-hidden">
+    <section id="subsidi" className="py-32 bg-brand-offwhite  overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-10">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-6xl font-serif text-brand-charcoal dark:text-brand-ivory mb-6 leading-tight tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-serif text-brand-charcoal  mb-6 leading-tight tracking-tight">
               hunian <span className="text-brand-gold italic">subsidi</span>
             </h2>
             <div className="w-16 h-1 bg-brand-gold mb-6"></div>
-            <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-lg">
+            <p className="text-brand-charcoal/70  text-lg">
               Wujudkan mimpi memiliki rumah pertama dengan cicilan flat yang ringan dan proses yang transparan.
             </p>
           </div>
@@ -66,7 +66,7 @@ export default function Subsidi() {
           <div className="flex flex-col items-start md:items-end gap-6">
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="group relative px-10 py-4 border border-brand-charcoal/20 dark:border-brand-ivory/20 text-brand-charcoal dark:text-brand-ivory text-[10px] font-bold tracking-[0.2em] uppercase rounded-full overflow-hidden transition-all duration-500 hover:border-brand-gold hover:text-brand-gold"
+              className="group relative px-10 py-4 border border-brand-charcoal/20  text-brand-charcoal  text-[10px] font-bold tracking-[0.2em] uppercase rounded-full overflow-hidden transition-all duration-500 hover:border-brand-gold hover:text-brand-gold"
             >
               <span className="relative z-10">Cek Syarat KPR</span>
             </button>
@@ -148,22 +148,22 @@ export default function Subsidi() {
                     </div>
                     
                     <div className={`px-2 transition-opacity duration-500 ${isSoldOut ? 'opacity-40' : 'opacity-100'}`}>
-                      <p className="text-sm text-brand-charcoal/70 dark:text-brand-ivory/70 line-clamp-2 mb-6 leading-relaxed">
+                      <p className="text-sm text-brand-charcoal/70  line-clamp-2 mb-6 leading-relaxed">
                         {item.description}
                       </p>
 
-                      <div className="flex items-center justify-between pt-6 border-t border-brand-charcoal/10 dark:border-brand-ivory/10">
+                      <div className="flex items-center justify-between pt-6 border-t border-brand-charcoal/10 ">
                         <div className="flex gap-8">
                           <div className="flex flex-col">
                             <span className="text-[10px] text-brand-gold font-bold uppercase tracking-widest mb-1">Luas</span>
                             <span className="text-sm font-medium">{item.luas_bangunan}/{item.luas_tanah} m²</span>
                           </div>
-                          <div className="w-px h-8 bg-brand-charcoal/10 dark:bg-brand-ivory/10"></div>
+                          <div className="w-px h-8 bg-brand-charcoal/10 "></div>
                           <div className="flex flex-col">
                             <span className="text-[10px] text-brand-gold font-bold uppercase tracking-widest mb-1">Beds</span>
                             <span className="text-sm font-medium">{item.kamar_tidur} Kamar</span>
                           </div>
-                          <div className="w-px h-8 bg-brand-charcoal/10 dark:bg-brand-ivory/10"></div>
+                          <div className="w-px h-8 bg-brand-charcoal/10 "></div>
                           <div className="flex flex-col">
                             <span className="text-[10px] text-brand-gold font-bold uppercase tracking-widest mb-1">Mandi</span>
                             <span className="text-sm font-medium">{item.kamar_mandi} Mandi</span>
@@ -182,9 +182,9 @@ export default function Subsidi() {
                       </div>
 
                       {!isSoldOut && (
-                        <div className="mt-4 pt-4 border-t border-brand-charcoal/5 dark:border-brand-ivory/5">
+                        <div className="mt-4 pt-4 border-t border-brand-charcoal/5 ">
                              <label className="inline-flex items-center gap-3 cursor-pointer group/label">
-                                <div className={`w-5 h-5 rounded border transition-all flex items-center justify-center ${selectedProperties.some(p => p.id === item.id) ? 'bg-brand-gold border-brand-gold' : 'border-brand-charcoal/20 dark:border-white/20'}`}>
+                                <div className={`w-5 h-5 rounded border transition-all flex items-center justify-center ${selectedProperties.some(p => p.id === item.id) ? 'bg-brand-gold border-brand-gold' : 'border-brand-charcoal/20 '}`}>
                                     {selectedProperties.some(p => p.id === item.id) && <div className="w-1.5 h-1.5 bg-white rounded-full"></div>}
                                     <input 
                                         type="checkbox" 
@@ -194,7 +194,7 @@ export default function Subsidi() {
                                         disabled={!selectedProperties.some(p => p.id === item.id) && selectedProperties.length >= 3}
                                     />
                                 </div>
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/40 dark:text-brand-ivory/40 group-hover/label:text-brand-gold transition-colors">Bandingkan Unit</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/40  group-hover/label:text-brand-gold transition-colors">Bandingkan Unit</span>
                             </label>
                         </div>
                       )}
@@ -204,7 +204,7 @@ export default function Subsidi() {
               })
             ) : (
                 <div className="w-full flex justify-center py-20">
-                    <p className="text-brand-charcoal/40 dark:text-brand-ivory/40 uppercase tracking-widest text-xs font-bold">Belum ada unit subsidi yang tersedia.</p>
+                    <p className="text-brand-charcoal/40  uppercase tracking-widest text-xs font-bold">Belum ada unit subsidi yang tersedia.</p>
                 </div>
             )}
           </div>
@@ -228,7 +228,7 @@ export default function Subsidi() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-brand-ivory dark:bg-brand-dark w-full max-w-6xl rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
+              className="bg-brand-ivory  w-full max-w-6xl rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
               onClick={e => e.stopPropagation()}
             >
               <div className="w-full md:w-3/5 bg-black relative flex flex-col">
@@ -255,34 +255,34 @@ export default function Subsidi() {
                     </div>
                 )}
               </div>
-              <div className="w-full md:w-2/5 p-8 md:p-12 overflow-y-auto flex flex-col bg-white dark:bg-brand-dark">
+              <div className="w-full md:w-2/5 p-8 md:p-12 overflow-y-auto flex flex-col bg-white ">
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h3 className="text-3xl font-serif dark:text-white leading-tight mb-2">{selectedDetail.name}</h3>
+                    <h3 className="text-3xl font-serif  leading-tight mb-2">{selectedDetail.name}</h3>
                     <p className="text-2xl text-brand-gold font-bold">{selectedDetail.price}</p>
                   </div>
-                  <button onClick={() => setSelectedDetail(null)} className="p-3 text-brand-charcoal/20 hover:text-brand-charcoal dark:hover:text-white transition-all"><X /></button>
+                  <button onClick={() => setSelectedDetail(null)} className="p-3 text-brand-charcoal/20 hover:text-brand-charcoal  transition-all"><X /></button>
                 </div>
                 
                 <div className="space-y-8">
-                    <p className="text-sm dark:text-brand-ivory/70 leading-relaxed italic">{selectedDetail.description}</p>
+                    <p className="text-sm  leading-relaxed italic">{selectedDetail.description}</p>
                     
                     <div className="grid grid-cols-2 gap-6 bg-brand-gold/5 p-6 rounded-3xl border border-brand-gold/10">
                         <div className="flex flex-col">
                             <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-1">Luas Tanah</span>
-                            <span className="text-xl font-medium dark:text-white">{selectedDetail.luas_tanah} m²</span>
+                            <span className="text-xl font-medium ">{selectedDetail.luas_tanah} m²</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-1">Luas Bangunan</span>
-                            <span className="text-xl font-medium dark:text-white">{selectedDetail.luas_bangunan} m²</span>
+                            <span className="text-xl font-medium ">{selectedDetail.luas_bangunan} m²</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-1">Kamar Tidur</span>
-                            <span className="text-xl font-medium dark:text-white">{selectedDetail.kamar_tidur} Bed</span>
+                            <span className="text-xl font-medium ">{selectedDetail.kamar_tidur} Bed</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-1">Kamar Mandi</span>
-                            <span className="text-xl font-medium dark:text-white">{selectedDetail.kamar_mandi} Bath</span>
+                            <span className="text-xl font-medium ">{selectedDetail.kamar_mandi} Bath</span>
                         </div>
                     </div>
 
@@ -293,7 +293,7 @@ export default function Subsidi() {
                         Konsultasi Unit Sekarang
                     </button>
                     
-                    <p className="text-[10px] text-center text-brand-charcoal/40 dark:text-brand-ivory/40 uppercase tracking-widest font-bold">Unit Subsidi Terbatas</p>
+                    <p className="text-[10px] text-center text-brand-charcoal/40  uppercase tracking-widest font-bold">Unit Subsidi Terbatas</p>
                 </div>
               </div>
             </motion.div>
@@ -315,18 +315,18 @@ export default function Subsidi() {
               initial={{ scale: 0.98, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.98, opacity: 0 }}
-              className="bg-white dark:bg-brand-dark w-full max-w-lg rounded-[2rem] shadow-sm overflow-hidden"
+              className="bg-white  w-full max-w-lg rounded-[2rem] shadow-sm overflow-hidden"
               onClick={e => e.stopPropagation()}
             >
               <div className="p-8 md:p-12">
                 <div className="flex justify-between items-start mb-10">
                   <div>
                     <p className="text-[10px] text-brand-gold font-bold tracking-[0.25em] uppercase mb-3">Persyaratan Dasar</p>
-                    <h3 className="text-3xl font-serif text-brand-charcoal dark:text-brand-ivory">Program KPR <span className="italic">Subsidi</span></h3>
+                    <h3 className="text-3xl font-serif text-brand-charcoal ">Program KPR <span className="italic">Subsidi</span></h3>
                   </div>
                   <button 
                     onClick={() => setIsModalOpen(false)} 
-                    className="p-2 text-brand-charcoal/30 hover:text-brand-charcoal dark:text-brand-ivory/30 dark:hover:text-brand-ivory transition-colors"
+                    className="p-2 text-brand-charcoal/30 hover:text-brand-charcoal   transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -351,19 +351,19 @@ export default function Subsidi() {
                       <div className="mt-1 w-4 h-4 rounded-full border border-brand-gold/30 flex items-center justify-center shrink-0">
                         <Check className="w-2 h-2 text-brand-gold" />
                       </div>
-                      <span className="text-brand-charcoal/60 dark:text-brand-ivory/60 text-sm leading-relaxed">{syarat}</span>
+                      <span className="text-brand-charcoal/60  text-sm leading-relaxed">{syarat}</span>
                     </motion.div>
                   ))}
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-brand-charcoal/5 dark:border-brand-ivory/5 flex flex-col gap-4">
+                <div className="mt-12 pt-8 border-t border-brand-charcoal/5  flex flex-col gap-4">
                   <button 
                     onClick={() => window.open('https://wa.me/62895403047867', '_blank')}
-                    className="w-full py-4 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal text-[10px] font-bold uppercase tracking-[0.2em] rounded-xl hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-white transition-all active:scale-95"
+                    className="w-full py-4 bg-brand-charcoal  text-brand-ivory  text-[10px] font-bold uppercase tracking-[0.2em] rounded-xl hover:bg-brand-gold  hover:text-white transition-all active:scale-95"
                   >
                     Konsultasi Marketing
                   </button>
-                  <p className="text-center text-[9px] text-brand-charcoal/30 dark:text-brand-ivory/30 uppercase tracking-widest">
+                  <p className="text-center text-[9px] text-brand-charcoal/30  uppercase tracking-widest">
                     Layanan bebas biaya konsultasi
                   </p>
                 </div>

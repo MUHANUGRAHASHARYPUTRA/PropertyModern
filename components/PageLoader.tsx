@@ -22,7 +22,7 @@ export default function PageLoader() {
             y: '-100%',
             transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
           }}
-          className="fixed inset-0 z-[10000] flex items-center justify-center bg-brand-ivory dark:bg-brand-dark overflow-hidden"
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-brand-ivory  overflow-hidden"
         >
           {/* Garis Dekoratif - Delay dipercepat ke 0.1s */}
           <motion.div 
@@ -69,7 +69,7 @@ export default function PageLoader() {
             {/* Nama Brand - Muncul lebih awal (delay 0.3s) tapi gerakan tetap lambat */}
             <div className="overflow-hidden">
               <motion.h1 
-                className="text-4xl md:text-5xl font-serif tracking-widest text-brand-charcoal dark:text-brand-ivory uppercase"
+                className="text-4xl md:text-5xl font-serif tracking-widest text-brand-charcoal  uppercase"
                 initial={{ y: 100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.3 }}

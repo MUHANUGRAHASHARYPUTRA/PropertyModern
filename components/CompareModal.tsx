@@ -24,13 +24,13 @@ export default function CompareModal() {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-brand-ivory dark:bg-brand-dark w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl"
+          className="bg-brand-ivory  w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl"
         >
-          <div className="sticky top-0 z-10 bg-brand-ivory dark:bg-brand-dark border-b border-brand-charcoal/10 dark:border-brand-ivory/10 p-6 flex justify-between items-center">
-            <h2 className="text-2xl font-serif text-brand-charcoal dark:text-brand-ivory">Perbandingan Properti</h2>
+          <div className="sticky top-0 z-10 bg-brand-ivory  border-b border-brand-charcoal/10  p-6 flex justify-between items-center">
+            <h2 className="text-2xl font-serif text-brand-charcoal ">Perbandingan Properti</h2>
             <button 
               onClick={() => setCompareModalOpen(false)}
-              className="p-2 hover:bg-brand-charcoal/5 dark:hover:bg-brand-ivory/5 rounded-full transition-colors"
+              className="p-2 hover:bg-brand-charcoal/5  rounded-full transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
@@ -39,7 +39,7 @@ export default function CompareModal() {
           <div className="p-6">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {selectedProperties.map((property) => (
-                <div key={property.id} className="relative bg-white dark:bg-brand-dark-surface rounded-xl overflow-hidden border border-brand-charcoal/10 dark:border-brand-ivory/10">
+                <div key={property.id} className="relative bg-white  rounded-xl overflow-hidden border border-brand-charcoal/10 ">
                   <button 
                     onClick={() => {
                       toggleProperty(property);
@@ -64,31 +64,31 @@ export default function CompareModal() {
                     
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
-                        <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Tipe</span>
+                        <span className="text-brand-charcoal/60 ">Tipe</span>
                         <span className="font-medium capitalize">{property.category}</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
-                        <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Luas Tanah</span>
+                        <span className="text-brand-charcoal/60 ">Luas Tanah</span>
                         <span className="font-medium">{property.luas_tanah} m²</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
-                        <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Luas Bangunan</span>
+                        <span className="text-brand-charcoal/60 ">Luas Bangunan</span>
                         <span className="font-medium">{property.luas_bangunan} m²</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
-                        <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Kamar Tidur</span>
+                        <span className="text-brand-charcoal/60 ">Kamar Tidur</span>
                         <span className="font-medium">{property.kamar_tidur}</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
-                        <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Kamar Mandi</span>
+                        <span className="text-brand-charcoal/60 ">Kamar Mandi</span>
                         <span className="font-medium">{property.kamar_mandi}</span>
                       </div>
                       <div className="flex justify-between border-b border-brand-charcoal/5 pb-2">
-                        <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Carport</span>
+                        <span className="text-brand-charcoal/60 ">Carport</span>
                         <span className="font-medium flex items-center"><Check className="w-4 h-4 text-[#1D9E75] mr-1" /> Ya</span>
                       </div>
                       <div className="flex justify-between pb-2">
-                        <span className="text-brand-charcoal/60 dark:text-brand-ivory/60">Dapur</span>
+                        <span className="text-brand-charcoal/60 ">Dapur</span>
                         <span className="font-medium flex items-center">
                           {property.category === 'komersil' ? <Check className="w-4 h-4 text-[#1D9E75] mr-1" /> : <X className="w-4 h-4 text-red-500 mr-1" />}
                           {property.category === 'komersil' ? 'Ya' : 'Ada (Belum Tutup)'}

@@ -23,7 +23,7 @@ export default function Timeline() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-brand-ivory dark:bg-brand-dark overflow-hidden">
+    <section className="py-16 md:py-24 bg-brand-ivory  overflow-hidden">
       <div className="container mx-auto px-5 md:px-12">
         
         {/* HEADER - Lebih responsif */}
@@ -31,11 +31,11 @@ export default function Timeline() {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-3xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4 lowercase tracking-tight"
+            className="text-3xl md:text-5xl font-serif text-brand-charcoal  mb-4 lowercase tracking-tight"
           >
             progress <span className="text-brand-gold italic">pembangunan</span>
           </motion.h2>
-          <p className="text-sm md:text-base text-brand-charcoal/70 dark:text-brand-ivory/70 leading-relaxed">
+          <p className="text-sm md:text-base text-brand-charcoal/70  leading-relaxed">
             Transparansi adalah komitmen kami. Pantau perkembangan proyek Perumahan Bukit Panaikang Residence secara berkala.
           </p>
         </div>
@@ -43,7 +43,7 @@ export default function Timeline() {
         {/* TIMELINE SECTION */}
         <div className="relative max-w-4xl mx-auto">
           {/* Garis Tengah - Disesuaikan untuk mobile (tetap di kiri) */}
-          <div className="absolute left-[18px] md:left-1/2 top-0 bottom-0 w-[1px] bg-brand-charcoal/10 dark:bg-brand-ivory/10 transform md:-translate-x-1/2" />
+          <div className="absolute left-[18px] md:left-1/2 top-0 bottom-0 w-[1px] bg-brand-charcoal/10  transform md:-translate-x-1/2" />
 
           <div className="space-y-10 md:space-y-16">
             {timeline.map((item, index) => (
@@ -56,13 +56,13 @@ export default function Timeline() {
                 className={`relative flex flex-col md:flex-row items-start md:items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
               >
                 {/* Icon Status - Ukuran lebih proporsional di mobile */}
-                <div className="absolute left-0 md:left-1/2 w-9 h-9 md:w-12 md:h-12 rounded-full border-2 border-brand-ivory dark:border-brand-dark bg-white dark:bg-brand-dark-surface flex items-center justify-center transform -translate-x-0 md:-translate-x-1/2 z-10 shadow-sm">
+                <div className="absolute left-0 md:left-1/2 w-9 h-9 md:w-12 md:h-12 rounded-full border-2 border-brand-ivory  bg-white  flex items-center justify-center transform -translate-x-0 md:-translate-x-1/2 z-10 shadow-sm">
                   {item.status === 'completed' ? (
                     <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-[#1D9E75]" />
                   ) : item.status === 'current' ? (
                     <Clock className="w-4 h-4 md:w-5 md:h-5 text-brand-gold animate-pulse" />
                   ) : (
-                    <Calendar className="w-4 h-4 md:w-5 md:h-5 text-brand-charcoal/30 dark:text-brand-ivory/30" />
+                    <Calendar className="w-4 h-4 md:w-5 md:h-5 text-brand-charcoal/30 " />
                   )}
                 </div>
 
@@ -71,17 +71,17 @@ export default function Timeline() {
                   <div className={`p-5 md:p-6 rounded-2xl border transition-all duration-300 ${
                     item.status === 'current' 
                       ? 'border-brand-gold bg-brand-gold/5 shadow-lg shadow-brand-gold/5' 
-                      : 'border-brand-charcoal/5 dark:border-brand-ivory/5 bg-white/50 dark:bg-brand-dark-surface/50 backdrop-blur-sm'
+                      : 'border-brand-charcoal/5  bg-white/50  backdrop-blur-sm'
                   }`}>
                     <span className={`text-[10px] md:text-xs font-bold tracking-widest uppercase mb-1 block ${
                       item.status === 'completed' ? 'text-[#1D9E75]' : item.status === 'current' ? 'text-brand-gold' : 'text-brand-charcoal/40'
                     }`}>
                       {item.date}
                     </span>
-                    <h4 className="text-lg md:text-xl font-serif mb-1.5 text-brand-charcoal dark:text-brand-ivory lowercase">
+                    <h4 className="text-lg md:text-xl font-serif mb-1.5 text-brand-charcoal  lowercase">
                       {item.phase}
                     </h4>
-                    <p className="text-xs md:text-sm text-brand-charcoal/60 dark:text-brand-ivory/60 leading-relaxed">
+                    <p className="text-xs md:text-sm text-brand-charcoal/60  leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
@@ -100,10 +100,10 @@ export default function Timeline() {
           >
             <form 
               onSubmit={handleSubscribe}
-              className="flex flex-col md:flex-row items-center gap-3 bg-white dark:bg-brand-dark-surface p-2 md:p-2 rounded-3xl md:rounded-full shadow-xl border border-brand-charcoal/5"
+              className="flex flex-col md:flex-row items-center gap-3 bg-white  p-2 md:p-2 rounded-3xl md:rounded-full shadow-xl border border-brand-charcoal/5"
             >
               <div className="flex-1 w-full flex flex-col md:flex-row items-center pl-4 pr-2">
-                <span className="text-[11px] md:text-sm font-medium text-brand-charcoal/50 dark:text-brand-ivory/50 whitespace-nowrap mb-2 md:mb-0 md:mr-4 lowercase">
+                <span className="text-[11px] md:text-sm font-medium text-brand-charcoal/50  whitespace-nowrap mb-2 md:mb-0 md:mr-4 lowercase">
                   update via email
                 </span>
                 <input 
@@ -112,20 +112,20 @@ export default function Timeline() {
                   placeholder="Email Anda" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-brand-offwhite dark:bg-brand-dark px-5 py-3 md:py-2.5 rounded-full md:bg-transparent border-none outline-none w-full text-sm text-brand-charcoal dark:text-brand-ivory placeholder:text-brand-charcoal/30" 
+                  className="bg-brand-offwhite  px-5 py-3 md:py-2.5 rounded-full md:bg-transparent border-none outline-none w-full text-sm text-brand-charcoal  placeholder:text-brand-charcoal/30" 
                 />
               </div>
               
               <button 
                 type="submit" 
-                className="w-full md:w-auto bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal px-8 py-3.5 md:py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg"
+                className="w-full md:w-auto bg-brand-charcoal  text-brand-ivory  px-8 py-3.5 md:py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-brand-gold  hover:text-white transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg"
               >
                 <Send className="w-3.5 h-3.5" />
                 Subscribe
               </button>
             </form>
             
-            <p className="mt-6 text-[9px] md:text-[10px] text-brand-charcoal/40 dark:text-brand-ivory/40 uppercase tracking-[0.2em]">
+            <p className="mt-6 text-[9px] md:text-[10px] text-brand-charcoal/40  uppercase tracking-[0.2em]">
               *Membuka aplikasi email default perangkat anda
             </p>
           </motion.div>

@@ -16,7 +16,7 @@ export default async function AdminProperties() {
   const { data: properties } = await supabase.from('properties').select('*').order('created_at', { ascending: false })
 
   return (
-    <div className="min-h-screen bg-brand-offwhite dark:bg-brand-dark flex">
+    <div className="min-h-screen bg-brand-offwhite  flex">
       {/* Sidebar (Identical to Dashboard for Consistency) */}
       <aside className="w-64 bg-brand-charcoal text-brand-ivory flex flex-col p-6 fixed h-full z-50">
         <div className="mb-12">
@@ -56,9 +56,9 @@ export default async function AdminProperties() {
                 <Link href="/admin/dashboard" className="text-brand-gold p-1 hover:bg-brand-gold/10 rounded-full transition-colors">
                     <ArrowLeft className="w-4 h-4" />
                 </Link>
-                <h1 className="text-3xl font-serif text-brand-charcoal dark:text-brand-ivory">Manajemen <span className="italic text-brand-gold">Properti</span></h1>
+                <h1 className="text-3xl font-serif text-brand-charcoal ">Manajemen <span className="italic text-brand-gold">Properti</span></h1>
             </div>
-            <p className="text-brand-charcoal/60 dark:text-brand-ivory/60 text-sm">Kelola daftar unit rumah, harga, dan status ketersediaan.</p>
+            <p className="text-brand-charcoal/60  text-sm">Kelola daftar unit rumah, harga, dan status ketersediaan.</p>
           </div>
           <AddPropertyModal />
         </header>

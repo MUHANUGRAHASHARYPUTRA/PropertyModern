@@ -75,7 +75,7 @@ export default function ChatBubble() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            className="fixed bottom-6 right-6 w-56 bg-brand-ivory dark:bg-brand-dark-surface rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-brand-gold/20"
+            className="fixed bottom-6 right-6 w-56 bg-brand-ivory  rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-brand-gold/20"
           >
             <div className="p-4 bg-brand-gold text-white flex justify-between items-center shadow-sm">
               <h3 className="font-serif font-semibold text-lg tracking-wide">Hubungi Kami</h3>
@@ -87,14 +87,14 @@ export default function ChatBubble() {
             <div className="flex flex-col">
               <button 
                 onClick={() => setView('chat')}
-                className="flex items-center gap-3 p-4 hover:bg-brand-offwhite dark:hover:bg-[#1f1f1f] transition-colors text-left"
+                className="flex items-center gap-3 p-4 hover:bg-brand-offwhite  transition-colors text-left"
               >
                 <div className="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center shrink-0">
                   <MessageCircle size={20} />
                 </div>
                 <div>
-                  <div className="font-medium text-sm text-brand-charcoal dark:text-brand-ivory">Asisten AI</div>
-                  <div className="text-xs text-brand-charcoal/60 dark:text-brand-ivory/60">Tanya jawab cepat 24/7</div>
+                  <div className="font-medium text-sm text-brand-charcoal ">Asisten AI</div>
+                  <div className="text-xs text-brand-charcoal/60 ">Tanya jawab cepat 24/7</div>
                 </div>
               </button>
               
@@ -103,14 +103,14 @@ export default function ChatBubble() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setView('closed')}
-                className="flex items-center gap-3 p-4 hover:bg-brand-offwhite dark:hover:bg-[#1f1f1f] transition-colors text-left border-t border-brand-gold/10"
+                className="flex items-center gap-3 p-4 hover:bg-brand-offwhite  transition-colors text-left border-t border-brand-gold/10"
               >
                 <div className="w-10 h-10 rounded-full bg-[#25D366]/10 text-[#25D366] flex items-center justify-center shrink-0">
                   <Phone size={20} />
                 </div>
                 <div>
-                  <div className="font-medium text-sm text-brand-charcoal dark:text-brand-ivory">WhatsApp</div>
-                  <div className="text-xs text-brand-charcoal/60 dark:text-brand-ivory/60">Chat langsung dengan admin</div>
+                  <div className="font-medium text-sm text-brand-charcoal ">WhatsApp</div>
+                  <div className="text-xs text-brand-charcoal/60 ">Chat langsung dengan admin</div>
                 </div>
               </a>
             </div>
@@ -126,7 +126,7 @@ export default function ChatBubble() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            className="fixed bottom-6 right-6 w-[350px] h-[500px] max-h-[80vh] bg-brand-ivory dark:bg-brand-dark-surface rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-brand-gold/20"
+            className="fixed bottom-6 right-6 w-[350px] h-[500px] max-h-[80vh] bg-brand-ivory  rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-brand-gold/20"
           >
             {/* Header */}
             <div className="p-4 bg-brand-gold text-white flex justify-between items-center shadow-sm">
@@ -146,15 +146,15 @@ export default function ChatBubble() {
                   key={idx}
                   className={`max-w-[85%] p-3 rounded-2xl ${
                     msg.role === 'user' 
-                      ? 'bg-brand-charcoal text-white rounded-tr-sm self-end dark:bg-white dark:text-brand-charcoal' 
-                      : 'bg-brand-offwhite text-brand-charcoal rounded-tl-sm self-start dark:bg-[#1f1f1f] dark:text-brand-ivory'
+                      ? 'bg-brand-charcoal text-white rounded-tr-sm self-end  ' 
+                      : 'bg-brand-offwhite text-brand-charcoal rounded-tl-sm self-start  '
                   }`}
                 >
                   <p className="text-[15px] leading-relaxed">{msg.content}</p>
                 </div>
               ))}
               {isLoading && (
-                <div className="bg-brand-offwhite dark:bg-[#1f1f1f] text-brand-charcoal dark:text-brand-ivory max-w-[80%] p-3 rounded-2xl rounded-tl-sm self-start flex items-center gap-2">
+                <div className="bg-brand-offwhite  text-brand-charcoal  max-w-[80%] p-3 rounded-2xl rounded-tl-sm self-start flex items-center gap-2">
                   <Loader2 size={16} className="animate-spin text-brand-gold" />
                   <span className="text-[15px]">Mengetik...</span>
                 </div>
@@ -163,14 +163,14 @@ export default function ChatBubble() {
             </div>
 
             {/* Input */}
-            <div className="p-3 bg-white dark:bg-brand-dark border-t border-brand-gold/10">
+            <div className="p-3 bg-white  border-t border-brand-gold/10">
               <form onSubmit={handleSubmit} className="flex items-center gap-2 relative">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Tanyakan sesuatu..."
-                  className="w-full bg-brand-offwhite dark:bg-[#1f1f1f] text-brand-charcoal dark:text-brand-ivory rounded-full px-4 py-3 pr-12 text-[15px] focus:outline-none focus:ring-1 focus:ring-brand-gold placeholder:text-brand-charcoal/50 dark:placeholder:text-brand-ivory/50 transition-shadow"
+                  className="w-full bg-brand-offwhite  text-brand-charcoal  rounded-full px-4 py-3 pr-12 text-[15px] focus:outline-none focus:ring-1 focus:ring-brand-gold placeholder:text-brand-charcoal/50  transition-shadow"
                   disabled={isLoading}
                 />
                 <button 

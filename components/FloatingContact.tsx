@@ -9,7 +9,7 @@ export default function FloatingContact() {
 
   const contacts = [
     { id: 'wa', icon: MessageCircle, label: 'WhatsApp', color: 'bg-[#25D366]', href: 'https://wa.me/62895403047867' },
-    { id: 'phone', icon: Phone, label: 'Telepon', color: 'bg-brand-charcoal dark:bg-brand-ivory dark:text-brand-charcoal', href: 'tel:+62895403047867' },
+    { id: 'phone', icon: Phone, label: 'Telepon', color: 'bg-brand-charcoal  ', href: 'tel:+62895403047867' },
     { id: 'email', icon: Mail, label: 'Email', color: 'bg-brand-gold', href: 'mailto:info@grandestate.com' },
   ];
 
@@ -34,7 +34,7 @@ export default function FloatingContact() {
                 transition={{ delay: index * 0.1 }}
                 className={`flex items-center gap-3 group`}
               >
-                <span className="bg-brand-ivory dark:bg-brand-dark-surface px-3 py-1.5 rounded-md text-sm font-medium shadow-md opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:translate-x-0">
+                <span className="bg-brand-ivory  px-3 py-1.5 rounded-md text-sm font-medium shadow-md opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:translate-x-0">
                   {contact.label}
                 </span>
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg ${contact.color} hover:scale-110 transition-transform`}>

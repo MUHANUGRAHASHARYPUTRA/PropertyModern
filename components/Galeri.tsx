@@ -39,21 +39,21 @@ export default function Galeri() {
   const closeLightbox = () => setLightboxIndex(null);
 
   return (
-    <section id="galeri" className="py-24 bg-brand-offwhite dark:bg-brand-dark-surface">
+    <section id="galeri" className="py-24 bg-brand-offwhite ">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
-            <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4">
+            <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal  mb-4">
               galeri <span className="text-brand-gold italic">perumahan</span>
             </h2>
-            <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 max-w-xl">
+            <p className="text-brand-charcoal/70  max-w-xl">
               Sentuhan minimalis modern di setiap sudut hunian Alizah Property.
             </p>
           </div>
           <a 
             href="/brosuralizahproperty.pdf" 
             download
-            className="flex items-center gap-2 px-6 py-3 border border-brand-charcoal/20 dark:border-brand-ivory/20 text-brand-charcoal dark:text-brand-ivory hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all font-medium text-xs tracking-widest uppercase"
+            className="flex items-center gap-2 px-6 py-3 border border-brand-charcoal/20  text-brand-charcoal  hover:bg-brand-gold hover:border-brand-gold hover:text-white transition-all font-medium text-xs tracking-widest uppercase"
           >
             <Download className="w-4 h-4" />
             Brosur PDF
@@ -72,7 +72,7 @@ export default function Galeri() {
               className={`px-6 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all ${
                 activeTab === cat 
                   ? 'bg-brand-gold text-white' 
-                  : 'bg-transparent border border-brand-charcoal/10 dark:border-brand-ivory/10 text-brand-charcoal/50 dark:text-brand-ivory/50 hover:text-brand-gold'
+                  : 'bg-transparent border border-brand-charcoal/10  text-brand-charcoal/50  hover:text-brand-gold'
               }`}
             >
               {cat}
@@ -127,14 +127,14 @@ export default function Galeri() {
               {showAll ? (
                 <>
                   <ChevronUp className="w-5 h-5 text-brand-gold" />
-                  <span className="font-medium tracking-widest uppercase text-xs text-brand-charcoal dark:text-brand-ivory">
+                  <span className="font-medium tracking-widest uppercase text-xs text-brand-charcoal ">
                     Sembunyikan Gambar
                   </span>
                 </>
               ) : (
                 <>
                   <Grid2X2 className="w-5 h-5 text-brand-gold group-hover:rotate-90 transition-transform duration-500" />
-                  <span className="font-medium tracking-widest uppercase text-xs text-brand-charcoal dark:text-brand-ivory">
+                  <span className="font-medium tracking-widest uppercase text-xs text-brand-charcoal ">
                     Lihat Semua Foto ({filteredData.length})
                   </span>
                 </>

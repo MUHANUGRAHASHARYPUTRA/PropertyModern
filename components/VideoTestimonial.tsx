@@ -23,15 +23,15 @@ export default function SocialTestimonials() {
   };
 
   return (
-    <section className="py-24 bg-brand-offwhite dark:bg-brand-dark-surface">
+    <section className="py-24 bg-brand-offwhite ">
       <div className="container mx-auto px-6 md:px-12">
         
         {/* HEADER */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4 lowercase tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal  mb-4 lowercase tracking-tight">
             social <span className="text-brand-gold italic">testimoni</span>
           </h2>
-          <p className="text-brand-charcoal/70 dark:text-brand-ivory/70">
+          <p className="text-brand-charcoal/70 ">
             Cerita nyata dari mereka yang telah menemukan hunian impian bersama kami.
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function SocialTestimonials() {
             {youtubeTestimonials.map((item) => (
               <motion.div 
                 key={item.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={cardVariants}
-                className="bg-white dark:bg-brand-dark rounded-2xl overflow-hidden shadow-xl border border-brand-charcoal/5"
+                className="bg-white  rounded-2xl overflow-hidden shadow-xl border border-brand-charcoal/5"
               >
                 <div className="relative pb-[56.25%] bg-black">
                   <iframe 
@@ -55,7 +55,7 @@ export default function SocialTestimonials() {
                   />
                 </div>
                 <div className="p-5">
-                  <h4 className="font-serif text-lg text-brand-charcoal dark:text-brand-ivory">{item.name}</h4>
+                  <h4 className="font-serif text-lg text-brand-charcoal ">{item.name}</h4>
                   <p className="text-xs text-brand-gold font-bold uppercase">{item.unit}</p>
                 </div>
               </motion.div>
@@ -68,7 +68,7 @@ export default function SocialTestimonials() {
             {instagramTestimonials.map((item) => (
               <motion.div 
                 key={item.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={cardVariants}
-                className="bg-white dark:bg-brand-dark rounded-2xl overflow-hidden shadow-xl border border-brand-charcoal/5"
+                className="bg-white  rounded-2xl overflow-hidden shadow-xl border border-brand-charcoal/5"
               >
                 <div className="w-full aspect-[4/5] bg-brand-offwhite">
                   <iframe
@@ -78,7 +78,7 @@ export default function SocialTestimonials() {
                   ></iframe>
                 </div>
                 <div className="p-5">
-                  <h4 className="font-serif text-lg text-brand-charcoal dark:text-brand-ivory">{item.name}</h4>
+                  <h4 className="font-serif text-lg text-brand-charcoal ">{item.name}</h4>
                   <p className="text-xs text-brand-gold font-bold uppercase">{item.unit}</p>
                 </div>
               </motion.div>
@@ -91,7 +91,7 @@ export default function SocialTestimonials() {
             {tiktokTestimonials.map((item) => (
               <motion.div 
                 key={item.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={cardVariants}
-                className="bg-white dark:bg-brand-dark rounded-2xl overflow-hidden shadow-xl border border-brand-charcoal/5"
+                className="bg-white  rounded-2xl overflow-hidden shadow-xl border border-brand-charcoal/5"
               >
                 <div className="w-full aspect-[9/16] bg-black">
                   <iframe
@@ -101,7 +101,7 @@ export default function SocialTestimonials() {
                   ></iframe>
                 </div>
                 <div className="p-5">
-                  <h4 className="font-serif text-lg text-brand-charcoal dark:text-brand-ivory">{item.name}</h4>
+                  <h4 className="font-serif text-lg text-brand-charcoal ">{item.name}</h4>
                   <p className="text-xs text-brand-gold font-bold uppercase">{item.unit}</p>
                 </div>
               </motion.div>

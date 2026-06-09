@@ -55,15 +55,15 @@ export default function Komersil() {
   };
 
   return (
-    <section id="komersil" className="py-32 bg-brand-ivory dark:bg-brand-dark overflow-hidden">
+    <section id="komersil" className="py-32 bg-brand-ivory  overflow-hidden">
       {/* Header Section */}
       <div className="container mx-auto px-6 md:px-12 mb-20 flex flex-col md:flex-row justify-between items-end gap-10">
         <div className="max-w-2xl">
-          <h2 className="text-4xl md:text-6xl font-serif text-brand-charcoal dark:text-brand-ivory mb-6 leading-tight tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-serif text-brand-charcoal  mb-6 leading-tight tracking-tight">
             properti <span className="text-brand-gold italic">komersil</span>
           </h2>
           <div className="w-16 h-1 bg-brand-gold mb-6"></div>
-          <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-lg">
+          <p className="text-brand-charcoal/70  text-lg">
             Koleksi hunian eksklusif dengan sentuhan arsitektur modern kontemporer yang dirancang untuk kenyamanan jangka panjang.
           </p>
         </div>
@@ -147,24 +147,24 @@ export default function Komersil() {
                         <div className="flex gap-6">
                           <div className="flex flex-col">
                             <span className="text-[10px] text-brand-gold font-bold uppercase tracking-widest mb-1">Luas</span>
-                            <span className="text-sm font-medium dark:text-white">{item.luas_bangunan}/{item.luas_tanah} m²</span>
+                            <span className="text-sm font-medium ">{item.luas_bangunan}/{item.luas_tanah} m²</span>
                           </div>
-                          <div className="w-px h-8 bg-brand-charcoal/10 dark:bg-brand-ivory/10"></div>
+                          <div className="w-px h-8 bg-brand-charcoal/10 "></div>
                           <div className="flex flex-col">
                             <span className="text-[10px] text-brand-gold font-bold uppercase tracking-widest mb-1">Kamar</span>
-                            <span className="text-sm font-medium dark:text-white">{item.kamar_tidur} Kamar</span>
+                            <span className="text-sm font-medium ">{item.kamar_tidur} Kamar</span>
                           </div>
-                          <div className="w-px h-8 bg-brand-charcoal/10 dark:bg-brand-ivory/10"></div>
+                          <div className="w-px h-8 bg-brand-charcoal/10 "></div>
                           <div className="flex flex-col">
                             <span className="text-[10px] text-brand-gold font-bold uppercase tracking-widest mb-1">Kamar Mandi</span>
-                            <span className="text-sm font-medium dark:text-white">{item.kamar_mandi} Mandi</span>
+                            <span className="text-sm font-medium ">{item.kamar_mandi} Mandi</span>
                           </div>
                         </div>
                       </div>
     
                       {!isSoldOut && (
                         <label className="inline-flex items-center gap-3 cursor-pointer group/label">
-                          <div className={`w-5 h-5 rounded border transition-all flex items-center justify-center ${isSelected ? 'bg-brand-gold border-brand-gold' : 'border-brand-charcoal/20 dark:border-white/20'}`}>
+                          <div className={`w-5 h-5 rounded border transition-all flex items-center justify-center ${isSelected ? 'bg-brand-gold border-brand-gold' : 'border-brand-charcoal/20 '}`}>
                             {isSelected && <div className="w-1.5 h-1.5 bg-white rounded-full"></div>}
                             <input 
                               type="checkbox" 
@@ -174,7 +174,7 @@ export default function Komersil() {
                               disabled={!isSelected && selectedProperties.length >= 3}
                             />
                           </div>
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/40 dark:text-brand-ivory/40 group-hover/label:text-brand-gold transition-colors">Bandingkan Unit</span>
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/40  group-hover/label:text-brand-gold transition-colors">Bandingkan Unit</span>
                         </label>
                       )}
                     </div>
@@ -183,7 +183,7 @@ export default function Komersil() {
               })
           ) : (
             <div className="w-full flex justify-center py-20">
-                <p className="text-brand-charcoal/40 dark:text-brand-ivory/40 uppercase tracking-widest text-xs font-bold">Belum ada unit komersil yang tersedia.</p>
+                <p className="text-brand-charcoal/40  uppercase tracking-widest text-xs font-bold">Belum ada unit komersil yang tersedia.</p>
             </div>
           )}
         </div>
@@ -203,7 +203,7 @@ export default function Komersil() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-brand-ivory dark:bg-brand-dark w-full max-w-6xl rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
+              className="bg-brand-ivory  w-full max-w-6xl rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
               onClick={e => e.stopPropagation()}
             >
               <div className="w-full md:w-3/5 bg-black relative flex flex-col">
@@ -232,16 +232,16 @@ export default function Komersil() {
               </div>
               <div className="w-full md:w-2/5 p-8 overflow-y-auto flex flex-col">
                 <div className="flex justify-between mb-4">
-                  <h3 className="text-3xl font-serif dark:text-white">{selectedDetail.name}</h3>
-                  <button onClick={() => setSelectedDetail(null)} className="p-2 dark:text-white hover:rotate-90 transition-transform"><X /></button>
+                  <h3 className="text-3xl font-serif ">{selectedDetail.name}</h3>
+                  <button onClick={() => setSelectedDetail(null)} className="p-2  hover:rotate-90 transition-transform"><X /></button>
                 </div>
                 <p className="text-2xl text-brand-gold mb-6 font-bold">{selectedDetail.price}</p>
-                <p className="text-sm dark:text-brand-ivory/70 leading-relaxed mb-8">{selectedDetail.description}</p>
+                <p className="text-sm  leading-relaxed mb-8">{selectedDetail.description}</p>
                 
                 {selectedDetail.features && (
                     <div className="mb-8 grid grid-cols-2 gap-4">
                         {selectedDetail.features.map((f: string, i: number) => (
-                            <div key={i} className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/60 dark:text-brand-ivory/60">
+                            <div key={i} className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/60 ">
                                 <Check className="w-3 h-3 text-brand-gold" />
                                 {f}
                             </div>

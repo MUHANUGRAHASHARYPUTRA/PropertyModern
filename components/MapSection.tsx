@@ -242,14 +242,14 @@ export default function MapSection() {
   ];
 
   return (
-    <section id="lokasi" className="py-24 bg-brand-ivory dark:bg-brand-dark" ref={containerRef}>
+    <section id="lokasi" className="py-24 bg-brand-ivory " ref={containerRef}>
       <div className="container mx-auto px-6 md:px-12 mb-12">
         <div className="flex flex-col md:flex-row justify-between items-end gap-6">
           <div>
-            <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4">
+            <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal  mb-4">
               lokasi <span className="text-brand-gold italic">strategis</span>
             </h2>
-            <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 max-w-xl">
+            <p className="text-brand-charcoal/70  max-w-xl">
               Terletak di pusat perkembangan kota dengan akses mudah ke berbagai fasilitas umum dan infrastruktur transportasi.
             </p>
           </div>
@@ -266,7 +266,7 @@ export default function MapSection() {
       </div>
 
       <div className="container mx-auto px-6 md:px-12">
-        <div className="relative w-full h-[480px] rounded-2xl overflow-hidden shadow-2xl border border-brand-charcoal/10 dark:border-brand-ivory/10 bg-brand-offwhite dark:bg-brand-dark-surface">
+        <div className="relative w-full h-[480px] rounded-2xl overflow-hidden shadow-2xl border border-brand-charcoal/10  bg-brand-offwhite ">
           
           {/* Map Container */}
           {mapError ? (
@@ -281,7 +281,7 @@ export default function MapSection() {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Google Maps Location"
               ></iframe>
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/90 dark:bg-brand-dark/90 backdrop-blur-md px-6 py-3 rounded-full shadow-lg border border-brand-charcoal/10 flex items-center gap-3">
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/90  backdrop-blur-md px-6 py-3 rounded-full shadow-lg border border-brand-charcoal/10 flex items-center gap-3">
                 <AlertCircle className="w-5 h-5 text-amber-500" />
                 <span className="text-sm font-medium">Mode Peta Sederhana</span>
                 <a 
@@ -299,7 +299,7 @@ export default function MapSection() {
           )}
 
           {/* Floating Facilities Panel */}
-          <div className="absolute top-4 left-4 bg-white/90 dark:bg-brand-dark/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-brand-charcoal/5 dark:border-brand-ivory/5 max-w-[280px]">
+          <div className="absolute top-4 left-4 bg-white/90  backdrop-blur-md p-4 rounded-xl shadow-lg border border-brand-charcoal/5  max-w-[280px]">
             <h4 className="font-serif font-medium mb-3 text-sm">Fasilitas Terdekat</h4>
             <div className="grid grid-cols-2 gap-2">
               {facilities.map(fac => (
@@ -309,7 +309,7 @@ export default function MapSection() {
                   className={`flex items-center gap-2 text-xs p-2 rounded-lg border transition-colors ${
                     activeLayer === fac.id 
                       ? 'border-brand-gold bg-brand-gold/10 text-brand-gold' 
-                      : 'border-brand-charcoal/10 dark:border-brand-ivory/10 hover:border-brand-gold/50'
+                      : 'border-brand-charcoal/10  hover:border-brand-gold/50'
                   }`}
                 >
                   <span>{fac.icon}</span>
@@ -322,12 +322,12 @@ export default function MapSection() {
         </div>
 
         {/* Distance Matrix Table */}
-        <div className="mt-12 bg-white dark:bg-brand-dark-surface p-6 md:p-8 rounded-2xl shadow-lg border border-brand-charcoal/5 dark:border-brand-ivory/5">
+        <div className="mt-12 bg-white  p-6 md:p-8 rounded-2xl shadow-lg border border-brand-charcoal/5 ">
           <h3 className="text-2xl font-serif mb-6">Aksesibilitas Lokasi</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-brand-charcoal/10 dark:border-brand-ivory/10 text-brand-charcoal/50 dark:text-brand-ivory/50 text-sm">
+                <tr className="border-b border-brand-charcoal/10  text-brand-charcoal/50  text-sm">
                   <th className="pb-4 font-medium">Fasilitas Utama</th>
                   <th className="pb-4 font-medium">Jarak</th>
                   <th className="pb-4 font-medium">Waktu Tempuh</th>
@@ -341,14 +341,14 @@ export default function MapSection() {
                   { name: 'SPBU Moncongloe', dist: '2,6 km', time: '6 mnt', icon: '⛽️' },
                   { name: 'Universitas Hasanuddin', dist: '9 km', time: '20 mnt', icon: '🏫' },
                 ].map((item, i) => (
-                  <tr key={i} className="border-b border-brand-charcoal/5 dark:border-brand-ivory/5 last:border-0">
+                  <tr key={i} className="border-b border-brand-charcoal/5  last:border-0">
                     <td className="py-4 flex items-center gap-3">
                       <span className="text-xl">{item.icon}</span>
                       <span className="font-medium">{item.name}</span>
                     </td>
-                    <td className="py-4 text-brand-charcoal/70 dark:text-brand-ivory/70">{item.dist}</td>
+                    <td className="py-4 text-brand-charcoal/70 ">{item.dist}</td>
                     <td className="py-4 text-brand-gold font-medium">{item.time}</td>
-                    <td className="py-4 text-brand-charcoal/50 dark:text-brand-ivory/50">Mobil</td>
+                    <td className="py-4 text-brand-charcoal/50 ">Mobil</td>
                   </tr>
                 ))}
               </tbody>

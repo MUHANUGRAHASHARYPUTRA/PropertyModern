@@ -52,13 +52,13 @@ export default function Kontak() {
   };
 
   return (
-    <section id="kontak" className="py-24 bg-brand-offwhite dark:bg-brand-dark-surface">
+    <section id="kontak" className="py-24 bg-brand-offwhite ">
       <div className="container mx-auto px-6 md:px-12">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-4">
+          <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal  mb-4">
             hubungi <span className="text-brand-gold italic">kami</span>
           </h2>
-          <p className="text-brand-charcoal/70 dark:text-brand-ivory/70">
+          <p className="text-brand-charcoal/70 ">
             Jadwalkan kunjungan survei lokasi atau konsultasikan kebutuhan properti Anda dengan tim ahli kami.
           </p>
         </div>
@@ -66,7 +66,7 @@ export default function Kontak() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <div className="space-y-8">
-            <div className="bg-white dark:bg-brand-dark p-8 rounded-2xl shadow-lg border border-brand-charcoal/5 dark:border-brand-ivory/5">
+            <div className="bg-white  p-8 rounded-2xl shadow-lg border border-brand-charcoal/5 ">
               <h3 className="text-2xl font-serif mb-6">Informasi Kontak</h3>
               
               <div className="space-y-6">
@@ -76,7 +76,7 @@ export default function Kontak() {
                   </div>
                   <div>
                     <h4 className="font-medium mb-1">Kantor Pemasaran</h4>
-                    <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-sm leading-relaxed">
+                    <p className="text-brand-charcoal/70  text-sm leading-relaxed">
                       Jl. Borong Raya Inspeksi Kanal No. 2<br />
                       Kawasan Borong Raya<br />
                       Makassar, Sulawesi Selatan 90234
@@ -90,7 +90,7 @@ export default function Kontak() {
                   </div>
                   <div>
                     <h4 className="font-medium mb-1">Telepon & WhatsApp</h4>
-                    <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-sm">
+                    <p className="text-brand-charcoal/70  text-sm">
                       +62 895 4030 47867<br />
                       0895403047867
                     </p>
@@ -103,7 +103,7 @@ export default function Kontak() {
                   </div>
                   <div>
                     <h4 className="font-medium mb-1">Email</h4>
-                    <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-sm">
+                    <p className="text-brand-charcoal/70  text-sm">
                     ptanugrahayunalizah@gmail.com
                     </p>
                   </div>
@@ -115,7 +115,7 @@ export default function Kontak() {
                   </div>
                   <div>
                     <h4 className="font-medium mb-1">Jam Operasional</h4>
-                    <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 text-sm">
+                    <p className="text-brand-charcoal/70  text-sm">
                       Senin - Sabtu: 08.00 - 17.00 WITA<br />
                       Minggu: Dengan Perjanjian
                     </p>
@@ -126,7 +126,7 @@ export default function Kontak() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white dark:bg-brand-dark p-8 rounded-2xl shadow-lg border border-brand-charcoal/5 dark:border-brand-ivory/5">
+          <div className="bg-white  p-8 rounded-2xl shadow-lg border border-brand-charcoal/5 ">
             <h3 className="text-2xl font-serif mb-6">Kirim Pesan</h3>
             
             {submitted ? (
@@ -139,7 +139,7 @@ export default function Kontak() {
                   <CheckCircle2 className="w-10 h-10 text-brand-gold animate-bounce" />
                 </div>
                 <h4 className="text-xl font-serif">Pesan Terkirim!</h4>
-                <p className="text-sm text-brand-charcoal/60 dark:text-brand-ivory/60 max-w-xs mx-auto">
+                <p className="text-sm text-brand-charcoal/60  max-w-xs mx-auto">
                   Terima kasih, {formData.nama}. Pesan Anda telah tersimpan. Kami akan segera menghubungi Anda, atau Anda akan diarahkan ke WhatsApp dalam sekejap.
                 </p>
                 <button 
@@ -159,7 +159,7 @@ export default function Kontak() {
                       required
                       value={formData.nama}
                       onChange={(e) => setFormData({...formData, nama: e.target.value})}
-                      className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors" 
+                      className="w-full px-4 py-3 bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl focus:outline-none focus:border-brand-gold transition-colors" 
                       placeholder="Cth: Budi Santoso" 
                     />
                   </div>
@@ -170,7 +170,7 @@ export default function Kontak() {
                       required
                       value={formData.whatsapp}
                       onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
-                      className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors" 
+                      className="w-full px-4 py-3 bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl focus:outline-none focus:border-brand-gold transition-colors" 
                       placeholder="Cth: 0812..." 
                     />
                   </div>
@@ -182,7 +182,7 @@ export default function Kontak() {
                     type="email" 
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors" 
+                    className="w-full px-4 py-3 bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl focus:outline-none focus:border-brand-gold transition-colors" 
                     placeholder="Cth: budi@email.com" 
                   />
                 </div>
@@ -192,7 +192,7 @@ export default function Kontak() {
                   <select 
                     value={formData.minat}
                     onChange={(e) => setFormData({...formData, minat: e.target.value})}
-                    className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors appearance-none"
+                    className="w-full px-4 py-3 bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl focus:outline-none focus:border-brand-gold transition-colors appearance-none"
                   >
                     <option value="">Pilih Tipe Properti</option>
                     <option value="subsidi">Properti Subsidi</option>
@@ -208,14 +208,14 @@ export default function Kontak() {
                     required
                     value={formData.pesan}
                     onChange={(e) => setFormData({...formData, pesan: e.target.value})}
-                    className="w-full px-4 py-3 bg-brand-offwhite dark:bg-brand-dark-surface border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl focus:outline-none focus:border-brand-gold transition-colors resize-none" 
+                    className="w-full px-4 py-3 bg-brand-offwhite  border border-brand-charcoal/10  rounded-xl focus:outline-none focus:border-brand-gold transition-colors resize-none" 
                     placeholder="Tulis pesan atau pertanyaan Anda di sini..."
                   ></textarea>
                 </div>
 
                 <button 
                   disabled={loading}
-                  className="w-full py-4 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal font-medium rounded-xl hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-white transition-colors flex items-center justify-center gap-2 mt-4 disabled:opacity-50"
+                  className="w-full py-4 bg-brand-charcoal  text-brand-ivory  font-medium rounded-xl hover:bg-brand-gold  hover:text-white transition-colors flex items-center justify-center gap-2 mt-4 disabled:opacity-50"
                 >
                   {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-4 h-4" />}
                   {loading ? 'Mengirim...' : 'Kirim Pesan'}

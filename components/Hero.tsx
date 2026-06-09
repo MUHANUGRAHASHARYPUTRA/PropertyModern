@@ -70,7 +70,7 @@ export default function Hero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover blur-[2px]" 
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-brand-charcoal/40 to-transparent dark:from-brand-dark dark:via-brand-dark/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-brand-charcoal/40 to-transparent  " />
       </motion.div>
 
       {/* Tombol Kontrol Suara Manual (Pojok Kanan Bawah) */}
@@ -134,7 +134,7 @@ export default function Hero() {
           {/* Search Bar */}
 <motion.div 
   variants={itemVariants} 
-  className="w-full max-w-3xl bg-white/10 backdrop-blur-xl dark:bg-black/20 p-4 md:p-2 rounded-3xl md:rounded-full shadow-2xl flex flex-col md:flex-row gap-4 md:gap-4 items-center border border-white/20"
+  className="w-full max-w-3xl bg-white/10 backdrop-blur-xl  p-4 md:p-2 rounded-3xl md:rounded-full shadow-2xl flex flex-col md:flex-row gap-4 md:gap-4 items-center border border-white/20"
 >
   <div className="flex-1 flex items-center gap-3 px-4 md:px-6 py-2 md:py-3 w-full border-b md:border-b-0 md:border-r border-white/10">
     <MapPin className="w-5 h-5 text-brand-gold shrink-0" />

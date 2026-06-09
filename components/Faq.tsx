@@ -27,20 +27,20 @@ export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 bg-brand-ivory dark:bg-brand-dark">
+    <section className="py-24 bg-brand-ivory ">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5">
-            <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal dark:text-brand-ivory mb-6">
+            <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal  mb-6">
               pertanyaan <span className="text-brand-gold italic">umum</span>
             </h2>
-            <p className="text-brand-charcoal/70 dark:text-brand-ivory/70 mb-8">
+            <p className="text-brand-charcoal/70  mb-8">
               Temukan jawaban untuk pertanyaan yang sering diajukan seputar proses pembelian rumah, KPR, dan fasilitas Bukit Panaikang Residence.
             </p>
             
-            <div className="bg-brand-offwhite dark:bg-brand-dark-surface p-6 rounded-2xl border border-brand-charcoal/5 dark:border-brand-ivory/5">
+            <div className="bg-brand-offwhite  p-6 rounded-2xl border border-brand-charcoal/5 ">
               <h4 className="font-serif text-xl mb-2">Masih punya pertanyaan?</h4>
-              <p className="text-sm text-brand-charcoal/70 dark:text-brand-ivory/70 mb-6">Tim konsultan kami siap membantu Anda 24/7.</p>
+              <p className="text-sm text-brand-charcoal/70  mb-6">Tim konsultan kami siap membantu Anda 24/7.</p>
               <a 
   href="https://wa.me/62895403047867?text=Halo%20Alizah%20Property%2C%20saya%20ingin%20bertanya%20mengenai%20perumahan%20Bukit%20Panaikang%20Residence."
   target="_blank" 
@@ -60,7 +60,7 @@ export default function Faq() {
                 className={`border rounded-2xl overflow-hidden transition-colors ${
                   openIndex === index 
                     ? 'border-brand-gold bg-brand-gold/5' 
-                    : 'border-brand-charcoal/10 dark:border-brand-ivory/10 bg-white dark:bg-brand-dark-surface'
+                    : 'border-brand-charcoal/10  bg-white '
                 }`}
               >
                 <button
@@ -71,7 +71,7 @@ export default function Faq() {
                   <motion.div
                     animate={{ rotate: openIndex === index ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className={`shrink-0 ${openIndex === index ? 'text-brand-gold' : 'text-brand-charcoal/50 dark:text-brand-ivory/50'}`}
+                    className={`shrink-0 ${openIndex === index ? 'text-brand-gold' : 'text-brand-charcoal/50 '}`}
                   >
                     <ChevronDown className="w-5 h-5" />
                   </motion.div>
@@ -84,7 +84,7 @@ export default function Faq() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="px-6 pb-5 text-brand-charcoal/70 dark:text-brand-ivory/70 leading-relaxed">
+                      <div className="px-6 pb-5 text-brand-charcoal/70  leading-relaxed">
                         {faq.a}
                       </div>
                     </motion.div>

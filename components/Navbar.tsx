@@ -109,7 +109,7 @@ export default function Navbar() {
       style={{ zIndex: 99999 }}
       className={`fixed top-0 left-0 right-0 transition-all duration-700 ease-in-out ${
         isScrolled 
-          ? 'py-3 bg-brand-ivory/10 dark:bg-brand-dark/10 backdrop-blur-md shadow-sm border-b border-brand-gold/5' 
+          ? 'py-3 bg-brand-ivory/10  backdrop-blur-md shadow-sm border-b border-brand-gold/5' 
           : 'bg-transparent border-b border-transparent'
       }`}
       initial={{ y: -100 }}
@@ -156,13 +156,13 @@ export default function Navbar() {
           
           <span className={`font-serif font-medium tracking-wide transition-all duration-500 ${
             isScrolled ? 'text-xl' : 'text-2xl'
-          } text-brand-charcoal dark:text-brand-ivory`}>
+          } text-brand-charcoal `}>
             Alizah <span className="text-brand-gold italic">Property</span>
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8 text-brand-charcoal dark:text-brand-ivory">
+        <div className="hidden md:flex items-center gap-8 text-brand-charcoal ">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
@@ -175,16 +175,16 @@ export default function Navbar() {
           ))}
           
           {user ? (
-              <div className="flex items-center gap-4 border-l border-brand-charcoal/10 dark:border-brand-ivory/10 pl-8">
+              <div className="flex items-center gap-4 border-l border-brand-charcoal/10  pl-8">
                   <Link 
                     href={profile?.role === 'admin' ? '/admin/dashboard' : '/user/dashboard'}
-                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-gold hover:text-brand-charcoal dark:hover:text-brand-ivory transition-colors"
+                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-gold hover:text-brand-charcoal  transition-colors"
                   >
                     <LayoutDashboard className="w-4 h-4" />
                     Dashboard
                   </Link>
                   <form action={signOut}>
-                      <button type="submit" className="text-brand-charcoal/40 dark:text-brand-ivory/40 hover:text-red-500 transition-colors">
+                      <button type="submit" className="text-brand-charcoal/40  hover:text-red-500 transition-colors">
                           <LogOut className="w-5 h-5" />
                       </button>
                   </form>
@@ -195,7 +195,7 @@ export default function Navbar() {
               className={`transition-all duration-500 font-medium rounded-full shadow-md ${
                 isScrolled 
                   ? 'px-6 py-2 bg-brand-gold text-white text-xs' 
-                  : 'px-8 py-2.5 bg-brand-charcoal dark:bg-brand-ivory text-brand-ivory dark:text-brand-charcoal text-sm'
+                  : 'px-8 py-2.5 bg-brand-charcoal  text-brand-ivory  text-sm'
               }`}
             >
               Sign In
@@ -214,7 +214,7 @@ export default function Navbar() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`p-2 rounded-lg transition-all duration-300 ${
               isScrolled 
-                ? 'text-brand-charcoal dark:text-brand-ivory bg-transparent' 
+                ? 'text-brand-charcoal  bg-transparent' 
                 : 'text-brand-ivory bg-brand-charcoal/50 backdrop-blur-sm'
             }`}
           >
@@ -227,18 +227,18 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
-            className="md:hidden absolute top-full left-0 right-0 bg-brand-ivory/95 dark:bg-brand-dark/95 backdrop-blur-xl border-t border-brand-charcoal/10 dark:border-brand-ivory/10 shadow-2xl"
+            className="md:hidden absolute top-full left-0 right-0 bg-brand-ivory/95  backdrop-blur-xl border-t border-brand-charcoal/10  shadow-2xl"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
           >
-            <div className="flex flex-col p-6 gap-2 text-brand-charcoal dark:text-brand-ivory">
+            <div className="flex flex-col p-6 gap-2 text-brand-charcoal ">
               {navLinks.map((link) => (
                 <a 
                   key={link.name} 
                   href={link.href}
                   onClick={(e) => scrollToSection(e, link.href)}
-                  className="text-lg font-medium py-3 border-b border-brand-charcoal/5 dark:border-brand-ivory/5"
+                  className="text-lg font-medium py-3 border-b border-brand-charcoal/5 "
                 >
                   {link.name}
                 </a>
