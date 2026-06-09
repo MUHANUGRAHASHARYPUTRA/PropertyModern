@@ -29,8 +29,8 @@ export default function Navbar() {
           .single();
         setProfile(profile);
       }
+    };
     getData();
-
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
