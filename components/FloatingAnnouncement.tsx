@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Bell, X } from 'lucide-react';
+import { Bell, X, ArrowRight } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
 export default function FloatingAnnouncement() {
   const [activePromo, setActivePromo] = useState<any>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
   const supabase = createClient();
 
   useEffect(() => {
@@ -26,56 +27,90 @@ export default function FloatingAnnouncement() {
     fetchPromo();
   }, []);
 
+  useEffect(() => {
+    if (!activePromo || isDismissed) return;
+
+    // Muncul pertama kali setelah 3 detik
+    const initialTimer = setTimeout(() => {
+      setIsVisible(true);
+      
+      // Hilang otomatis setelah 6 detik
+      setTimeout(() => setIsVisible(false), 6000);
+    }, 3000);
+
+    // Looping: Muncul setiap 45 detik, dan hilang setelah 6 detik
+    const intervalTimer = setInterval(() => {
+      setIsVisible(true);
+      
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 6000);
+    }, 45000);
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(intervalTimer);
+    };
+  }, [activePromo, isDismissed]);
+
+  const handleDismiss = () => {
+    setIsVisible(false);
+    setIsDismissed(true); // Jika di-close manual, jangan dimunculkan lagi sesi ini
+  };
+
   if (!activePromo) return null;
 
   return (
-    <>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 left-6 p-4 rounded-full bg-brand-charcoal text-brand-gold shadow-2xl hover:bg-opacity-90 transition-all z-50 ${(isOpen) ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'}`}
-        aria-label="Pengumuman"
-      >
-        <Bell size={24} />
-        {/* Pulsing Dot */}
-        <span className="absolute top-0 right-0 flex h-3 w-3">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-gold border border-brand-charcoal"></span>
-        </span>
-      </button>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.9 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+          className="fixed bottom-28 left-6 md:bottom-6 md:left-6 w-[85vw] md:w-80 bg-white rounded-2xl shadow-2xl flex items-start overflow-hidden z-[60] border border-brand-gold/20 cursor-pointer group"
+          onClick={() => {
+            const el = document.getElementById('komersil');
+            if(el) el.scrollIntoView({ behavior: 'smooth' });
+            setIsVisible(false);
+          }}
+        >
+          {/* Aksen kiri */}
+          <div className="w-1.5 bg-brand-gold self-stretch"></div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 15, scale: 0.9, originX: 0, originY: 1 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 15, scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            className="fixed bottom-6 left-6 w-72 bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden z-50 border border-brand-charcoal/10"
-          >
-            <div className="p-4 bg-brand-charcoal text-brand-gold flex justify-between items-center shadow-sm">
-              <div className="flex items-center gap-2">
-                <Bell size={18} />
-                <h3 className="font-serif font-semibold text-base tracking-wide">Info Terbaru</h3>
-              </div>
-              <button onClick={() => setIsOpen(false)} className="text-brand-gold/80 hover:text-brand-gold transition-colors">
-                <X size={18} />
-              </button>
+          <div className="flex-1 p-4 flex gap-4">
+            {/* Ikon */}
+            <div className="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center shrink-0">
+              <Bell size={18} className="animate-pulse" />
             </div>
-            
-            <div className="p-6 flex flex-col gap-3 bg-brand-ivory">
-              <span className="self-start px-2.5 py-1 bg-brand-gold/15 text-brand-gold text-[10px] font-black uppercase tracking-wider rounded-md">
-                {activePromo.badge}
-              </span>
-              <h4 className="font-bold text-brand-charcoal text-[15px] leading-snug">
+
+            {/* Konten Text */}
+            <div className="flex flex-col flex-1 mt-0.5">
+              <div className="flex justify-between items-start mb-1">
+                <span className="text-[10px] font-black uppercase tracking-widest text-brand-gold">
+                  {activePromo.badge}
+                </span>
+                <button 
+                  onClick={(e) => { e.stopPropagation(); handleDismiss(); }} 
+                  className="text-brand-charcoal/30 hover:text-red-500 transition-colors p-1 -mt-1 -mr-1"
+                >
+                  <X size={14} />
+                </button>
+              </div>
+              <h4 className="font-bold text-brand-charcoal text-sm leading-tight mb-1">
                 {activePromo.title}
               </h4>
-              <p className="text-xs text-brand-charcoal/70 leading-relaxed">
+              <p className="text-xs text-brand-charcoal/60 leading-snug line-clamp-2">
                 {activePromo.content}
               </p>
+              
+              <div className="mt-3 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-brand-gold group-hover:translate-x-1 transition-transform">
+                Lihat Detail <ArrowRight size={10} />
+              </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
