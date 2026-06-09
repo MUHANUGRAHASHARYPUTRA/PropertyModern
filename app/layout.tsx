@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Cormorant_Garamond, Manrope } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import ChatBubble from '@/components/ChatBubble';
+import FloatingAnnouncement from '@/components/FloatingAnnouncement';
 import './globals.css';
 
 
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${cormorant.variable} ${manrope.variable} font-sans bg-brand-ivory text-brand-charcoal   transition-colors duration-300`}>
         <ThemeProvider attribute="class" forcedTheme="light">
           {children}
+          <FloatingAnnouncement />
           <ChatBubble />
         </ThemeProvider>
       </body>

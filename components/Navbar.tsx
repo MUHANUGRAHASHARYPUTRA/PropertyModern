@@ -13,7 +13,6 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
-  const [activePromo, setActivePromo] = useState<any>(null);
   const { scrollY } = useScroll();
   const supabase = createClient();
 
@@ -30,17 +29,6 @@ export default function Navbar() {
           .single();
         setProfile(profile);
       }
-
-      // Fetch active announcement
-      const { data: promo } = await supabase
-        .from('announcements')
-        .select('*')
-        .eq('is_active', true)
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .maybeSingle();
-      setActivePromo(promo);
-    };
     getData();
 
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
@@ -115,27 +103,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
     >
-      {/* Integrated Promo Banner */}
-      <AnimatePresence>
-        {activePromo && !isScrolled && (
-          <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="bg-brand-charcoal text-white py-2 px-6 overflow-hidden border-b border-brand-gold/10"
-          >
-            <div className="container mx-auto flex items-center justify-center gap-4 text-center">
-              <span className="px-1.5 py-0.5 bg-brand-gold text-brand-charcoal text-[8px] font-black uppercase rounded">
-                {activePromo.badge}
-              </span>
-              <p className="text-[10px] md:text-xs font-medium truncate">
-                <span className="text-brand-gold font-bold">{activePromo.title}</span> {activePromo.content}
-              </p>
-              <ArrowRight className="w-3 h-3 text-brand-gold animate-bounce-x" />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
 
       <div className={`container mx-auto px-6 md:px-12 flex justify-between items-center ${isScrolled ? '' : 'py-4'}`}>
         {/* Logo & Brand */}
