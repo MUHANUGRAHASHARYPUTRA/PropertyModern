@@ -51,11 +51,11 @@ export default function EditPropertyModal({ property, isOpen, onClose }: EditPro
     e.preventDefault()
     setLoading(true)
     setError(null)
-    
+
     const formData = new FormData(e.currentTarget)
     // Pass current gallery URLs that weren't removed
     formData.set('gallery_urls', galleryPreviews.join(','))
-    
+
     const result = await updateProperty(property.id, formData)
     setLoading(false)
     if (result?.error) {
@@ -69,13 +69,13 @@ export default function EditPropertyModal({ property, isOpen, onClose }: EditPro
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-brand-charcoal/40 backdrop-blur-sm"
         >
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
@@ -86,7 +86,7 @@ export default function EditPropertyModal({ property, isOpen, onClose }: EditPro
                 <h3 className="text-xl font-serif text-brand-charcoal dark:text-brand-ivory">Edit <span className="italic text-brand-gold">Properti</span></h3>
                 <p className="text-[10px] text-brand-charcoal/40 dark:text-brand-ivory/40 uppercase tracking-widest font-bold mt-1">ID: {property.id}</p>
               </div>
-              <button 
+              <button
                 onClick={onClose}
                 className="p-2 hover:bg-brand-charcoal/5 dark:hover:bg-brand-ivory/5 rounded-full transition-colors"
               >
@@ -120,12 +120,12 @@ export default function EditPropertyModal({ property, isOpen, onClose }: EditPro
                       <img src={imagePreview} className="w-full h-full object-cover" alt="Preview" />
                     )}
                     <div className="absolute inset-0 bg-brand-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center flex-col gap-2">
-                      <input 
-                        type="file" 
-                        name="image_file" 
+                      <input
+                        type="file"
+                        name="image_file"
                         accept="image/*"
                         onChange={handleImageChange}
-                        className="absolute inset-0 opacity-0 cursor-pointer" 
+                        className="absolute inset-0 opacity-0 cursor-pointer"
                       />
                       <Save className="w-6 h-6 text-white" />
                       <span className="text-[10px] font-bold text-white uppercase tracking-widest">Klik Ganti Gambar</span>
@@ -165,7 +165,7 @@ export default function EditPropertyModal({ property, isOpen, onClose }: EditPro
                     {galleryPreviews.map((url, idx) => (
                       <div key={`old-${idx}`} className="relative h-16 rounded-lg overflow-hidden group">
                         <img src={url} className="w-full h-full object-cover" alt="Gallery" />
-                        <button 
+                        <button
                           type="button"
                           onClick={() => removeExistingGallery(url)}
                           className="absolute inset-0 bg-red-500/80 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
@@ -178,7 +178,7 @@ export default function EditPropertyModal({ property, isOpen, onClose }: EditPro
                     {newGalleryFiles.map((src, idx) => (
                       <div key={`new-${idx}`} className="relative h-16 rounded-lg overflow-hidden border border-brand-gold/40 group">
                         <img src={src} className="w-full h-full object-cover" alt="New Gallery" />
-                        <button 
+                        <button
                           type="button"
                           onClick={() => removeNewGallery(src)}
                           className="absolute inset-0 bg-red-500/80 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
@@ -189,13 +189,13 @@ export default function EditPropertyModal({ property, isOpen, onClose }: EditPro
                     ))}
                     {/* Add Button */}
                     <div className="relative h-16 border-2 border-dashed border-brand-gold/20 rounded-lg flex items-center justify-center hover:bg-brand-gold/5 transition-all">
-                      <input 
-                        type="file" 
-                        name="gallery_files" 
-                        multiple 
+                      <input
+                        type="file"
+                        name="gallery_files"
+                        multiple
                         accept="image/*"
                         onChange={handleGalleryChange}
-                        className="absolute inset-0 opacity-0 cursor-pointer" 
+                        className="absolute inset-0 opacity-0 cursor-pointer"
                       />
                       <Plus className="w-4 h-4 text-brand-gold/40" />
                     </div>
@@ -223,19 +223,19 @@ export default function EditPropertyModal({ property, isOpen, onClose }: EditPro
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">URL Video (Opsional)</label>
-                    <input name="video_url" defaultValue={property.video_url} className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">URL Video (Opsional)</label>
+                  <input name="video_url" defaultValue={property.video_url} className="w-full bg-brand-offwhite dark:bg-brand-dark/50 border border-brand-charcoal/10 dark:border-brand-ivory/10 rounded-xl px-4 py-3 text-sm focus:ring-1 focus:ring-brand-gold outline-none dark:text-white" />
                 </div>
 
                 <div className="pt-6 flex gap-4">
-                  <button 
+                  <button
                     type="button"
                     onClick={onClose}
                     className="flex-1 py-4 border border-brand-charcoal/10 dark:border-brand-ivory/10 text-brand-charcoal/60 dark:text-brand-ivory/60 text-[10px] font-bold uppercase tracking-widest rounded-2xl hover:bg-brand-charcoal/5 transition-all"
                   >
                     Batal
                   </button>
-                  <button 
+                  <button
                     type="submit"
                     disabled={loading}
                     className="flex-[2] py-4 bg-brand-gold text-white text-[10px] font-bold uppercase tracking-widest rounded-2xl hover:bg-brand-charcoal transition-all disabled:opacity-50 flex items-center justify-center gap-2"

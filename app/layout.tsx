@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { Cormorant_Garamond, Manrope } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
+import ChatBubble from '@/components/ChatBubble';
 import './globals.css';
+
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -25,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${cormorant.variable} ${manrope.variable} font-sans bg-brand-ivory text-brand-charcoal dark:bg-brand-dark dark:text-brand-ivory transition-colors duration-300`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <ChatBubble />
         </ThemeProvider>
       </body>
     </html>
