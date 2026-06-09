@@ -71,10 +71,10 @@ export default function ChatBubble() {
       <AnimatePresence>
         {view === 'menu' && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 15, scale: 0.9, originX: 1, originY: 1 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: 15, scale: 0.9 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             className="fixed bottom-6 right-6 w-56 bg-brand-ivory dark:bg-brand-dark-surface rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-brand-gold/20"
           >
             <div className="p-4 bg-brand-gold text-white flex justify-between items-center shadow-sm">
@@ -122,10 +122,10 @@ export default function ChatBubble() {
       <AnimatePresence>
         {view === 'chat' && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 15, scale: 0.9, originX: 1, originY: 1 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: 15, scale: 0.9 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             className="fixed bottom-6 right-6 w-[350px] h-[500px] max-h-[80vh] bg-brand-ivory dark:bg-brand-dark-surface rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-brand-gold/20"
           >
             {/* Header */}
