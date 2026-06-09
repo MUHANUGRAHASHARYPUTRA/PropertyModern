@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Disable dark mode globally by mapping the dark variant to a non-existent class */
+@custom-variant dark (&:is(.disabled-dark-mode *));
+
 @theme {
   --color-brand-ivory: #FDFBF7;
   --color-brand-charcoal: #18181A;
