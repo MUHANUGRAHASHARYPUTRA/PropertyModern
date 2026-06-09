@@ -88,18 +88,18 @@ export default function FloatingAnnouncement() {
                 </div>
               )}
 
-              {/* Konten Teks (Glassmorphism Transparan) */}
-              <div className="w-full p-5 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 text-center text-white shadow-2xl flex flex-col items-center">
-                <span className="px-4 py-1.5 bg-brand-gold text-brand-charcoal text-[10px] font-black uppercase tracking-widest rounded-full mb-3 shadow-lg">
+              {/* Konten Teks (Tanpa Bingkai) */}
+              <div className="w-full text-center flex flex-col items-center px-2 mt-2">
+                <span className="text-[10px] text-white/90 font-medium uppercase tracking-[0.3em] mb-2 drop-shadow-md">
                   {activePromo.badge}
                 </span>
                 
-                <h3 className="font-serif text-xl md:text-2xl font-bold leading-tight mb-2 drop-shadow-md">
+                <h3 className="font-serif text-2xl md:text-3xl text-white font-bold leading-tight mb-2 drop-shadow-lg">
                   {activePromo.title}
                 </h3>
                 
                 {activePromo.content && (
-                  <p className="text-xs md:text-sm text-white/80 leading-relaxed mb-5 drop-shadow-sm">
+                  <p className="text-xs md:text-sm text-white/80 leading-relaxed mb-6 drop-shadow-md max-w-sm">
                     {activePromo.content}
                   </p>
                 )}
@@ -110,7 +110,7 @@ export default function FloatingAnnouncement() {
                     const el = document.getElementById('komersil');
                     if(el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="w-full py-4 bg-gradient-to-r from-brand-gold to-yellow-500 text-brand-charcoal rounded-2xl text-xs font-black uppercase tracking-widest hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand-gold/30"
+                  className="px-8 py-3.5 bg-white text-brand-charcoal rounded-full text-xs font-bold uppercase tracking-widest hover:bg-gray-200 transition-all flex items-center justify-center gap-2 shadow-2xl"
                 >
                   Cek Sekarang <ArrowRight size={14} className="animate-bounce-x" />
                 </button>
