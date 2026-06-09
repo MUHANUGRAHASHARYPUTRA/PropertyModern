@@ -211,11 +211,23 @@ export async function upsertAnnouncement(formData: FormData) {
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user?.id).single()
   if (profile?.role !== 'admin') return { error: 'Unauthorized' }
 
+  let image_url = formData.get('existing_image_url') as string || null;
+  const imageFile = formData.get('image_file') as File;
+  
+  if (imageFile && imageFile.size > 0) {
+    try {
+      image_url = await uploadFile(imageFile, 'announcements');
+    } catch (err: any) {
+      return { error: 'Gagal mengupload gambar: ' + err.message };
+    }
+  }
+
   const data = {
     title: formData.get('title') as string,
     content: formData.get('content') as string,
     badge: formData.get('badge') as string || 'PROMO',
     is_active: formData.get('is_active') === 'on',
+    image_url: image_url,
   }
 
   // Just manage one active announcement for now

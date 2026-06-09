@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Bell, X } from 'lucide-react';
+import { X, ArrowRight } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
+import Image from 'next/image';
 
 export default function FloatingAnnouncement() {
   const [activePromo, setActivePromo] = useState<any>(null);
@@ -30,77 +31,89 @@ export default function FloatingAnnouncement() {
   useEffect(() => {
     if (!activePromo || isDismissed) return;
 
-    // Muncul pertama kali setelah 3 detik
+    // Muncul setelah 3.5 detik (menunggu PageLoader selesai)
     const initialTimer = setTimeout(() => {
       setIsVisible(true);
-      
-      // Hilang otomatis setelah 6 detik
-      setTimeout(() => setIsVisible(false), 6000);
-    }, 3000);
+    }, 3500);
 
-    // Looping: Muncul setiap 45 detik, dan hilang setelah 6 detik
-    const intervalTimer = setInterval(() => {
-      setIsVisible(true);
-      
-      setTimeout(() => {
-        setIsVisible(false);
-      }, 6000);
-    }, 45000);
-
-    return () => {
-      clearTimeout(initialTimer);
-      clearInterval(intervalTimer);
-    };
+    return () => clearTimeout(initialTimer);
   }, [activePromo, isDismissed]);
 
   const handleDismiss = () => {
     setIsVisible(false);
-    setIsDismissed(true); // Jika di-close manual, jangan dimunculkan lagi sesi ini
+    setIsDismissed(true); // Jangan muncul lagi di sesi ini
   };
 
   if (!activePromo) return null;
 
   return (
-    <div className="fixed top-24 left-0 right-0 flex justify-center z-[60] pointer-events-none px-4">
-      <AnimatePresence>
-        {isVisible && (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-brand-charcoal/80 backdrop-blur-sm"
+          onClick={handleDismiss} // Tutup jika area luar diklik
+        >
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            className="bg-brand-charcoal text-white rounded-full shadow-xl border border-brand-gold/20 flex items-center p-1.5 pr-2 pointer-events-auto cursor-pointer max-w-full"
-            onClick={() => {
-              const el = document.getElementById('komersil');
-              if(el) el.scrollIntoView({ behavior: 'smooth' });
-              setIsVisible(false);
-            }}
+            initial={{ scale: 0.9, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            exit={{ scale: 0.9, y: 20 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+            className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden cursor-default"
+            onClick={(e) => e.stopPropagation()} // Jangan tutup kalau modal diklik
           >
-            {/* Ikon Lonceng di dalam lingkaran */}
-            <div className="w-8 h-8 rounded-full bg-brand-gold text-brand-charcoal flex items-center justify-center shrink-0">
-              <Bell size={14} className="animate-pulse" />
-            </div>
+            {/* Tombol Close Mengambang di atas gambar */}
+            <button 
+              onClick={handleDismiss}
+              className="absolute top-4 right-4 w-8 h-8 z-10 flex items-center justify-center bg-black/40 hover:bg-black/60 text-white rounded-full backdrop-blur-md transition-colors"
+            >
+              <X size={16} />
+            </button>
 
-            {/* Teks Singkat */}
-            <div className="ml-3 mr-4 flex flex-col justify-center">
-              <span className="text-[9px] text-brand-gold font-bold uppercase tracking-widest leading-none mb-1">
+            {/* Gambar Banner */}
+            {activePromo.image_url ? (
+              <div className="relative w-full aspect-[4/3] bg-brand-offwhite">
+                <Image 
+                  src={activePromo.image_url} 
+                  alt={activePromo.title} 
+                  fill 
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <div className="w-full h-32 bg-brand-gold flex items-center justify-center">
+                <span className="text-white font-serif text-2xl tracking-widest uppercase">Special Promo</span>
+              </div>
+            )}
+
+            {/* Konten Text */}
+            <div className="p-6 md:p-8 flex flex-col items-center text-center">
+              <span className="px-3 py-1 bg-brand-gold/10 text-brand-gold text-[10px] font-black uppercase tracking-widest rounded-full mb-4">
                 {activePromo.badge}
               </span>
-              <span className="text-xs font-medium truncate max-w-[180px] md:max-w-[250px] leading-tight">
+              <h3 className="font-serif text-2xl md:text-3xl text-brand-charcoal leading-tight mb-3">
                 {activePromo.title}
-              </span>
+              </h3>
+              <p className="text-sm text-brand-charcoal/60 leading-relaxed mb-6">
+                {activePromo.content}
+              </p>
+              
+              <button 
+                onClick={() => {
+                  handleDismiss();
+                  const el = document.getElementById('komersil');
+                  if(el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="w-full py-4 bg-brand-charcoal text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-brand-gold transition-colors flex items-center justify-center gap-2"
+              >
+                Lihat Penawaran Sekarang <ArrowRight size={14} />
+              </button>
             </div>
-
-            {/* Tombol Tutup */}
-            <button 
-              onClick={(e) => { e.stopPropagation(); handleDismiss(); }} 
-              className="p-1.5 rounded-full hover:bg-white/10 text-white/50 hover:text-white transition-colors ml-auto"
-            >
-              <X size={14} />
-            </button>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
